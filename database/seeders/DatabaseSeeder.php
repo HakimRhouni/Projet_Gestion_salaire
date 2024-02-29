@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
 {
-    // Créer les rôles s'ils n'existent pas déjà
+    
     if (Role::where('name', 'superadmin')->doesntExist()) {
         Role::create(['name' => 'superadmin']);
     }
@@ -29,18 +29,30 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'user']);
     }
 
-    // Vérifier si l'utilisateur "admin" existe déjà
+    
     $existingAdmin = User::where('email', 'admin@argon.com')->first();
 
-    // Si l'utilisateur "admin" n'existe pas, créer un nouvel utilisateur
+    
     if (!$existingAdmin) {
         User::create([
             'username' => 'admin',
             'firstname' => 'Admin',
             'lastname' => 'Admin',
-            'email' => 'admin@argon.com', // Changer l'adresse e-mail si nécessaire
+            'email' => 'admin@argon.com', 
             'password' => bcrypt('secret')
         ])->assignRole('superadmin');
     }
+
+    $newUser = User::create([
+        'username' => 'nouvel_utilisateur',
+        'firstname' => 'Prénom',
+        'lastname' => 'Nom',
+        'email' => 'nouvel_utilisateur@example.com', 
+        'password' => bcrypt('mot_de_passe')
+    ]);
+    
+    
+    $role = Role::where('name', 'user')->first(); // Récupère le rôle 'user'
+    $newUser->assignRole($role);
 }
 }
