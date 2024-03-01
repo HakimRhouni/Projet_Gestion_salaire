@@ -105,6 +105,7 @@
             </div>
         </div>
         <div class="row mt-4">
+        @if(auth()->user()->hasRole('admin'))
     <div class="col-lg-12 mb-lg-0 mb-4">
         <div class="card ">
             <div class="card-header pb-0 p-3">
@@ -139,9 +140,11 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 
             </div>
+            
             <div class="col-lg-5">
                 <div class="card card-carousel overflow-hidden h-100 p-0">
                     <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">

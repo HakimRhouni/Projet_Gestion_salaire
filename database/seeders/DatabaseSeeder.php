@@ -52,7 +52,6 @@ class DatabaseSeeder extends Seeder
     ]);
     
     
-    $role = Role::where('name', 'user')->first(); // Récupère le rôle 'user'
-    $newUser->assignRole($role);
+    
 }
 }

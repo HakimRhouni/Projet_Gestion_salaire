@@ -37,7 +37,11 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
+	Route::get('/virtual-reality', [PageController::class, 'vr'])
+    ->name('virtual-reality')
+    ->middleware('role:admin');
+	//->middleware('role:admin,user');
+	//Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
