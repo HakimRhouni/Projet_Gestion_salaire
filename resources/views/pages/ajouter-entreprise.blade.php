@@ -9,50 +9,39 @@
                     <div class="col-12">
                         <div class="card mb-4">
                             <div class="card-header pb-0">
-                                <h6>Entreprises</h6>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <button class="btn btn-primary me-2" onclick="ouvrir()" aria-label="Ouvrir la sélection">Ouvrir</button>
-                                        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter</a>
-                                    </div>
-                                    <div class="input-group w-auto" style="height: 2rem;">
-                                        <input type="text" id="recherche" name="recherche" placeholder="Rechercher..." class="form-control border-end-0" style="height: 130%;" title="Entrez le nom de l'entreprise à rechercher">
-                                        <button type="submit" class="btn btn-info rounded-end" style="height: 130%;" onclick="rechercher()" aria-label="Rechercher une entreprise">Rechercher</button>
-                                    </div>
-                                </div>
+                                <h6>Ajouter une Entreprises</h6>
+                                
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped align-middle">
-                                        <thead class="table-header">
-                                            <tr>
-                                                <th>Raison sociale</th>
-                                                <th>ID Fiscal</th>
-                                                <th>Forme juridique</th>
-                                                <th>Régime</th>
-                                                <th>Modèle</th>
-                                                <th>Téléphone</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                             @foreach ($entreprises as $entreprise)
-                                                <tr>
-                                                    <td>{{ $entreprise->raison_sociale }}</td>
-                                                    <td>{{ $entreprise->id_fiscal }}</td>
-                                                    <td>{{ $entreprise->forme_juridique }}</td>
-                                                    <td>{{ $entreprise->regime }}</td>
-                                                    <td>{{ $entreprise->modele }}</td>
-                                                    <td>{{ $entreprise->telephone }}</td>
-                                                    <td>
-                                                        <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning">Modifier</a>
-                                                        <a  href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning" >Supprimer</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="{{ route('ajouter-entreprise') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="raison_sociale" class="form-label">Raison sociale</label>
+                                        <input type="text" class="form-control" id="raison_sociale" name="raison_sociale" placeholder="Raison sociale">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="id_fiscal" class="form-label">ID Fiscal</label>
+                                        <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" placeholder="ID Fiscal">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="forme_juridique" class="form-label">Forme juridique</label>
+                                        <input type="text" class="form-control" id="forme_juridique" name="forme_juridique" placeholder="Forme juridique">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="regime" class="form-label">Régime</label>
+                                        <input type="text" class="form-control" id="regime" name="regime" placeholder="Régime">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="modele" class="form-label">Modèle</label>
+                                        <input type="text" class="form-control" id="modele" name="modele" placeholder="Modèle">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="telephone" class="form-label">Téléphone</label>
+                                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Téléphone">
+                                    </div>
+                                    <!-- Bouton pour soumettre le formulaire -->
+                                    <button type="submit" class="btn btn-success">Ajouter</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -62,14 +51,6 @@
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
-
-@push('css')
-    <style>
-        .table-header th {
-            height: 60px; /* Ajustez la hauteur selon vos besoins */
-        }
-    </style>
-@endpush
 
 @push('js')
     <script src="./assets/js/plugins/chartjs.min.js"></script>
@@ -129,6 +110,7 @@
                                 family: "Open Sans",
                                 style: 'normal',
                                 lineHeight: 2
+                           
                             },
                         }
                     },

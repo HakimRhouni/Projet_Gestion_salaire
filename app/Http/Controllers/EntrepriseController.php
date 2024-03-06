@@ -7,40 +7,68 @@ use App\Models\Entreprise;
 
 class EntrepriseController extends Controller
 {
+     /**
+     * @Route("/ajouter-entreprise", name="ajouter-entreprise")
+     */
     public function ajouter(Request $request)
     {
-        // Récupérer les données du formulaire
-        $donnees = $request->all();
+        // Validation des données reçues du formulaire d'ajout
+        $request->validate([
+            'raison_sociale' => 'required|string',
+            'id_fiscal' => 'required|string',
+            'forme_juridique' => 'required|string',
+            'regime' => 'required|string',
+            'modele' => 'required|string',
+            'telephone' => 'required|string',
+        ]);
 
-        // Créer une nouvelle entreprise avec les données du formulaire
-        Entreprise::create($donnees);
+        // Création d'une nouvelle entreprise avec les données reçues
+        Entreprise::create([
+            'raison_sociale' => $request->raison_sociale,
+            'id_fiscal' => $request->id_fiscal,
+            'forme_juridique' => $request->forme_juridique,
+            'regime' => $request->regime,
+            'modele' => $request->modele,
+            'telephone' => $request->telephone,
+        ]);
 
-        // Rediriger avec un message de succès
-        return redirect()->back()->with('success', 'Entreprise ajoutée avec succès.');
+        // Redirection vers la page d'origine avec un message de succès
+        return redirect()->route('home')->with('success', 'Entreprise ajoutée avec succès.');;
     }
 
     
+    public function showModifierForm($id)
+    {
+        // Récupérer l'entreprise à modifier
+        $entreprise = Entreprise::findOrFail($id);
+
+        // Afficher la vue avec le formulaire de modification
+        return view('pages.modifier-entreprise', ['entreprise' => $entreprise]);
+    }
+
+    // Méthode pour traiter la soumission du formulaire de modification
     public function modifier(Request $request, $id)
-{
-    // Récupérer l'entreprise à modifier
-    $entreprise = Entreprise::findOrFail($id);
+    {
+        // Récupérer l'entreprise à modifier
+        $entreprise = Entreprise::findOrFail($id);
 
-    // Valider les données du formulaire
-    $request->validate([
-        'raison_sociale' => 'required|string',
-        'id_fiscal' => 'required|string',
-        'forme_juridique' => 'required|string',
-        'regime' => 'required|string',
-        'modele' => 'required|string',
-        'telephone' => 'required|string',
-    ]);
+        // Valider les données du formulaire de modification
+        $request->validate([
+            'raison_sociale' => 'required|string',
+            'id_fiscal' => 'required|string',
+            'forme_juridique' => 'required|string',
+            'regime' => 'required|string',
+            'modele' => 'required|string',
+            'telephone' => 'required|string',
+        ]);
 
-    // Mettre à jour les données de l'entreprise avec les données du formulaire
-    $entreprise->update($request->all());
+        // Mettre à jour les données de l'entreprise avec les données du formulaire
+        $entreprise->update($request->all());
 
-    // Rediriger avec un message de succès
-    return redirect()->back()->with('success', 'Entreprise modifiée avec succès.');
-}
+        // Rediriger avec un message de succès
+        return redirect()->route('home')->with('success', 'Entreprise modifiée avec succès.');
+    }
+
 
     public function supprimer($id)
     {
