@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +26,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;      
 use App\Http\Controllers\UserManagementController;   
-use App\Http\Controllers\EntrepriseController;    
+use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\PeriodesController;    
             
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -57,6 +59,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/ajouter-entreprise', [EntrepriseController::class, 'ajouter'])->name('ajouter-entreprise');
 	Route::get('/modifier-entreprise/{id}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
 	Route::put('/modifier-entreprise/{id}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
+	Route::get('dashboard/{id_societe}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
+	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
+	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
 
 
 

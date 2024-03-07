@@ -38,4 +38,8 @@ class Entreprise extends Model
     {
         $this->attributes['mot_de_passe_compte_dgi'] = bcrypt($value);
     }
+    public function periodes()
+{
+    return $this->hasMany(Periode::class, 'id_societe', 'id');
+}
 }

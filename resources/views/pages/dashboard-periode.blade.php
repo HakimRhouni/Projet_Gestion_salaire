@@ -1,68 +1,57 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="container-fluid py-4">
-        <div class="row mt-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card mb-4">
-                            <div class="card-header pb-0">
-                                <h6>Entreprises</h6>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <button class="btn btn-primary me-2" onclick="ouvrir()" aria-label="Ouvrir la sélection">Ouvrir</button>
-                                        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter</a>
-                                    </div>
-                                    <div class="input-group w-auto" style="height: 2rem;">
-                                        <input type="text" id="recherche" name="recherche" placeholder="Rechercher..." class="form-control border-end-0" style="height: 130%;" title="Entrez le nom de l'entreprise à rechercher">
-                                        <button type="submit" class="btn btn-info rounded-end" style="height: 130%;" onclick="rechercher()" aria-label="Rechercher une entreprise">Rechercher</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped align-middle">
-                                        <thead class="table-header">
+<link href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+
+@include('layouts.navbars.auth.topnav', ['title' => 'Périodes'])
+
+<div class="container-fluid py-4">
+    <div class="row mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Périodes de l'entreprise : {{ $entreprise->raison_sociale }}</h6>
+                            <a href="{{ route('periodes.create', ['raison_sociale' => $entreprise->raison_sociale]) }}" class="btn btn-primary btn-sm me-2">Créer une nouvelle période</a>
+                        </div>
+                        
+
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle">
+                                    <thead class="table-header">
+                                        <tr>
+                                            <th>Année</th>
+                                            <th>Début de l'exercice</th>
+                                            <th>Fin de l'exercice</th>
+                                            <!-- Ajoutez d'autres colonnes si nécessaire -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($periodes as $periode)
                                             <tr>
-                                                <th>Raison sociale</th>
-                                                <th>ID Fiscal</th>
-                                                <th>Forme juridique</th>
-                                                <th>Régime</th>
-                                                <th>Modèle</th>
-                                                <th>Téléphone</th>
-                                                <th>Actions</th>
+                                                <td>{{ $periode->annee }}</td>
+                                                <td>{{ $periode->debut_exercice }}</td>
+                                                <td>{{ $periode->fin_exercice }}</td>
+                                                <!-- Ajoutez d'autres colonnes si nécessaire -->
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                             @foreach ($entreprises as $entreprise)
-                                             
-                                             <tr onclick="window.location='{{ route('dashboard.periode', ['raison_sociale' => $entreprise->raison_sociale]) }}';" style="cursor:pointer;">
-
-
-    <td>{{ $entreprise->raison_sociale }}</td>
-    <td>{{ $entreprise->id_fiscal }}</td>
-    <td>{{ $entreprise->forme_juridique }}</td>
-    <td>{{ $entreprise->regime }}</td>
-    <td>{{ $entreprise->modele }}</td>
-    <td>{{ $entreprise->telephone }}</td>
-    <td>
-        <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning">Modifier</a>
-        <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning">Supprimer</a>
-    </td>
-</tr>
-
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
