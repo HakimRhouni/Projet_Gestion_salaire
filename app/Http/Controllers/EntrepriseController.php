@@ -97,7 +97,7 @@ class EntrepriseController extends Controller
             'debut_exercice' => 'nullable|date',
             'compte_dgi' => 'nullable|string',
             'mot_de_passe_compte_dgi' => 'nullable|string',
-        ]);
+        ]);//test
 
         // Mettre à jour les données de l'entreprise avec les données du formulaire
         $entreprise->update($request->all());
