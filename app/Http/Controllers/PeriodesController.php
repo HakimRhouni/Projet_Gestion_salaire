@@ -69,5 +69,36 @@ public function create($raison_sociale)
         
         return redirect()->back()->with('success', 'Entreprise supprimée avec succès.');
     }
+    public function edit($id_periode)
+    {
+        // Récupérer la période à modifier
+        $periode = Periode::findOrFail($id_periode);
+
+        // Afficher la vue avec le formulaire de modification de la période
+        return view('pages.modifier-periode', compact('periode'));
+    }
+
+    // Méthode pour traiter la soumission du formulaire de modification d'une période
+    public function update(Request $request, $id_periode)
+    {
+        // Récupérer la période à modifier
+        $periode = Periode::findOrFail($id_periode);
+    
+        // Valider les données du formulaire de modification
+        $request->validate([
+            'annee' => 'required|integer',
+            'debut_exercice' => 'required|date',
+            'fin_exercice' => 'required|date',
+            // Ajoutez d'autres règles de validation si nécessaire
+        ]);
+    
+        // Mettre à jour les données de la période avec les données du formulaire
+        $periode->update($request->all());
+    
+        // Rediriger vers la page des périodes avec un message de succès
+        return redirect()->route('dashboard.periode', [
+            'raison_sociale' => $periode->entreprise->raison_sociale
+        ])->with('success', 'Période modifiée avec succès.');
+    }
 
 }

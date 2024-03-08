@@ -63,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
 	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
 	Route::delete('/periodes/{id_periode}', [PeriodesController::class, 'destroy'])->name('periodes.destroy');
+	Route::get('/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
+	Route::put('/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
+
 
 
 
