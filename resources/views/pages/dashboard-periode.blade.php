@@ -40,6 +40,13 @@
                                                 <td>{{ $periode->annee }}</td>
                                                 <td>{{ $periode->debut_exercice }}</td>
                                                 <td>{{ $periode->fin_exercice }}</td>
+                                                <td>
+            <form action="{{ route('periodes.destroy', ['id_periode' => $periode->id_periode]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette période ?')">Supprimer</button>
+            </form>
+        </td>
                                                 <!-- Ajoutez d'autres colonnes si nécessaire -->
                                             </tr>
                                         @endforeach

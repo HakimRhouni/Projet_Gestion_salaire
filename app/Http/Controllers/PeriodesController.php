@@ -51,6 +51,23 @@ public function create($raison_sociale)
             'id_societe' => $id_societe,
             'raison_sociale' => $request->raison_sociale
         ]);
+
+        
+    }
+    public function destroy($id_periode)
+    {
+        // Trouver la période à supprimer
+        $periode = Periode::findOrFail($id_periode);
+    
+        // Récupérer l'id de la société associée à la période
+        $id_societe = $periode->id_societe;
+    
+        // Supprimer la période
+        $periode->delete();
+    
+        // Redirection vers la page des périodes de l'entreprise associée à cette période
+        
+        return redirect()->back()->with('success', 'Entreprise supprimée avec succès.');
     }
 
 }
