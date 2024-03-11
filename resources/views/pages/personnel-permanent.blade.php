@@ -16,46 +16,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h6>Périodes de l'entreprise : {{ $entreprise->raison_sociale }}</h6>
-                            <a href="{{ route('periodes.create', ['raison_sociale' => $entreprise->raison_sociale]) }}" class="btn btn-primary btn-sm me-2">Créer une nouvelle période</a>
-                        </div>
-                        
-
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped align-middle">
-                                    <thead class="table-header">
-                                        <tr>
-                                            <th>Année</th>
-                                            <th>Début de l'exercice</th>
-                                            <th>Fin de l'exercice</th>
-                                            <!-- Ajoutez d'autres colonnes si nécessaire -->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($periodes as $periode)
-                                        <tr onclick="window.location='{{ route('periodes.personnel_permanent', ['id_periode' => $periode->id_periode]) }}';" style="cursor:pointer;">
-                                                <td>{{ $periode->annee }}</td>
-                                                <td>{{ $periode->debut_exercice }}</td>
-                                                <td>{{ $periode->fin_exercice }}</td>
-                                                <td>
-                                                <div   aria-label="Actions">
-    <a href="{{ route('periodes.edit', ['id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
-     <a action="{{ route('periodes.destroy', ['id_periode' => $periode->id_periode]) }}" method="POST" class="ms-2"> <!-- ms-2 pour une marge à gauche -->
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette période ?')">Supprimer</button>
-</a>
-</div>
-
-        </td>
-                                                <!-- Ajoutez d'autres colonnes si nécessaire -->
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                       
                             </div>
                         </div>
                     </div>

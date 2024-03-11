@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/periodes/{id_periode}', [PeriodesController::class, 'destroy'])->name('periodes.destroy');
 	Route::get('/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
 	Route::put('/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
+	Route::get('/periodes/{id_periode}/personnel-permanent', [PeriodesController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
 
 
 

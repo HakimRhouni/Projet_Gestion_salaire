@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entreprise;
 use App\Models\Periode;
+use App\Models\PersonnelPermanent;
 
 class PeriodesController extends Controller
 {
@@ -100,5 +101,9 @@ public function create($raison_sociale)
             'raison_sociale' => $periode->entreprise->raison_sociale
         ])->with('success', 'Période modifiée avec succès.');
     }
-
+    public function showPersonnelPermanent($id_periode)
+{
+    $personnelPermanent = PersonnelPermanent::where('id_periode', $id_periode)->get();
+    return view('pages.personnel-permanent', ['personnelPermanent' => $personnelPermanent]);
+}
 }
