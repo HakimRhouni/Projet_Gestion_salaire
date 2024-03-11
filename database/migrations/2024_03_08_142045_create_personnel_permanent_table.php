@@ -33,6 +33,7 @@ class CreatePersonnelPermanentTable extends Migration
             $table->decimal('montant_avantages', 10, 2)->nullable();
             $table->decimal('montant_indemnites', 10, 2)->nullable();
             $table->decimal('montant_exoneres', 10, 2)->nullable();
+            $table->decimal('montant_revenu_brut_imposable', 10, 2)->nullable();
             $table->decimal('montant_frais_professionnels', 10, 2)->nullable();
             $table->decimal('montant_cotisations', 10, 2)->nullable();
             $table->decimal('montant_autres_retenues', 10, 2)->nullable();

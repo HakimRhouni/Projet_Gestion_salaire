@@ -27,7 +27,9 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;      
 use App\Http\Controllers\UserManagementController;   
 use App\Http\Controllers\EntrepriseController;
-use App\Http\Controllers\PeriodesController;    
+use App\Http\Controllers\PeriodesController;  
+use App\Http\Controllers\PersonnelPermanentController;
+
             
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -65,7 +67,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/periodes/{id_periode}', [PeriodesController::class, 'destroy'])->name('periodes.destroy');
 	Route::get('/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
 	Route::put('/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
-	Route::get('/periodes/{id_periode}/personnel-permanent', [PeriodesController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
+	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
+	Route::get('/personnel-permanent', [PersonnelPermanentController::class, 'index'])->name('personnel-permanent.index');
+	Route::get('/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
+	Route::post('/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
+
+
+
 
 
 

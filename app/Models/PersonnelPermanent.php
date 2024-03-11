@@ -29,6 +29,7 @@ class PersonnelPermanent extends Model
         'montant_avantages',
         'montant_indemnites',
         'montant_exoneres',
+        'montant_revenu_brut_imposable',
         'montant_frais_professionnels',
         'montant_cotisations',
         'montant_autres_retenues',
@@ -50,6 +51,6 @@ class PersonnelPermanent extends Model
     // Relation avec le modèle Periode
     public function periode()
     {
-        return $this->belongsTo(Periode::class, 'id_periode', 'id');
+        return $this->belongsTo(Periode::class, 'id_periode', 'id_periode');
     }
 }

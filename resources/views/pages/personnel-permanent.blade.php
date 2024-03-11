@@ -16,7 +16,47 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                       
+                        <div class="card-header">
+                            <h5 class="card-title">Personnel Permanent</h5>
+                            <!-- Bouton "Ajouter Personnel Permanent" -->
+                            <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle">
+                                    <thead class="table-header">
+                                    <tr>
+        <th>Matricule</th>
+        <th>LF de l'employé</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>CIN</th>
+        <th>Carte de séjour</th>
+        <th>CNSS</th>
+        <th>Situation de famille</th>
+        <th>Adresse</th>
+        <th>Montant du revenu brut imposable</th> <!-- Ajout de la colonne -->
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+    </tr>
+</thead>
+<tbody>
+    @foreach ($personnelPermanents as $personnelPermanent)
+    <tr>
+        <td>{{ $personnelPermanent->matricule }}</td>
+        <td>{{ $personnelPermanent->lf_employe }}</td>
+        <td>{{ $personnelPermanent->nom }}</td>
+        <td>{{ $personnelPermanent->prenom }}</td>
+        <td>{{ $personnelPermanent->cin }}</td>
+        <td>{{ $personnelPermanent->carte_sejour }}</td>
+        <td>{{ $personnelPermanent->cnss }}</td>
+        <td>{{ $personnelPermanent->situation_famille }}</td>
+        <td>{{ $personnelPermanent->adresse }}</td>
+        <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td> <!-- Affichage du nouveau champ -->
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+    </tr>
+@endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -24,8 +64,8 @@
             </div>
         </div>
     </div>
-        @include('layouts.footers.auth.footer')
-    </div>
+    @include('layouts.footers.auth.footer')
+</div>
 @endsection
 
 @push('css')
