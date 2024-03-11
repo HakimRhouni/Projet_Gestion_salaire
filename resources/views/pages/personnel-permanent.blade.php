@@ -25,36 +25,43 @@
                             <div class="table-responsive">
                                 <table class="table table-striped align-middle">
                                     <thead class="table-header">
-                                    <tr>
-        <th>Matricule</th>
-        <th>LF de l'employé</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>CIN</th>
-        <th>Carte de séjour</th>
-        <th>CNSS</th>
-        <th>Situation de famille</th>
-        <th>Adresse</th>
-        <th>Montant du revenu brut imposable</th> <!-- Ajout de la colonne -->
-        <!-- Ajoutez d'autres colonnes si nécessaire -->
-    </tr>
-</thead>
-<tbody>
-    @foreach ($personnelPermanents as $personnelPermanent)
-    <tr>
-        <td>{{ $personnelPermanent->matricule }}</td>
-        <td>{{ $personnelPermanent->lf_employe }}</td>
-        <td>{{ $personnelPermanent->nom }}</td>
-        <td>{{ $personnelPermanent->prenom }}</td>
-        <td>{{ $personnelPermanent->cin }}</td>
-        <td>{{ $personnelPermanent->carte_sejour }}</td>
-        <td>{{ $personnelPermanent->cnss }}</td>
-        <td>{{ $personnelPermanent->situation_famille }}</td>
-        <td>{{ $personnelPermanent->adresse }}</td>
-        <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td> <!-- Affichage du nouveau champ -->
-        <!-- Ajoutez d'autres colonnes si nécessaire -->
-    </tr>
-@endforeach
+                                        <tr>
+                                            <th>Matricule</th>
+                                            <th>LF de l'employé</th>
+                                            <th>Nom</th>
+                                            <th>Prénom</th>
+                                            <th>CIN</th>
+                                            <th>Carte de séjour</th>
+                                            <th>CNSS</th>
+                                            <th>Situation de famille</th>
+                                            <th>Adresse</th>
+                                            <th>Montant du revenu brut imposable</th>
+                                            <th>Actions</th> <!-- Ajout de la colonne pour les actions -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($personnelPermanents as $personnelPermanent)
+                                        <tr>
+                                            <td>{{ $personnelPermanent->matricule }}</td>
+                                            <td>{{ $personnelPermanent->lf_employe }}</td>
+                                            <td>{{ $personnelPermanent->nom }}</td>
+                                            <td>{{ $personnelPermanent->prenom }}</td>
+                                            <td>{{ $personnelPermanent->cin }}</td>
+                                            <td>{{ $personnelPermanent->carte_sejour }}</td>
+                                            <td>{{ $personnelPermanent->cnss }}</td>
+                                            <td>{{ $personnelPermanent->situation_famille }}</td>
+                                            <td>{{ $personnelPermanent->adresse }}</td>
+                                            <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td>
+                                            <td>
+                                                <a href="{{ route('personnel_permanent.edit', $personnelPermanent->id_personnel_permanent) }}" class="btn btn-warning">Modifier</a>
+                                                <a action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-warning">Supprimer</button>
+                                                </a>
+                                            </td> <!-- Ajout des boutons de modification et de suppression -->
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

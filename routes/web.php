@@ -71,7 +71,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/personnel-permanent', [PersonnelPermanentController::class, 'index'])->name('personnel-permanent.index');
 	Route::get('/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
-
+	Route::get('/personnel_permanent/{id}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
+    Route::put('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
+    Route::delete('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
 
 
 

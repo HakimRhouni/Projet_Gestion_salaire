@@ -54,4 +54,33 @@ return redirect()->route('periodes.personnel_permanent', ['id_periode' => $reque
 
 
     }
+  
+
+public function edit($id)
+{
+    $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    // Vous pouvez passer d'autres données nécessaires à la vue ici
+    return view('pages.modifier-personnel-permanent', compact('personnelPermanent'));
+}
+
+public function update(Request $request, $id)
+{
+    $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    $personnelPermanent->update($request->all());
+    $id_periode = $personnelPermanent->id_periode;
+    return redirect()->route('periodes.personnel_permanent', ['id_periode' => $id_periode])->with('success', 'Personnel permanent mis à jour avec succès');
+}
+
+public function destroy($id)
+{
+    $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    $id_periode = $personnelPermanent->id_periode; // Récupérer l'id de la période associée au personnel permanent
+
+    $personnelPermanent->delete();
+
+    // Rediriger vers la route 'periodes.personnel_permanent' en fournissant l'id_periode
+    return redirect()->route('periodes.personnel_permanent', ['id_periode' => $id_periode])->with('success', 'Personnel permanent supprimé avec succès');
+}
+
+
 }
