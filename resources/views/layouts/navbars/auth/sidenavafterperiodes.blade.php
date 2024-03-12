@@ -68,7 +68,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('personnel_occasionnel.index') }}">
+    <a class="nav-link" href="{{ route('personnel_occasionnel.index',['id_periode' => $id_periode]) }}">
         <i class="ni ni-single-02 text-primary"></i>
         <span class="nav-link-text ms-1">Personnel Occasionnel</span>
     </a>
