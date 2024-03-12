@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Periode;
+use App\Models\SalaireBeneficiantExoneration;
+
+class SalariesExonerationController extends Controller
+{
+    public function index($id_periode)
+    {
+        $periode = Periode::findOrFail($id_periode);
+        
+        // Maintenant, vous pouvez accéder à l'ID de la société via la relation avec la méthode entreprise()
+        $id_societe = $periode->entreprise->id;
+        
+        // Récupérez la liste des personnels permanents pour cette période
+        $salaries_exoneres = SalaireBeneficiantExoneration::where('id_periode', $id_periode)->get();
+        
+        // Passez les variables à la vue
+        return view('pages.salaries_exoneration', compact('salaries_exoneres', 'id_societe', 'id_periode'));
+    }
+    public function create($id_periode)
+    {
+        $periode = Periode::findOrFail($id_periode);
+        $id_societe = $periode->entreprise->id;
+
+        return view('pages.create_salaries_exoneration',compact('id_periode','id_societe'));
+    }
+
+    public function store(Request $request)
+    {
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'numero_cin' => 'required|string',
+            'carte_sejour' => 'nullable|string',
+            'id_societe' => 'required|numeric', 
+            'id_periode' => 'required|numeric', 
+            'adresse' => 'required|string',
+            'numero_cnss' => 'required|string',
+            'id_fiscale' => 'required|string',
+            'date_recrutement' => 'required|date',
+            'periode_en_jours' => 'required|numeric',
+            'brut_traitements' => 'required|numeric',
+            'avantages' => 'required|numeric',
+            'indemnite' => 'required|numeric',
+            'revenu_brut_imposable' => 'required|numeric',
+            'retenues_operees' => 'required|numeric',
+            'revenu_net_imposable' => 'required|numeric',
+        ]);
+
+        // Créer un nouveau salarié exonéré avec les données validées
+        SalaireBeneficiantExoneration::create($validatedData);
+
+        // Rediriger avec un message de succès
+        return redirect()->route('salaries_exoneration.index', ['id_periode' => $request->id_periode])->with('success', 'Le salarié exonéré a été créé avec succès.');
+
+    }
+    public function destroy($id)
+    {
+        // Trouver le salarié exonéré à supprimer
+        $salarie = SalaireBeneficiantExoneration::findOrFail($id);
+        $id_periode = $salarie->id_periode;
+
+        // Supprimer le salarié exonéré
+        $salarie->delete();
+
+        // Redirection avec un message de succès
+        return redirect()->route('salaries_exoneration.index',['id_periode' => $id_periode])->with('success', 'Le salarié exonéré a été supprimé avec succès.');
+    }
+    public function edit($id)
+{
+    // Trouver le salarié exonéré à éditer
+    $salarie = SalaireBeneficiantExoneration::findOrFail($id);
+    $id_periode = $salarie->id_periode;
+
+    // Passer les données à la vue pour l'édition
+    return view('pages.edit_salaries_exoneration', compact('salarie', 'id_periode'));
+}
+public function update(Request $request, $id)
+{
+    // Valider les données du formulaire
+    $validatedData = $request->validate([
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+        'adresse' => 'required|string',
+        'numero_cin' => 'required|string',
+        'carte_sejour' => 'nullable|string',
+        'numero_cnss' => 'required|string',
+        'id_fiscale' => 'required|string',
+        'date_recrutement' => 'required|date',
+        'periode_en_jours' => 'required|numeric',
+        'brut_traitements' => 'required|numeric',
+        'avantages' => 'required|numeric',
+        'indemnite' => 'required|numeric',
+        'revenu_brut_imposable' => 'required|numeric',
+        'retenues_operees' => 'required|numeric',
+        'revenu_net_imposable' => 'required|numeric',
+    ]);
+
+    // Mettre à jour les données du salarié exonéré
+    $Salarieexonéré=SalaireBeneficiantExoneration::findOrFail($id);
+    $Salarieexonéré->update($validatedData);
+    $id_periode = $Salarieexonéré->id_periode;
+
+
+    // Rediriger avec un message de succès
+    return redirect()->route('salaries_exoneration.index', ['id_periode' => $id_periode])->with('success', 'Le salarié exonéré a été modifié avec succès.');
+}
+
+}

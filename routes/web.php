@@ -29,6 +29,8 @@ use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\PeriodesController;  
 use App\Http\Controllers\PersonnelPermanentController;
+use App\Http\Controllers\SalariesExonerationController;
+use App\Http\Controllers\PersonnelOccasionnelController;
 
             
 
@@ -68,12 +70,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
 	Route::put('/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
 	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
-	Route::get('/personnel-permanent', [PersonnelPermanentController::class, 'index'])->name('personnel-permanent.index');
 	Route::get('/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
 	Route::get('/personnel_permanent/{id}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
     Route::put('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
     Route::delete('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
+	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
+	Route::get('/periodes/{id_periode}/societes/{id_societe}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
+	Route::post('/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
+	Route::delete('/salaries-exoneration/{id}', [SalariesExonerationController::class, 'destroy'])->name('salaries_exoneration.destroy');
+	Route::get('/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');
+	Route::put('/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
+	Route::get('/personnel-occasionnel', [PersonnelOccasionnelController::class, 'index'])->name('personnel_occasionnel.index');
+
+
+
+
 
 
 
