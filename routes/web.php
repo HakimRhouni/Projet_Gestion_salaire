@@ -91,6 +91,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/stagiaire', [StagiaireController::class,'index'])->name('stagiaires.index');
 	Route::get('/periodes/{id_periode}/stagiaires/create', [StagiaireController::class, 'create'])->name('stagiaires.create');
 	Route::post('/stagiaires/{id_periode}/{id_societe}', [StagiaireController::class, 'store'])->name('stagiaires.store');
+	Route::get('/periodes/{id_periode}/stagiaires/{id}/edit', [StagiaireController::class, 'edit'])->name('stagiaires.edit');
+	Route::put('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'update'])->name('stagiaires.update');
+	Route::delete('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'destroy'])->name('stagiaires.destroy');
+
 
 
 

@@ -57,6 +57,18 @@
                                                     <td>{{ $stagiaire->retenues }}</td>
                                                     <td>{{ $stagiaire->net_imposable }}</td>
                                                     <td>{{ $stagiaire->periode }}</td>
+                                                    <td>
+                                                    
+                <a href="{{ route('stagiaires.edit', ['id_periode' => $id_periode, 'id' => $stagiaire->id]) }}" class="btn btn-primary">Modifier</a>
+                <form action="{{ route('stagiaires.destroy', ['id_periode' => $id_periode, 'id' => $stagiaire->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce stagiaire?')">Supprimer</button>
+                </form>
+            
+          
+            
+            </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

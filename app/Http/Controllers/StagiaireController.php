@@ -58,4 +58,49 @@ class StagiaireController extends Controller
         // Rediriger vers la page de la liste des stagiaires avec un message de succès
         return redirect()->route('stagiaires.index', ['id_periode' => $id_periode])->with('success', 'Stagiaire ajouté avec succès.');
     }
+    public function edit($id_periode, $id)
+{
+    $stagiaire = Stagiaire::findOrFail($id);
+    $periode = Periode::findOrFail($id_periode);
+    $id_societe = $periode->entreprise; // Assurez-vous que votre modèle Periode a une relation nommée "entreprise"
+
+    return view('pages.edit_stagiaire', compact('stagiaire', 'id_periode', 'id_societe'));
+}
+public function update(Request $request, $id_periode, $id)
+{
+    // Valider les données du formulaire
+    $validatedData = $request->validate([
+        'nom' => 'required',
+            'prenom' => 'required',
+            'adresse' => 'required',
+            'cin' => 'required',
+            'carte_sejour' => 'required',
+            'numero_cnss' => 'required',
+            'id_fiscal' => 'required',
+            'montant_brut' => 'required',
+            'indemnite' => 'required',
+            'retenues' => 'required',
+            'net_imposable' => 'required',
+            'periode' => 'required',
+    ]);
+
+   
+    $stagiaire = Stagiaire::findOrFail($id);
+    
+    $stagiaire->update($validatedData);
+
+    // Rediriger avec un message de succès
+    return redirect()->route('stagiaires.index', ['id_periode' => $id_periode])->with('success', 'Stagiaire mis à jour avec succès.');
+}
+
+public function destroy($id_periode, $id)
+{
+    // Trouver le stagiaire et le supprimer
+    $stagiaire = Stagiaire::findOrFail($id);
+    $stagiaire->delete();
+
+    // Rediriger avec un message de succès
+    return redirect()->route('stagiaires.index', ['id_periode' => $id_periode])->with('success', 'Stagiaire supprimé avec succès.');
+}
+
 }
