@@ -31,6 +31,7 @@ use App\Http\Controllers\PeriodesController;
 use App\Http\Controllers\PersonnelPermanentController;
 use App\Http\Controllers\SalariesExonerationController;
 use App\Http\Controllers\PersonnelOccasionnelController;
+use App\Http\Controllers\StagiaireController;
 
             
 
@@ -82,6 +83,21 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');
 	Route::put('/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
 	Route::get('/periodes/{id_periode}/personnel-occasionnel', [PersonnelOccasionnelController::class, 'index'])->name('personnel_occasionnel.index');
+	Route::get('/periodes/{id_periode}/personnel-occasionnel/create', [PersonnelOccasionnelController::class, 'create'])->name('personnel_occasionnel.create');
+	Route::post('/personnel-occasionnel/{id_periode}', [PersonnelOccasionnelController::class, 'store'])->name('personnel_occasionnel.store');
+	Route::get('/personnel_occasionnel/{id_periode}/edit/{id}', [PersonnelOccasionnelController::class, 'edit'])->name('personnel_occasionnel.edit');
+	Route::delete('/personnel_occasionnel/{id_periode}/{id}', [PersonnelOccasionnelController::class ,'destroy'])->name('personnel_occasionnel.destroy');
+	Route::put('/personnel_occasionnel/{id_periode}/{id_personnel}', [PersonnelOccasionnelController::class ,'update'])->name('personnel_occasionnel.update');
+	Route::get('/periodes/{id_periode}/stagiaire', [StagiaireController::class,'index'])->name('stagiaires.index');
+	Route::get('/periodes/{id_periode}/stagiaires/create', [StagiaireController::class, 'create'])->name('stagiaires.create');
+	Route::post('/stagiaires/{id_periode}/{id_societe}', [StagiaireController::class, 'store'])->name('stagiaires.store');
+
+
+
+
+
+
+
 
 
 

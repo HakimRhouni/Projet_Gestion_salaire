@@ -8,7 +8,7 @@
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
 
-    @include('layouts.navbars.auth.topnav', ['title' => 'Personnel Occasionnel'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Stagiaires'])
 
     @include('layouts.navbars.auth.sidenavafterperiodes') <!-- Ajout du deuxième sidenav -->
 
@@ -19,13 +19,10 @@
                     <div class="col-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5 class="card-title">Personnel Occasionnel</h5>
+                                <h5 class="card-title">Liste des Stagiaires</h5>
                             </div>
-                            <div class="card-header">
-    <h5 class="card-title">Personnel Occasionnel</h5>
-    <a href="{{ route('personnel_occasionnel.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter</a>
-</div>
                             <div class="card-body">
+                            <a href="{{ route('stagiaires.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter</a>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead class="table-header">
@@ -37,35 +34,29 @@
                                                 <th>Carte de séjour</th>
                                                 <th>Numéro CNSS</th>
                                                 <th>Id fiscal</th>
-                                                <th>Profession</th>
                                                 <th>Montant Brut</th>
-                                                <th>IR Prélevé</th>
+                                                <th>Indemnité</th>
+                                                <th>Retenues</th>
+                                                <th>Net Imposable</th>
+                                                <th>Période</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($personnelOcasionnel as $personnel)
+                                            <!-- Boucle pour afficher chaque stagiaire -->
+                                            @foreach($stagiaires as $stagiaire)
                                                 <tr>
-                                                    <td>{{ $personnel->nom }}</td>
-                                                    <td>{{ $personnel->prenom }}</td>
-                                                    <td>{{ $personnel->adresse }}</td>
-                                                    <td>{{ $personnel->cin }}</td>
-                                                    <td>{{ $personnel->carte_sejour }}</td>
-                                                    <td>{{ $personnel->numero_cnss }}</td>
-                                                    <td>{{ $personnel->id_fiscal }}</td>
-                                                    <td>{{ $personnel->profession }}</td>
-                                                    <td>{{ $personnel->montant_brut }}</td>
-                                                    <td>{{ $personnel->ir_preleve }}</td>
-                                                    <td>
-            <!-- Bouton Modifier -->
-            <a href="{{ route('personnel_occasionnel.edit', ['id_periode' => $id_periode, 'id' => $personnel->id]) }}" class="btn btn-sm btn-warning">Modifier</a>
-            
-            <!-- Bouton Supprimer -->
-            <form action="{{ route('personnel_occasionnel.destroy', ['id_periode' => $id_periode, 'id' => $personnel->id]) }}" method="POST" style="display: inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel occasionnel?')">Supprimer</button>
-            </form>
-        </td>
+                                                    <td>{{ $stagiaire->nom }}</td>
+                                                    <td>{{ $stagiaire->prenom }}</td>
+                                                    <td>{{ $stagiaire->adresse }}</td>
+                                                    <td>{{ $stagiaire->cin }}</td>
+                                                    <td>{{ $stagiaire->carte_sejour }}</td>
+                                                    <td>{{ $stagiaire->numero_cnss }}</td>
+                                                    <td>{{ $stagiaire->id_fiscal }}</td>
+                                                    <td>{{ $stagiaire->montant_brut }}</td>
+                                                    <td>{{ $stagiaire->indemnite }}</td>
+                                                    <td>{{ $stagiaire->retenues }}</td>
+                                                    <td>{{ $stagiaire->net_imposable }}</td>
+                                                    <td>{{ $stagiaire->periode }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

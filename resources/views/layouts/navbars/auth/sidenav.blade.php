@@ -38,7 +38,7 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-            
+           
             @if(auth()->user()->hasRole('admin'))
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
