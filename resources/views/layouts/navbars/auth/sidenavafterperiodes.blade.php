@@ -81,6 +81,29 @@
         <span class="nav-link-text ms-1">Stagiaires</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link{{ request()->routeIs('doctorants.index') ? ' active' : '' }}" href="{{ route('doctorants.index', ['id_periode' => $id_periode]) }}">
+        <i class="ni ni-single-02 text-blue"></i>
+        <span class="nav-link-text">Doctorants</span>
+    </a>
+</li>
+
+    <!-- Vos autres éléments de navigation -->
+    <li class="nav-item">
+    <a class="nav-link" href="{{ route('beneficiairesOS.index', ['id_periode' => $id_periode]) }}">
+    <i class="fas fa-users"></i>
+    <span class="nav-link-text">Bénéf d’options de souscription</span>
+</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link {{ Route::currentRouteName() == 'beneficiairesAbondement.index' ? 'active' : '' }}" href="{{ route('beneficiairesAbondement.index',['id_periode' => $id_periode]) }}">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="fas fa-hand-holding-usd text-dark text-sm opacity-10"></i>
+        </div> 
+        <span class="nav-link-text ms-1">Bénéficiaires d'abondement</span>
+    </a>
+</li>
+
             
             
         </ul>

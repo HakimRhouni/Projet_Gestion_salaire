@@ -32,6 +32,9 @@ use App\Http\Controllers\PersonnelPermanentController;
 use App\Http\Controllers\SalariesExonerationController;
 use App\Http\Controllers\PersonnelOccasionnelController;
 use App\Http\Controllers\StagiaireController;
+use App\Http\Controllers\DoctorantController;
+use App\Http\Controllers\BeneficiaireOSController;
+use App\Http\Controllers\BeneficiaireAbondementController;
 
             
 
@@ -94,6 +97,30 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/stagiaires/{id}/edit', [StagiaireController::class, 'edit'])->name('stagiaires.edit');
 	Route::put('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'update'])->name('stagiaires.update');
 	Route::delete('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'destroy'])->name('stagiaires.destroy');
+	Route::get('/periodes/{id_periode}/doctorants', [DoctorantController::class, 'index'])->name('doctorants.index');
+	Route::get('/periodes/{id_periode}/doctorants/create', [DoctorantController::class, 'create'])->name('doctorants.create');
+	Route::post('/doctorants/{id_periode}/{id_societe}', [DoctorantController::class, 'store'])->name('doctorants.store');
+	Route::get('periodes/{id_periode}/societes/{id_societe}/doctorants/{id}/edit', [DoctorantController::class, 'edit'])->name('doctorants.edit');
+	Route::put('periodes/{id_periode}/societes/{id_societe}/doctorants/{id}', [DoctorantController::class, 'update'])->name('doctorants.update');
+	Route::delete('periodes/{id_periode}/societes/{id_societe}/doctorants/{id}', [DoctorantController::class, 'destroy'])->name('doctorants.destroy');
+	Route::get('/periodes/{id_periode}/beneficiaires', [BeneficiaireOSController::class, 'index'])->name('beneficiairesOS.index');
+	Route::get('/periodes/{id_periode}/beneficiaires/create', [BeneficiaireOSController::class, 'create'])->name('beneficiairesOS.create');
+	Route::post('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'store'])->name('beneficiairesOS.store');
+	Route::get('/periodes/{id_periode}/beneficiaires/{id_societe}/edit', [BeneficiaireOSController::class, 'edit'])->name('beneficiairesOS.edit');
+	Route::put('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'update'])->name('beneficiairesOS.update');
+	Route::delete('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'destroy'])->name('beneficiairesOS.destroy');
+	Route::get('/periodes/{id_periode}/beneficiaires-abondement', [BeneficiaireAbondementController::class, 'index'])->name('beneficiairesAbondement.index');
+	Route::get('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement/create', [BeneficiaireAbondementController::class,'create'])->name('beneficiaires_abondement.create');
+	Route::post('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement', [BeneficiaireAbondementController::class, 'store'])->name('beneficiaires_abondement.store');
+
+
+
+
+
+
+
+
+
 
 
 
