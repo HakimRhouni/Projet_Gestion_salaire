@@ -10,7 +10,7 @@ class BeneficiaireOSController extends Controller
 {
     public function index($id_periode  )
     {
-        $beneficiairesOS = BeneficiaireOptionsSouscription::all();
+        $beneficiairesOS = BeneficiaireOptionsSouscription::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
     $id_societe = $periode->id_societe;
     

@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                                 @else
-                                    <p>Aucun Bénéficiaire d’options de souscription trouvé.</p>
+                                    <p>Aucun versement trouvé.</p>
                                 @endif
                             </div>
                         </div>

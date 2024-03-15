@@ -20,11 +20,10 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <h5 class="card-title">Personnel Occasionnel</h5>
+                                <a href="{{ route('personnel_occasionnel.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter</a>
                             </div>
-                            <div class="card-header">
-    <h5 class="card-title">Personnel Occasionnel</h5>
-    <a href="{{ route('personnel_occasionnel.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter</a>
-</div>
+                           
+@if(count($personnelOcasionnel) > 0)
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
@@ -72,6 +71,9 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                    <p>Aucun personnel ocasionnel trouvé.</p>
+                                @endif
                         </div>
                     </div>
                 </div>

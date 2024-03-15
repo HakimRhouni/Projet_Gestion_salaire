@@ -11,7 +11,7 @@ class DoctorantController extends Controller
     public function index($id_periode)
     {
         // Récupérer tous les doctorants depuis la base de données
-        $doctorants = Doctorant::all();
+        $doctorants = Doctorant::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
     $id_societe = $periode->id_societe;
         

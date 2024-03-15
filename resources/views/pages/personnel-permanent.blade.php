@@ -25,6 +25,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                            @if(count($personnelPermanents) > 0)
                                 <table class="table table-striped align-middle">
                                     <thead class="table-header">
                                         <tr>
@@ -66,6 +67,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                @else
+                                    <p>Aucun personnel Permanent trouvé.</p>
+                                @endif
                             </div>
                         </div>
                     </div>

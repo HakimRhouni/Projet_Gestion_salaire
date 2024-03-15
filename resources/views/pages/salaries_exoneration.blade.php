@@ -26,6 +26,7 @@ div class="container-fluid py-4">
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                            @if(count($salaries_exoneres) > 0)
                                 <table class="table table-striped align-middle">
                                     <thead class="table-header">
                                     <tr>
@@ -70,6 +71,9 @@ div class="container-fluid py-4">
                 @endforeach
                                     </tbody>
                                 </table>
+                                @else
+                                    <p>Aucun salarie exoneré trouvé.</p>
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ class BeneficiaireAbondementController extends Controller
     public function index($id_periode)
     {
         // Récupérez la liste des bénéficiaires d'abondement depuis le modèle
-        $beneficiairesAbondement = BeneficiaireAbondement::all();
+        $beneficiairesAbondement = BeneficiaireAbondement::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
     $id_societe = $periode->id_societe;
 

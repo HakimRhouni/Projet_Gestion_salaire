@@ -20,9 +20,11 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <h5 class="card-title">Liste des Stagiaires</h5>
+                                <a href="{{ route('stagiaires.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter</a>
                             </div>
                             <div class="card-body">
-                            <a href="{{ route('stagiaires.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter</a>
+                           
+                            @if(count($stagiaires) > 0)
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead class="table-header">
@@ -74,6 +76,9 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                @else
+                                    <p>Aucun stagiaire trouvé.</p>
+                                @endif
                             </div>
                         </div>
                     </div>

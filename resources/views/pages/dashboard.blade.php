@@ -12,17 +12,15 @@
                                 <h6>Entreprises</h6>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <button class="btn btn-primary me-2" onclick="ouvrir()" aria-label="Ouvrir la sélection">Ouvrir</button>
+                                        
                                         <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter</a>
                                     </div>
-                                    <div class="input-group w-auto" style="height: 2rem;">
-                                        <input type="text" id="recherche" name="recherche" placeholder="Rechercher..." class="form-control border-end-0" style="height: 130%;" title="Entrez le nom de l'entreprise à rechercher">
-                                        <button type="submit" class="btn btn-info rounded-end" style="height: 130%;" onclick="rechercher()" aria-label="Rechercher une entreprise">Rechercher</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                @if(count($entreprises) > 0)
                                     <table class="table table-striped align-middle">
                                         <thead class="table-header">
                                             <tr>
@@ -56,6 +54,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    @else
+                                    <p>Aucune entreprise trouvé.</p>
+                                @endif
                                 </div>
                             </div>
                         </div>
