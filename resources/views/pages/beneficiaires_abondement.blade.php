@@ -52,6 +52,16 @@
                                         <td>{{ $beneficiaire->date_ouverture }}</td>
                                         <td>{{ $beneficiaire->montant_abondement }}</td>
                                         <td>{{ $beneficiaire->montant_annuel_revenu_imposable }}</td>
+                                        <td>
+                <!-- Bouton Modifier -->
+                <a href="{{ route('beneficiaires_abondement.edit', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id_societe, 'id' => $beneficiaire->id]) }}" class="btn btn-primary">Modifier</a>
+                <!-- Formulaire Supprimer -->
+                <form action="{{ route('beneficiaires_abondement.destroy', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id_societe, 'id' => $beneficiaire->id]) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
                                     </tr>
                                 @endforeach
                             </tbody>

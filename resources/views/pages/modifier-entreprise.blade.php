@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="siege_social">Siège social</label>
-                                    <input type="text" class="form-control" id="siege_social" name="siege_social" value="{{ $entreprise->siege_social }}">
+                                    <input type="text area" class="form-control" id="siege_social" name="siege_social" value="{{ $entreprise->siege_social }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="commune">Commune</label>
@@ -63,9 +63,22 @@
                                     <input type="email" class="form-control" id="email" name="email" value="{{ $entreprise->email }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="forme_juridique">Forme juridique</label>
-                                    <input type="text" class="form-control" id="forme_juridique" name="forme_juridique" value="{{ $entreprise->forme_juridique }}">
-                                </div>
+    <label for="forme_juridique">Forme juridique</label>
+    <select class="form-control" id="forme_juridique" name="forme_juridique">
+        <option value="">Choisissez une forme juridique</option>
+        <option value="EI" {{ $entreprise->forme_juridique === 'EI' ? 'selected' : '' }}>Entreprise individuelle (EI)</option>
+        <option value="EIRL" {{ $entreprise->forme_juridique === 'EIRL' ? 'selected' : '' }}>Entreprise individuelle à responsabilité limitée (EIRL)</option>
+        <option value="SNC" {{ $entreprise->forme_juridique === 'SNC' ? 'selected' : '' }}>Société en nom collectif (SNC)</option>
+        <option value="SCS" {{ $entreprise->forme_juridique === 'SCS' ? 'selected' : '' }}>Société en commandite simple (SCS)</option>
+        <option value="SARL" {{ $entreprise->forme_juridique === 'SARL' ? 'selected' : '' }}>Société à responsabilité limitée (SARL)</option>
+        <option value="SAS" {{ $entreprise->forme_juridique === 'SAS' ? 'selected' : '' }}>Société par actions simplifiée (SAS)</option>
+        <option value="SA" {{ $entreprise->forme_juridique === 'SA' ? 'selected' : '' }}>Société anonyme (SA)</option>
+        <option value="SCA" {{ $entreprise->forme_juridique === 'SCA' ? 'selected' : '' }}>Société en commandite par actions (SCA)</option>
+        <option value="EP" {{ $entreprise->forme_juridique === 'EP' ? 'selected' : '' }}>Entreprise publique</option>
+        <option value="Coop" {{ $entreprise->forme_juridique === 'Coop' ? 'selected' : '' }}>Coopérative</option>
+    </select>
+</div>
+
                                 <div class="form-group">
                                     <label for="id_fiscal">Identifiant fiscal</label>
                                     <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" value="{{ $entreprise->id_fiscal }}">
@@ -110,10 +123,20 @@
                                     <label for="compte_dgi">Compte DGI</label>
                                     <input type="text" class="form-control" id="compte_dgi" name="compte_dgi" value="{{ $entreprise->compte_dgi }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="mot_de_passe_compte_dgi">Mot de passe du Compte DGI</label>
-                                    <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
-                                </div>
+                                
+                                <div class="form-group position-relative">
+    <label for="mot_de_passe_compte_dgi">Mot de passe du Compte DGI</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary align-middle" type="button" id="togglePassword" onclick="toggle()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                    
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
                                 <button type="submit" class="btn btn-primary">Modifier</button>
                             </form>
                         </div>
@@ -127,7 +150,31 @@
 @endsection
 
 @push('js')
+<script>
+    function toggle() {
+    let passwordInput = document.getElementById('mot_de_passe_compte_dgi');
+    let toggleButton = document.getElementById('togglePassword');
 
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        `;
+    } else {
+        passwordInput.type = 'password';
+        toggleButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        `;
+    }
+}
+
+</script>
 <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);

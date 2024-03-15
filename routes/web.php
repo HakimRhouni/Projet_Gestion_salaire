@@ -35,8 +35,9 @@ use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\DoctorantController;
 use App\Http\Controllers\BeneficiaireOSController;
 use App\Http\Controllers\BeneficiaireAbondementController;
+use App\Http\Controllers\VersementController;
+use App\Http\Controllers\SimpleIRController;
 
-            
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 Route::get('/user-management', [UserManagementController::class, 'index'])->name('user-management')->middleware('auth');
@@ -112,6 +113,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/beneficiaires-abondement', [BeneficiaireAbondementController::class, 'index'])->name('beneficiairesAbondement.index');
 	Route::get('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement/create', [BeneficiaireAbondementController::class,'create'])->name('beneficiaires_abondement.create');
 	Route::post('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement', [BeneficiaireAbondementController::class, 'store'])->name('beneficiaires_abondement.store');
+	Route::get('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}/edit', [BeneficiaireAbondementController::class, 'edit'])->name('beneficiaires_abondement.edit');
+	Route::put('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}', [BeneficiaireAbondementController::class, 'update'])->name('beneficiaires_abondement.update');
+	Route::delete('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}', [BeneficiaireAbondementController::class, 'destroy'])->name('beneficiaires_abondement.destroy');
+	Route::get('/periodes/{id_periode}/versements', [VersementController::class, 'index'])->name('versements.index');
+	Route::get('/periodes/{id_periode}/{id_societe}/versements/create', [VersementController::class, 'create'])->name('versements.create');
+	Route::post('/periodes/{id_periode}/{id_societe}/versements', [VersementController::class, 'store'])->name('versements.store');
+	Route::get('/versements/{id_periode}/edit/{id}', [VersementController::class, 'edit'])->name('versements.edit');
+	Route::put('/versements/{id_periode}/update/{id}', [VersementController::class, 'update'])->name('versements.update');
+	Route::delete('/versements/{id_periode}/delete/{id}', [VersementController::class, 'destroy'])->name('versements.destroy');
+	Route::get('/simple-ir/{id_periode}', [SimpleIRController::class, 'index'])->name('simple_ir.index');
+
+
+
+
+
+
 
 
 

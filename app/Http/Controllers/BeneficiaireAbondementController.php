@@ -55,4 +55,46 @@ class BeneficiaireAbondementController extends Controller
         // Redirigez avec un message de succès
         return redirect()->route('beneficiairesAbondement.index', ['id_periode' => $id_periode])->with('success', 'Bénéficiaire d\'abondement créé avec succès.');
     }
+    public function edit($id_periode, $id_societe, $id)
+    {
+        $beneficiaire = BeneficiaireAbondement::findOrFail($id);
+        return view('pages.edit_beneficiaire_abondement', compact('beneficiaire', 'id_periode', 'id_societe'));
+    }
+    public function destroy($id_periode, $id_societe, $id)
+    {
+        // Récupérer le bénéficiaire à supprimer
+        $beneficiaire = BeneficiaireAbondement::findOrFail($id);
+
+        // Supprimer le bénéficiaire de la base de données
+        $beneficiaire->delete();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('beneficiairesAbondement.index', compact('id_periode', 'id_societe'))->with('success', 'Bénéficiaire supprimé avec succès.');
+    }
+    public function update(Request $request, $id_periode, $id_societe, $id)
+{
+    // Valider les données du formulaire
+    $request->validate([
+        'nom' => 'required|string',
+        'prenom' => 'required|string',
+        'adresse' => 'required|string',
+        'cin' => 'required|string',
+        'carte_sejour' => 'nullable|string',
+        'commune' => 'nullable|string',
+        'numero_plan' => 'required|string',
+        'duree_annees' => 'required|integer',
+        'date_ouverture' => 'required|date',
+        'montant_abondement' => 'required|numeric',
+        'montant_annuel_revenu_imposable' => 'required|numeric',
+    ]);
+
+    // Récupérer le bénéficiaire à mettre à jour
+    $beneficiaire = BeneficiaireAbondement::findOrFail($id);
+
+    // Mettre à jour les champs du bénéficiaire avec les données du formulaire
+    $beneficiaire->update($request->all());
+
+    // Rediriger avec un message de succès
+    return redirect()->route('beneficiairesAbondement.index', compact('id_periode', 'id_societe'))->with('success', 'Bénéficiaire modifié avec succès.');
+}
 }

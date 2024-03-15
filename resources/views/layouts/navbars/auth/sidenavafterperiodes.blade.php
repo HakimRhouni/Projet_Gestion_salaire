@@ -103,6 +103,12 @@
         <span class="nav-link-text ms-1">Bénéficiaires d'abondement</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ Route::currentRouteName() == 'versements.index' ? 'active' : '' }}" href="{{ route('versements.index',['id_periode' => $id_periode]) }}">
+        <i class="fas fa-coins"></i>
+        <span class="nav-link-text">Versements</span>
+    </a>
+</li>
 
             
             

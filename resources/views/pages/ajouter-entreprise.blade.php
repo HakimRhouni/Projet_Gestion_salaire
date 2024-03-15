@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="siege_social" class="form-label">Siège social</label>
-                                        <input type="text" class="form-control" id="siege_social" name="siege_social" placeholder="Siège social">
+                                        <input type="text area" class="form-control" id="siege_social" name="siege_social" placeholder="Siège social">
                                     </div>
                                     <div class="mb-3">
                                         <label for="commune" class="form-label">Commune</label>
@@ -55,9 +55,21 @@
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="forme_juridique" class="form-label">Forme juridique</label>
-                                        <input type="text" class="form-control" id="forme_juridique" name="forme_juridique" placeholder="Forme juridique" required>
-                                    </div>
+    <label for="forme_juridique" class="form-label">Forme juridique</label>
+    <select class="form-select" id="forme_juridique" name="forme_juridique" required>
+        <option value="">Choisissez une forme juridique</option>
+        <option value="EI">Entreprise individuelle (EI)</option>
+        <option value="EIRL">Entreprise individuelle à responsabilité limitée (EIRL)</option>
+        <option value="SNC">Société en nom collectif (SNC)</option>
+        <option value="SCS">Société en commandite simple (SCS)</option>
+        <option value="SARL">Société à responsabilité limitée (SARL)</option>
+        <option value="SAS">Société par actions simplifiée (SAS)</option>
+        <option value="SA">Société anonyme (SA)</option>
+        <option value="SCA">Société en commandite par actions (SCA)</option>
+        <option value="EP">Entreprise publique</option>
+        <option value="Coop">Coopérative</option>
+    </select>
+</div>
                                     <div class="mb-3">
                                         <label for="id_fiscal" class="form-label">Identifiant fiscal</label>
                                         <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" placeholder="Identifiant fiscal" required>
@@ -102,10 +114,19 @@
                                         <label for="compte_dgi" class="form-label">Compte DGI</label>
                                         <input type="text" class="form-control" id="compte_dgi" name="compte_dgi" placeholder="Compte DGI">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="mot_de_passe_compte_dgi" class="form-label">Mot de passe du Compte DGI</label>
-                                        <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi" placeholder="Mot de passe du Compte DGI">
-                                    </div>
+                                    <div class="form-group position-relative">
+    <label for="mot_de_passe_compte_dgi">Mot de passe du Compte DGI</label>
+    <div class="input-group">
+        <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary align-middle" type="button" id="togglePassword" onclick="toggle()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                    
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>    
                                     <button type="submit" class="btn btn-success">Ajouter</button>
                                 </form>
                             </div>
@@ -119,6 +140,31 @@
 @endsection
 
 @push('js')
+<script>
+    function toggle() {
+    let passwordInput = document.getElementById('mot_de_passe_compte_dgi');
+    let toggleButton = document.getElementById('togglePassword');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        `;
+    } else {
+        passwordInput.type = 'password';
+        toggleButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        `;
+    }
+}
+
+</script>
     <script src="./assets/js/plugins/chartjs.min.js"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
