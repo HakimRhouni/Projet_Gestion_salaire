@@ -36,7 +36,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($periodes as $periode)
-                                        <tr onclick="window.location='{{ route('periodes.personnel_permanent', ['id_periode' => $periode->id_periode]) }}';" style="cursor:pointer;">
+                                        <tr onclick="window.location ='{{ route('periodes.personnel_permanent', ['id_periode' => $periode->id_periode]) }}';" style="cursor:pointer;">
                                                 <td>{{ $periode->annee }}</td>
                                                 <td>{{ $periode->debut_exercice }}</td>
                                                 <td>{{ $periode->fin_exercice }}</td>

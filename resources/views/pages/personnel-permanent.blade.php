@@ -57,11 +57,13 @@
                                             <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td>
                                             <td>
                                                 <a href="{{ route('personnel_permanent.edit', $personnelPermanent->id_personnel_permanent) }}" class="btn btn-warning">Modifier</a>
-                                                <a action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-warning">Supprimer</button>
-                                                </a>
+                                               
+                                                <form action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST" style="display: inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel permanent?')">Supprimer</button>
+</form>
+
                                             </td> <!-- Ajout des boutons de modification et de suppression -->
                                         </tr>
                                         @endforeach

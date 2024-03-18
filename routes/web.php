@@ -78,7 +78,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
 	Route::get('/personnel_permanent/{id}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
-    Route::put('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
+	//calcul
+	Route::post('/personnel_permanent/calcul-montants', [PersonnelPermanentController::class, 'calculMontants'])->name('calcul.montants');
+    Route::post('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
     Route::delete('/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
 	Route::get('/periodes/{id_periode}/societes/{id_societe}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
@@ -123,6 +125,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/versements/{id_periode}/update/{id}', [VersementController::class, 'update'])->name('versements.update');
 	Route::delete('/versements/{id_periode}/delete/{id}', [VersementController::class, 'destroy'])->name('versements.destroy');
 	Route::get('/simple-ir/{id_periode}', [SimpleIRController::class, 'index'])->name('simple_ir.index');
+	
 
 
 

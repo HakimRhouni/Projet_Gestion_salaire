@@ -20,7 +20,7 @@
                             <h5 class="card-title">Créer Personnel Permanent</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('personnel_permanent.store') }}" method="POST">
+                            <form id="createPersonnelForm" action="{{ route('personnel_permanent.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id_societe" value="{{ $id_societe }}">
                                 <input type="hidden" name="id_periode" value="{{ $id_periode }}">
@@ -67,19 +67,19 @@
                                 </div>
                                 <div class="mb-3">
     <label for="montant_brut" class="form-label">Montant Brut</label>
-    <input type="text" class="form-control" id="montant_brut" name="montant_brut" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_brut" name="montant_brut" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_avantages" class="form-label">Montant Avantages</label>
-    <input type="text" class="form-control" id="montant_avantages" name="montant_avantages" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_avantages" name="montant_avantages" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_indemnites" class="form-label">Montant Indemnités</label>
-    <input type="text" class="form-control" id="montant_indemnites" name="montant_indemnites" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_indemnites " name="montant_indemnites" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_exoneres" class="form-label">Montant Exonérés</label>
-    <input type="text" class="form-control" id="montant_exoneres" name="montant_exoneres" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_exoneres" name="montant_exoneres" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_revenu_brut_imposable" class="form-label">Montant du revenu brut imposable</label>
@@ -87,19 +87,19 @@
 </div>
 <div class="mb-3">
     <label for="montant_frais_professionnels" class="form-label">Montant Frais Professionnels</label>
-    <input type="text" class="form-control" id="montant_frais_professionnels" name="montant_frais_professionnels" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_frais_professionnels" name="montant_frais_professionnels" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_cotisations" class="form-label">Montant Cotisations</label>
-    <input type="text" class="form-control" id="montant_cotisations" name="montant_cotisations" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_cotisations" name="montant_cotisations" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_autres_retenues" class="form-label">Montant Autres Retenues</label>
-    <input type="text" class="form-control" id="montant_autres_retenues" name="montant_autres_retenues" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_autres_retenues" name="montant_autres_retenues" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="montant_echeances" class="form-label">Montant Echéances</label>
-    <input type="text" class="form-control" id="montant_echeances" name="montant_echeances" onchange="calculateAmounts()">
+    <input type="text" class="form-control montant-input" id="montant_echeances" name="montant_echeances" onchange="calculateAmounts()">
 </div>
 <div class="mb-3">
     <label for="revenu_net_imposable" class="form-label">Revenu Net Imposable</label>
@@ -137,34 +137,34 @@
     @include('layouts.footers.auth.footer')
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     // Fonction pour calculer automatiquement les montants
+    $(document).ready(function() {
+        // Écouter les événements de saisie sur les champs de montant
+        $('.montant-input').on('input', function() {
+            calculateAmounts();
+        });
+    });
+
     function calculateAmounts() {
-        var montant_brut = parseFloat(document.getElementById('montant_brut').value) || 0;
-        var montant_avantages = parseFloat(document.getElementById('montant_avantages').value) || 0;
-        var montant_indemnites = parseFloat(document.getElementById('montant_indemnites').value) || 0;
-        var montant_exoneres = parseFloat(document.getElementById('montant_exoneres').value) || 0;
-        var montant_frais_professionnels = parseFloat(document.getElementById('montant_frais_professionnels').value) || 0;
-        var montant_cotisations = parseFloat(document.getElementById('montant_cotisations').value) || 0;
-        var montant_autres_retenues = parseFloat(document.getElementById('montant_autres_retenues').value) || 0;
-        var montant_echeances = parseFloat(document.getElementById('montant_echeances').value) || 0;
-
-        var montant_revenu_brut_imposable = montant_brut + montant_avantages + montant_indemnites - montant_exoneres;
-        document.getElementById('montant_revenu_brut_imposable').value = montant_revenu_brut_imposable;
-
-        var revenu_net_imposable = montant_revenu_brut_imposable - montant_frais_professionnels + montant_cotisations + montant_autres_retenues + montant_echeances;
-        document.getElementById('revenu_net_imposable').value = revenu_net_imposable;
+        var formData = $('#createPersonnelForm').serialize();
+       
+        // Envoyer les données au serveur via une requête AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("calcul.montants") }}',
+            data: formData,
+            success: function (data) {
+                // Mettre à jour les champs de formulaire avec les résultats
+                $('#montant_revenu_brut_imposable').val(data.montant_revenu_brut_imposable);
+                $('#revenu_net_imposable').val(data.revenu_net_imposable);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
     }
 </script>
 
-@push('css')
-    <style>
-        /* Ajoutez vos styles CSS personnalisés ici */
-    </style>
-@endpush
-
-@push('js')
-    <script>
-        // Ajoutez vos scripts JavaScript personnalisés ici
-    </script>
-@endpush

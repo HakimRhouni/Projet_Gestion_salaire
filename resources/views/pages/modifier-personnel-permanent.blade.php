@@ -20,9 +20,9 @@
                             <h5 class="card-title">Modifier Personnel Permanent</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('personnel_permanent.update', $personnelPermanent->id_personnel_permanent) }}" method="POST">
+                            <form id="editPersonnelForm" action="{{ route('personnel_permanent.update', $personnelPermanent->id_personnel_permanent) }}" method="POST">
                                 @csrf
-                                @method('PUT')
+                                @method('POST')
 
                                 <div class="mb-3">
                                     <label for="matricule" class="form-label">Matricule</label>
@@ -136,26 +136,36 @@
     @include('layouts.footers.auth.footer')
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     // Fonction pour calculer automatiquement les montants
+    $(document).ready(function() {
+        // Écouter les événements de saisie sur les champs de montant
+        $('.montant-input').on('input', function() {
+            calculateAmounts();
+        });
+    });
+
     function calculateAmounts() {
-        var montant_brut = parseFloat(document.getElementById('montant_brut').value) || 0;
-        var montant_avantages = parseFloat(document.getElementById('montant_avantages').value) || 0;
-        var montant_indemnites = parseFloat(document.getElementById('montant_indemnites').value) || 0;
-        var montant_exoneres = parseFloat(document.getElementById('montant_exoneres').value) || 0;
-        var montant_frais_professionnels = parseFloat(document.getElementById('montant_frais_professionnels').value) || 0;
-        var montant_cotisations = parseFloat(document.getElementById('montant_cotisations').value) || 0;
-        var montant_autres_retenues = parseFloat(document.getElementById('montant_autres_retenues').value) || 0;
-        var montant_echeances = parseFloat(document.getElementById('montant_echeances').value) || 0;
-
-        var montant_revenu_brut_imposable = montant_brut + montant_avantages + montant_indemnites - montant_exoneres;
-        document.getElementById('montant_revenu_brut_imposable').value = montant_revenu_brut_imposable;
-
-        var revenu_net_imposable = montant_revenu_brut_imposable - montant_frais_professionnels + montant_cotisations + montant_autres_retenues + montant_echeances;
-        document.getElementById('revenu_net_imposable').value = revenu_net_imposable;
+        var formData = $('#editPersonnelForm').serialize();
+        
+        // Envoyer les données au serveur via une requête AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("calcul.montants") }}',
+            data: formData,
+            success: function (data) {
+                // Mettre à jour les champs de formulaire avec les résultats
+                $('#montant_revenu_brut_imposable').val(data.montant_revenu_brut_imposable);
+                $('#revenu_net_imposable').val(data.revenu_net_imposable);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
     }
 </script>
-
 @push('css')
     <style>
         /* Ajoutez vos styles CSS personnalisés ici */

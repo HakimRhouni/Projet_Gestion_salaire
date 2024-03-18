@@ -34,9 +34,24 @@
                     </a>
                 </li>
                 
-                
+                <script>
+    // Cibler le bouton du topnav
+    var iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+
+    // Cibler la deuxième sidenav
+    var secondSidenav = document.getElementById('secondSidenav');
+
+    // Fonction pour basculer la deuxième sidenav
+    function toggleSecondSidenav() {
+        secondSidenav.classList.toggle('show'); // Ajoute ou supprime la classe 'show' pour afficher ou masquer la sidenav
+    }
+
+    // Associer la fonction de basculement à l'événement de clic du bouton du topnav
+    iconNavbarSidenav.addEventListener('click', toggleSecondSidenav);
+</script>
             </ul>
         </div>
     </div>
 </nav>
+
 <!-- End Navbar -->

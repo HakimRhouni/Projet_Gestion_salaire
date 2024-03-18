@@ -29,6 +29,7 @@ class PersonnelPermanentController extends Controller
 
 public function create($id_societe, $id_periode)
 {
+    
     return view('pages.create-personnel-permanent', compact('id_societe', 'id_periode'));
 }
 
@@ -82,5 +83,25 @@ public function destroy($id)
     return redirect()->route('periodes.personnel_permanent', ['id_periode' => $id_periode])->with('success', 'Personnel permanent supprimé avec succès');
 }
 
+public function calculMontants(Request $request)
+    {
+        $montant_brut = $request->input('montant_brut');
+        $montant_avantages = $request->input('montant_avantages');
+        $montant_indemnites = $request->input('montant_indemnites');
+        $montant_exoneres = $request->input('montant_exoneres');
+        $montant_frais_professionnels = $request->input('montant_frais_professionnels');
+        $montant_cotisations = $request->input('montant_cotisations');
+        $montant_autres_retenues = $request->input('montant_autres_retenues');
+        $montant_echeances = $request->input('montant_echeances');
+
+        $montant_revenu_brut_imposable = $montant_brut + $montant_avantages + $montant_indemnites - $montant_exoneres;
+        $revenu_net_imposable = $montant_revenu_brut_imposable - $montant_frais_professionnels + $montant_cotisations + $montant_autres_retenues + $montant_echeances;
+
+        // Vous pouvez retourner les montants calculés sous forme de réponse JSON
+        return response()->json([
+            'montant_revenu_brut_imposable' => $montant_revenu_brut_imposable,
+            'revenu_net_imposable' => $revenu_net_imposable
+        ]);
+    }
 
 }
