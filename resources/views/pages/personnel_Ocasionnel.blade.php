@@ -10,7 +10,7 @@
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Personnel Occasionnel'])
 
-    @include('layouts.navbars.auth.sidenavafterperiodes') <!-- Ajout du deuxième sidenav -->
+  
 
     <div class="container-fluid py-4">
         <div class="row mt-4">

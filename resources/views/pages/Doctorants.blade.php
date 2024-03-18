@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-50'])
 
 @section('content')
     <link href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet">
@@ -10,7 +10,7 @@
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Doctorants'])
 
-    @include('layouts.navbars.auth.sidenavafterperiodes')
+    
 
     <div class="container-fluid py-4">
         <div class="row mt-4">
