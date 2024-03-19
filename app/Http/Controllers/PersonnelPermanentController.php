@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonnelPermanent;
 use Illuminate\Http\Request;
-use App\Models\Periode; // Assurez-vous d'importer le modèle Periode
+use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class PersonnelPermanentController extends Controller
 {
@@ -103,5 +104,32 @@ public function calculMontants(Request $request)
             'revenu_net_imposable' => $revenu_net_imposable
         ]);
     }
+
+    public function generatePdfPersonnelPermanent($id_periode)
+{
+    // Obtenez l'objet Periode correspondant à l'ID de la période
+    $periode = Periode::findOrFail($id_periode);
+
+    // Récupérez la liste des personnels permanents pour cette période
+    $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
+
+    // Générez le contenu HTML en utilisant la vue que vous avez créée
+    $html = view('pages.personnel-permanent-pdf', compact('personnelPermanents'))->render();
+
+    // Créez une nouvelle instance de Dompdf
+    $pdf = new Dompdf();
+
+    // Chargez le contenu HTML dans Dompdf
+    $pdf->loadHtml($html);
+
+    // Définissez le format du papier et l'orientation
+    $pdf->setPaper('A4', 'portrait');
+
+    // Rendez le PDF
+    $pdf->render();
+
+    // Affichez le PDF dans le navigateur
+    return $pdf->stream('liste-personnel-permanent.pdf');
+}
 
 }

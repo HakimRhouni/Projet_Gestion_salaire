@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use App\Models\SalaireBeneficiantExoneration;
+use Dompdf\Dompdf;
 
 class SalariesExonerationController extends Controller
 {
@@ -109,6 +110,29 @@ public function update(Request $request, $id)
 
     // Rediriger avec un message de succès
     return redirect()->route('salaries_exoneration.index', ['id_periode' => $id_periode])->with('success', 'Le salarié exonéré a été modifié avec succès.');
+}
+public function generatePdf($id_periode)
+{
+    // Obtenez la liste des salariés exonérés pour cette période
+    $salaries_exoneres = SalaireBeneficiantExoneration::where('id_periode', $id_periode)->get();
+
+    // Générez le contenu HTML en utilisant la vue que vous avez créée
+    $html = view('pages.salaries-exoneres-pdf', compact('salaries_exoneres'))->render();
+
+    // Créez une nouvelle instance de Dompdf
+    $pdf = new Dompdf();
+
+    // Chargez le contenu HTML dans Dompdf
+    $pdf->loadHtml($html);
+
+    // Définissez le format du papier et l'orientation
+    $pdf->setPaper('A4', 'portrait');
+
+    // Rendez le PDF
+    $pdf->render();
+
+    // Affichez le PDF dans le navigateur
+    return $pdf->stream('liste-salaries-exoneres.pdf');
 }
 
 }

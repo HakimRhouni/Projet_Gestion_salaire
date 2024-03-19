@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Entreprise;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class EntrepriseController extends Controller
 {
@@ -136,4 +138,13 @@ class EntrepriseController extends Controller
         // Retourner les résultats de la recherche à la vue
         return view('votre_vue', ['resultats' => $resultats]);
     }
+    public function generatePdf()
+{
+    $entreprises = Entreprise::all(); 
+    $pdf = new Dompdf();
+    $pdf->loadHtml(view('pages.entreprises-pdf', compact('entreprises')));
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    return $pdf->stream('liste_entreprises.pdf');
+}
 }

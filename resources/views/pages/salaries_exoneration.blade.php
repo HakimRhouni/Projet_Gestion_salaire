@@ -17,7 +17,7 @@ div class="container-fluid py-4">
                             <h5 class="card-title">salaries exoneres</h5>
                             
                             <a href="{{ route('salaries_exoneration.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Créer un salarié exonéré</a>
-
+                            <a href="{{ route('salaries_exonerationController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

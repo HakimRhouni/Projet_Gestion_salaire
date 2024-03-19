@@ -13,7 +13,9 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
                                         
-                                        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter</a>
+                                        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter Entreprise</a>
+                                        <a href="{{ route('entreprise.pdf') }}" class="btn btn-primary">Imprimer PDF</a>
+
                                     </div>
                                     
                                 </div>

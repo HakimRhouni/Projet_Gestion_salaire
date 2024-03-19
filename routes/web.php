@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/ajouter-entreprise', [EntrepriseController::class, 'ajouter'])->name('ajouter-entreprise');
 	Route::get('/modifier-entreprise/{id}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
 	Route::put('/modifier-entreprise/{id}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
+	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
 	Route::get('dashboard/{raison_sociale}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
 	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
@@ -82,12 +83,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/periodes/personnel_permanent/calcul-montants', [PersonnelPermanentController::class, 'calculMontants'])->name('calcul.montants');
     Route::post('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
     Route::delete('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
+	Route::get('/PersonnelPermanentController/{id_periode}/pdf', [PersonnelPermanentController::class, 'generatePdfPersonnelPermanent'])->name('PersonnelPermanentController.pdf');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
 	Route::get('/periodes/{id_periode}/societes/{id_societe}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
 	Route::delete('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'destroy'])->name('salaries_exoneration.destroy');
 	Route::get('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');
 	Route::put('/periodes/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
+	Route::get('/salaries_exoneration/{id_periode}/pdf', [SalariesExonerationController::class, 'generatePdf'])->name('salaries_exonerationController.pdf');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel', [PersonnelOccasionnelController::class, 'index'])->name('personnel_occasionnel.index');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel/create', [PersonnelOccasionnelController::class, 'create'])->name('personnel_occasionnel.create');
 	Route::post('/periodes/personnel-occasionnel/{id_periode}', [PersonnelOccasionnelController::class, 'store'])->name('personnel_occasionnel.store');
@@ -125,6 +128,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/periodes/versements/{id_periode}/update/{id}', [VersementController::class, 'update'])->name('versements.update');
 	Route::delete('/periodes/versements/{id_periode}/delete/{id}', [VersementController::class, 'destroy'])->name('versements.destroy');
 	Route::get('/periodes/simple-ir/{id_periode}', [SimpleIRController::class, 'index'])->name('simple_ir.index');
+	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
+
 	
 
 

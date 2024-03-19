@@ -16,6 +16,8 @@
                             <h5 class="card-title">Personnel Permanent</h5>
                             <!-- Bouton "Ajouter Personnel Permanent" -->
                             <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
+                            <a href="{{ route('PersonnelPermanentController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
