@@ -11,6 +11,8 @@
             <h6 class="font-weight-bolder text-white mb-0">{{ $title }}</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+              
             </div>
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
@@ -33,25 +35,10 @@
                         </div>
                     </a>
                 </li>
-                
-                <script>
-    // Cibler le bouton du topnav
-    var iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
-
-    // Cibler la deuxième sidenav
-    var secondSidenav = document.getElementById('secondSidenav');
-
-    // Fonction pour basculer la deuxième sidenav
-    function toggleSecondSidenav() {
-        secondSidenav.classList.toggle('show'); // Ajoute ou supprime la classe 'show' pour afficher ou masquer la sidenav
-    }
-
-    // Associer la fonction de basculement à l'événement de clic du bouton du topnav
-    iconNavbarSidenav.addEventListener('click', toggleSecondSidenav);
-</script>
+               
+               
             </ul>
         </div>
     </div>
 </nav>
-
 <!-- End Navbar -->

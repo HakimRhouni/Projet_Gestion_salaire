@@ -1,12 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    <link href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet">
-    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+   
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Personnel Occasionnel'])
 
@@ -82,6 +77,13 @@
         </div>
     </div>
     @include('layouts.footers.auth.footer')
+    <link href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/argon-dashboard.js') }}"></script>
 @endsection
 
 @push('css')
