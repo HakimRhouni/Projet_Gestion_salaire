@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Entreprise;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,10 @@ class HomeController extends Controller
         // Récupérer tous les utilisateurs avec leurs rôles
         $users = User::with('roles')->get();
 
-        // Passer les utilisateurs à la vue de tableau de bord
-        return view('pages.dashboard', compact('users'));
+        // Récupérer toutes les entreprises
+        $entreprises = Entreprise::all();
+
+        // Passer les utilisateurs et les entreprises à la vue de tableau de bord
+        return view('pages.dashboard', compact('users', 'entreprises'));
     }
 }
