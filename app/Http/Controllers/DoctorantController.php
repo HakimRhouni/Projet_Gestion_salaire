@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Doctorant;
 use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class DoctorantController extends Controller
 {
@@ -67,5 +68,16 @@ class DoctorantController extends Controller
         Doctorant::findOrFail($id)->delete();
         
         return redirect()->route('doctorants.index', ['id_periode' => $id_periode])->with('success', 'Doctorant supprimé avec succès.');
+    }
+    public function generatePdf($id_periode)
+    {
+        
+        $doctorants = Doctorant::where('id_periode', $id_periode)->get();
+        $dompdf = new Dompdf();
+        $html = view('pages.doctorants-pdf',compact('doctorants'))->render();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        return $dompdf->stream('liste-doctorants.pdf');
     }
 }

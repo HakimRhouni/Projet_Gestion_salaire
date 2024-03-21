@@ -16,6 +16,7 @@
                             <div class="card-header">
                                 <h5 class="card-title">Liste des bénéficiaires d'options de souscription</h5>
                                 <a href="{{ route('beneficiairesOS.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Bénéficiaire</a>
+                                <a href="{{ route('beneficiairesOS.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
 
                             </div>
                             <div class="card-body">

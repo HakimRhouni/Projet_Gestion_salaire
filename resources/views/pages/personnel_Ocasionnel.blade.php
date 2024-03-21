@@ -15,6 +15,7 @@
                             <div class="card-header">
                                 <h5 class="card-title">Personnel Occasionnel</h5>
                                 <a href="{{ route('personnel_occasionnel.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter</a>
+                                <a href="{{ route('personnel-occasionnel.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                             </div>
                            
 @if(count($personnelOcasionnel) > 0)

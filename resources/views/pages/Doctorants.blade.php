@@ -20,6 +20,7 @@
                             <div class="card-header">
                                 <h5 class="card-title">Liste des Doctorants</h5>
                                 <a href="{{ route('doctorants.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Doctorant</a>
+                                <a href="{{ route('doctorants.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
 
                             </div>
                             <div class="card-body">

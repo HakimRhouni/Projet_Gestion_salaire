@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BeneficiaireAbondement; 
 use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class BeneficiaireAbondementController extends Controller
 {
@@ -96,5 +97,18 @@ class BeneficiaireAbondementController extends Controller
 
     // Rediriger avec un message de succès
     return redirect()->route('beneficiairesAbondement.index', compact('id_periode', 'id_societe'))->with('success', 'Bénéficiaire modifié avec succès.');
+}
+public function generatePdf($id_periode)
+{
+    $beneficiairesAbondement = BeneficiaireAbondement::where('id_periode', $id_periode)->get();
+
+    $html = view('pages.beneficiaires-abondement-pdf', compact('beneficiairesAbondement'))->render();
+
+    $pdf = new Dompdf();
+    $pdf->loadHtml($html);
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    
+    return $pdf->stream('liste-beneficiairesOS-pdf.pdf');
 }
 }
