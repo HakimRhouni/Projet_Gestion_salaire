@@ -12,10 +12,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <h5 class="card-title">Page Web Intégrée</h5>
-                            </div>
+                            
                             <div class="card-body">
+                                <!-- Insérer ici le code de l'iframe -->
                                 <iframe src="https://ir.tax.gov.ma/ir/private/login.do?method=reload&feature=IR&langue=fr" style="width: 100%; height: 600px; border: none;"></iframe>
                             </div>
                         </div>

@@ -24,7 +24,7 @@ class PersonnelPermanentController extends Controller
         $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode'));
+        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode', 'periode'));
     }
     
 
@@ -131,5 +131,58 @@ public function calculMontants(Request $request)
     // Affichez le PDF dans le navigateur
     return $pdf->stream('liste-personnel-permanent.pdf');
 }
+
+public function ajouterEmployesAnneePrecedente($idPeriode)
+{
+    // Trouver la période actuelle
+    $periodeActuelle = Periode::findOrFail($idPeriode);
+
+    // Trouver la période de l'année précédente
+    $periodeAnneePrecedente = Periode::where('annee', $periodeActuelle->annee - 1)->first();
+
+    // Vérifier si la période de l'année précédente existe
+    if (!$periodeAnneePrecedente) {
+        echo "<script>alert('Aucune période de l\'année précédente trouvée.');</script>";
+        return redirect()->back();
+    }
+
+    // Récupérer l'ID de l'entreprise de la période actuelle
+    $idEntrepriseActuelle = $periodeActuelle->id_societe;
+
+    // Récupérer les employés permanents de l'année précédente de la même entreprise que la période actuelle
+    $employesAnneePrecedente = PersonnelPermanent::where('id_periode', $periodeAnneePrecedente->id_periode)
+        ->where('id_societe', $idEntrepriseActuelle)
+        ->get();
+
+    // Vérifier s'il n'y a aucun employé permanent de l'année précédente
+    if ($employesAnneePrecedente->isEmpty()) {
+        echo "<script>alert('Aucun personnel permanent dans l\'année précédente.');</script>";
+        return redirect()->back();
+    }
+
+    // Copier les employés de l'année précédente et les ajouter à la période actuelle
+    foreach ($employesAnneePrecedente as $employe) {
+        // Vérifier si l'employé existe déjà dans la période actuelle
+        $employeExiste = PersonnelPermanent::where('id_periode', $periodeActuelle->id_periode)
+            ->where('matricule', $employe->matricule)
+            ->exists();
+
+        // Si l'employé n'existe pas déjà, l'ajouter à la période actuelle
+        if (!$employeExiste) {
+            // Créer une copie de l'employé pour la période actuelle
+            $employeActuel = $employe->replicate();
+            $employeActuel->id_periode = $periodeActuelle->id_periode;
+            $employeActuel->save();
+        }
+    }
+
+    echo "<script>alert('Employéeeees de l\'année précédente de la même entreprise ajoutés avec succès.');</script>";
+
+    
+    return redirect()->route('periodes.personnel_permanent', ['id_periode' => $idPeriode]);
+}
+
+
+
 
 }
