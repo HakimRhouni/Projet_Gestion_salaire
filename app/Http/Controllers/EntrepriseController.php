@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entreprise;
 use Dompdf\Dompdf;
-use Dompdf\Options;
+
+use Illuminate\Support\Facades\Validator;
 
 class EntrepriseController extends Controller
 {
@@ -147,4 +148,7 @@ class EntrepriseController extends Controller
     $pdf->render();
     return $pdf->stream('liste_entreprises.pdf');
 }
+
 }
+
+

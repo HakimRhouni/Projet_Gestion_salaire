@@ -12,4 +12,5 @@ class SimpleIRController extends Controller
         $id_societe = Periode::findOrFail($id_periode)->id_societe;
         return view('pages.simple_ir', compact( 'id_periode', 'id_societe'));
     }
+  
 }

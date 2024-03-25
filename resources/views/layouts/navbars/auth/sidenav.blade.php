@@ -113,15 +113,15 @@
         <span class="nav-link-text">Versements</span>
     </a>
 </li>
-            @endif
-            
-            <a class="nav-link {{ Route::currentRouteName() == 'simple_ir.index' ? 'active' : '' }}" href="{{ route('simple_ir.index',['id_periode' => $id_periode]) }}">
+<a class="nav-link {{ Route::currentRouteName() == 'simple_ir.index' ? 'active' : '' }}" href="{{ route('simple_ir.index',['id_periode' => $id_periode]) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">simple_ir</span>
                 </a>
+            @endif
+           
         </ul>
     </div>
     
