@@ -17,8 +17,8 @@
                                         <a href="{{ route('entreprise.pdf') }}" class="btn btn-primary">Imprimer PDF</a>
                                         <form action="{{ route('entreprise.import') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="csv_file" accept=".csv">
-    <button type="submit">Importer CSV</button>
+    <input type="file" name="csv_file" accept=".csv" class="btn btn-primary">
+    <button type="submit" class="btn btn-success">Importer CSV</button>
 </form>
 
                                     </div>
@@ -170,5 +170,6 @@
         $(document).ready(function () {
         $('.dropdown-toggle').dropdown();
     });
+    
     </script>
 @endpush

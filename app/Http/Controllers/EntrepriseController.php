@@ -148,6 +148,73 @@ class EntrepriseController extends Controller
     $pdf->render();
     return $pdf->stream('liste_entreprises.pdf');
 }
+public function import(Request $request)
+{
+    // Valider la requête
+    $validator = Validator::make($request->all(), [
+        'csv_file' => 'required|mimes:csv,txt',
+    ]);
+
+    // Vérifier s'il y a des erreurs de validation
+    if ($validator->fails()) {
+        return "Error" ;
+    }
+
+    // Vérifier si un fichier a été téléchargé
+    if ($request->hasFile('csv_file')) {
+        $file = $request->file('csv_file');
+
+        // Lire le fichier CSV
+        $data = array_map('str_getcsv', file($file), [',']);
+
+        // Supprimer la première ligne (en-tête des colonnes)
+        array_shift($data);
+
+        // Traiter les données et enregistrer dans la base de données
+        foreach ($data as $row) {
+            // Vérifier si une entreprise avec la même raison sociale existe déjà
+            $existingEntreprise = Entreprise::where('raison_sociale', $row[0])->first();
+
+            if (!$existingEntreprise) {
+                // Créer une nouvelle instance de l'entreprise
+                $entreprise = new Entreprise();
+                $entreprise->raison_sociale = !empty($row[0]) ? $row[0] : null;
+                $entreprise->nom = !empty($row[1]) ? $row[1] : null;
+                $entreprise->prenom = !empty($row[2]) ? $row[2] : null;
+                $entreprise->n_cin = !empty($row[3]) ? $row[3] : null;
+                $entreprise->n_carte_sejour = !empty($row[4]) ? $row[4] : null;
+                $entreprise->siege_social = !empty($row[5]) ? $row[5] : null;
+                $entreprise->commune = !empty($row[6]) ? $row[6] : null;
+                $entreprise->telephone = !empty($row[7]) ? $row[7] : null;
+                $entreprise->fax = !empty($row[8]) ? $row[8] : null;
+                $entreprise->email = !empty($row[9]) ? $row[9] : null;
+                $entreprise->forme_juridique = !empty($row[10]) ? $row[10] : null;
+                $entreprise->id_fiscal = !empty($row[11]) ? $row[11] : null;
+                $entreprise->n_taxe_pro = !empty($row[12]) ? $row[12] : null;
+                $entreprise->regime = !empty($row[13]) ? $row[13] : null;
+                $entreprise->numero_ice = !empty($row[14]) ? $row[14] : null;
+                $entreprise->numero_rc = !empty($row[15]) ? $row[15] : null;
+                $entreprise->n_cnss = !empty($row[16]) ? $row[16] : null;
+                $entreprise->modele = !empty($row[17]) ? $row[17] : null;
+                $entreprise->date_creation = !empty($row[18]) ? $row[18] : null;
+                $entreprise->date_premier_acte_exploitation = !empty($row[19]) ? $row[19] : null;
+                $entreprise->debut_exercice = !empty($row[20]) ? $row[20] : null;
+                $entreprise->compte_dgi = !empty($row[21]) ? $row[21] : null;
+                $entreprise->mot_de_passe_compte_dgi = !empty($row[22]) ? $row[22] : null;
+
+                // Enregistrer l'entreprise dans la base de données
+                $entreprise->save();
+            }
+        }
+
+        // Rediriger avec un message de succès
+        return back()->with('success', 'Les données ont été importées avec succès.');
+    }
+
+    // Rediriger en cas d'échec
+    return back()->with('error', 'Une erreur s\'est produite lors de l\'importation des données.');
+}
+
 
 }
 
