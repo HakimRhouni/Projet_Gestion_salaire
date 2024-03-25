@@ -424,14 +424,7 @@ public function creerXML($id)
     // Écrivez la chaîne XML dans un fichier
     $fileName = '/Users/rhoun/Desktop/votre_fichier.xml'; // Nom du fichier XML à générer
     $result = file_put_contents($fileName, $xmlString);
-if ($result === false) {
-    echo "Erreur lors de l'écriture du fichier.";
-} else {
-    echo "Fichier créé avec succès.";
-}
-
-    // Retournez le nom du fichier créé pour référence
-    return $fileName;
+    return back()->with('success', 'XML generé avec succès.');
 }
 
 }
