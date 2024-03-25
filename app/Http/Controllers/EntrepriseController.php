@@ -215,6 +215,224 @@ public function import(Request $request)
     return back()->with('error', 'Une erreur s\'est produite lors de l\'importation des données.');
 }
 
+public function creerXML($id)
+{
+    // Créer un nouvel objet SimpleXMLElement
+    $xml = new \SimpleXMLElement('<entreprises/>');
+
+    // Boucler à travers les données d'entreprise pour ajouter chaque entreprise au XML
+    $entreprise = Entreprise::find($id);
+        $entreprise_xml = $xml->addChild('entreprise');
+        $entreprise_xml->addChild('raison_sociale', $entreprise->raison_sociale);
+        $entreprise_xml->addChild('commune', $entreprise->commune);
+        $entreprise_xml->addChild('forme_juridique', $entreprise->forme_juridique);
+        $entreprise_xml->addChild('id_fiscal', $entreprise->id_fiscal);
+        $entreprise_xml->addChild('regime', $entreprise->regime);
+        $entreprise_xml->addChild('modele', $entreprise->modele);
+
+        
+
+        // Récupérer toutes les périodes liées à cette entreprise
+        $periodes = $entreprise->periodes;
+
+        // Boucler à travers les périodes
+        foreach ($periodes as $periode) {
+            $periode_xml = $entreprise_xml->addChild('periode');
+            $periode_xml->addChild('annee', $periode->annee);
+            $periode_xml->addChild('debut_exercice', $periode->debut_exercice);
+            $periode_xml->addChild('fin_exercice', $periode->fin_exercice);
+           
+            // Ajouter d'autres données de période selon votre modèle Periode
+
+            // Récupérer tous les employés permanents liés à cette période
+            $personnel_permanent = $periode->PersonnelPermanent;
+            $Salaire_Beneficiant_Exoneration= $periode->SalaireBeneficiantExoneration;
+            $Personnel_Occasionnel = $periode->PersonnelOccasionnel;
+            $Stagiaire = $periode->Stagiaire;
+            $Doctorant = $periode->Doctorant;
+            $Beneficiaire_Options_Souscription = $periode->BeneficiaireOptionsSouscription;
+            $BeneficiaireAbondement = $periode->BeneficiaireAbondement;
+            $Versement = $periode->Versement;
+            
+           
+            if ($personnel_permanent){
+            foreach ($personnel_permanent as $employe) {
+                $employe_xml = $periode_xml->addChild('personnel_permanent');
+                $employe_xml->addChild('nom', $employe->nom);
+                $employe_xml->addChild('prenom', $employe->prenom);
+                $employe_xml->addChild('cin', $employe->cin);
+                $employe_xml->addChild('carte_sejour', $employe->carte_sejour);
+                $employe_xml->addChild('cnss', $employe->cnss);
+                $employe_xml->addChild('situation_famille', $employe->situation_famille);
+                $employe_xml->addChild('salaire_base_annuel', $employe->salaire_base_annuel);
+                $employe_xml->addChild('montant_brut', $employe->montant_brut);
+                $employe_xml->addChild('montant_avantages', $employe->montant_avantages);
+                $employe_xml->addChild('montant_indemnites', $employe->montant_indemnites);
+                $employe_xml->addChild('montant_exoneres', $employe->montant_exoneres);
+                $employe_xml->addChild('montant_revenu_brut_imposable', $employe->montant_revenu_brut_imposable);
+                $employe_xml->addChild('montant_frais_professionnels', $employe->montant_frais_professionnels);
+                $employe_xml->addChild('montant_cotisations', $employe->montant_cotisations);
+                $employe_xml->addChild('montant_autres_retenues', $employe->montant_autres_retenues);
+                $employe_xml->addChild('montant_echeances', $employe->montant_echeances);
+                $employe_xml->addChild('revenu_net_imposable', $employe->revenu_net_imposable);
+                $employe_xml->addChild('nb_reductions_charge_famille', $employe->nb_reductions_charge_famille);
+                $employe_xml->addChild('periode_jours', $employe->periode_jours);
+                $employe_xml->addChild('date_permis_habiter', $employe->date_permis_habiter);
+                $employe_xml->addChild('ir_preleve', $employe->ir_preleve);
+                $employe_xml->addChild('date_autorisation_construir', $employe->date_autorisation_construir);
+
+
+                
+            }}
+            if ($Salaire_Beneficiant_Exoneration) {
+            foreach ($Salaire_Beneficiant_Exoneration as $SalaireBE) {
+                $employe_xml = $periode_xml->addChild('Salaire_Beneficiant_Exoneration');
+                $employe_xml->addChild('nom', $SalaireBE->nom);
+                $employe_xml->addChild('prenom', $SalaireBE->prenom);
+                $employe_xml->addChild('numero_cin', $SalaireBE->numero_cin);
+                $employe_xml->addChild('carte_sejour', $SalaireBE->carte_sejour);
+                $employe_xml->addChild('numero_cnss', $SalaireBE->numero_cnss);
+                $employe_xml->addChild('id_fiscale', $SalaireBE->id_fiscale);
+                $employe_xml->addChild('date_recrutement', $SalaireBE->date_recrutement);
+                $employe_xml->addChild('periode_en_jours', $SalaireBE->periode_en_jours);
+                $employe_xml->addChild('brut_traitements', $SalaireBE->brut_traitements);
+                $employe_xml->addChild('avantages', $SalaireBE->avantages);
+                $employe_xml->addChild('indemnite', $SalaireBE->indemnite);
+                $employe_xml->addChild('revenu_brut_imposable', $SalaireBE->revenu_brut_imposable);
+                $employe_xml->addChild('retenues_operees', $SalaireBE->retenues_operees);
+                $employe_xml->addChild('revenu_net_imposable', $SalaireBE->revenu_net_imposable);
+            
+            }}
+            if ($Personnel_Occasionnel) {
+            foreach ($Personnel_Occasionnel as $personnel_occasionnel) {
+                $employe_xml = $periode_xml->addChild('personnel_occasionnel');
+                $employe_xml->addChild('nom', $personnel_occasionnel->nom);
+                $employe_xml->addChild('prenom', $personnel_occasionnel->prenom);
+                $employe_xml->addChild('cin', $personnel_occasionnel->cin);
+                $employe_xml->addChild('carte_sejour', $personnel_occasionnel->carte_sejour);
+                $employe_xml->addChild('numero_cnss', $personnel_occasionnel->numero_cnss);
+                $employe_xml->addChild('id_fiscal', $personnel_occasionnel->id_fiscal);
+                $employe_xml->addChild('profession', $personnel_occasionnel->profession);
+                $employe_xml->addChild('montant_brut', $personnel_occasionnel->montant_brut);
+                $employe_xml->addChild('ir_preleve', $personnel_occasionnel->nom);
+               
+
+
+                
+            }
+        }
+        if ($Stagiaire) {
+            foreach ($Stagiaire as $stagiaires) {
+                $employe_xml = $periode_xml->addChild('stagiaires');
+                $employe_xml->addChild('nom', $stagiaires->nom);
+                $employe_xml->addChild('prenom', $stagiaires->prenom);
+                $employe_xml->addChild('adresse', $stagiaires->adresse);
+                $employe_xml->addChild('cin', $stagiaires->cin);
+                $employe_xml->addChild('carte_sejour', $stagiaires->carte_sejour);
+                $employe_xml->addChild('numero_cnss', $stagiaires->numero_cnss);
+                $employe_xml->addChild('id_fiscal', $stagiaires->id_fiscal);
+                $employe_xml->addChild('montant_brut', $stagiaires->montant_brut);
+                $employe_xml->addChild('indemnite', $stagiaires->indemnite);
+                $employe_xml->addChild('retenues', $stagiaires->retenues);
+                $employe_xml->addChild('net_imposable', $stagiaires->net_imposable);
+              
+            }}
+            if ($Doctorant) {
+            foreach ($Doctorant as $doctorants) {
+                $employe_xml = $periode_xml->addChild('doctorants');
+                $employe_xml->addChild('nom', $doctorants->nom);
+                $employe_xml->addChild('prenom', $doctorants->prenom);
+                $employe_xml->addChild('numero_cin', $doctorants->numero_cin);
+                $employe_xml->addChild('carte_sejour', $doctorants->carte_sejour);
+                $employe_xml->addChild('brut_indemnites', $doctorants->brut_indemnites);
+                
+            }}
+            if ($Beneficiaire_Options_Souscription) {
+            foreach ($Beneficiaire_Options_Souscription as $beneficiairesOS) {
+                $employe_xml = $periode_xml->addChild('beneficiaires_options_souscription');
+                $employe_xml->addChild('nom', $beneficiairesOS->nom);
+                $employe_xml->addChild('prenom', $beneficiairesOS->prenom);
+                $employe_xml->addChild('cin', $beneficiairesOS->cin);
+                $employe_xml->addChild('carte_sejour', $beneficiairesOS->carte_sejour);
+                $employe_xml->addChild('num_cnss', $beneficiairesOS->num_cnss);
+                $employe_xml->addChild('id_fiscal', $beneficiairesOS->id_fiscal);
+                $employe_xml->addChild('organisme', $beneficiairesOS->organisme);
+                $employe_xml->addChild('nbr_actions_acquises', $beneficiairesOS->nbr_actions_acquises);
+                $employe_xml->addChild('nbr_actions_distribuees', $beneficiairesOS->nbr_actions_distribuees);
+                $employe_xml->addChild('prix_acquisition', $beneficiairesOS->prix_acquisition);
+                $employe_xml->addChild('date_attribution', $beneficiairesOS->date_attribution);
+                $employe_xml->addChild('valeur_action_attribution', $beneficiairesOS->valeur_action_attribution);
+                $employe_xml->addChild('date_levee_option', $beneficiairesOS->date_levee_option);
+                $employe_xml->addChild('valeur_action_levee', $beneficiairesOS->valeur_action_levee);
+                $employe_xml->addChild('date_cession', $beneficiairesOS->date_cession);
+                $employe_xml->addChild('nbr_actions_cedees', $beneficiairesOS->nbr_actions_cedees);
+                $employe_xml->addChild('montant_abondement', $beneficiairesOS->montant_abondement);
+                $employe_xml->addChild('complement_salaire', $beneficiairesOS->nom);
+               
+
+
+            }
+            }
+            if ($BeneficiaireAbondement) {
+            foreach ($BeneficiaireAbondement as $beneficiaires_abondement) {
+                $employe_xml = $periode_xml->addChild('beneficiaires_abondement');
+                $employe_xml->addChild('nom', $beneficiaires_abondement->nom);
+                $employe_xml->addChild('prenom', $beneficiaires_abondement->prenom);
+                $employe_xml->addChild('cin', $beneficiaires_abondement->cin);
+                $employe_xml->addChild('carte_sejour', $beneficiaires_abondement->carte_sejour);
+                $employe_xml->addChild('commune', $beneficiaires_abondement->commune);
+                $employe_xml->addChild('numero_plan', $beneficiaires_abondement->numero_plan);
+                $employe_xml->addChild('duree_annees', $beneficiaires_abondement->duree_annees);
+                $employe_xml->addChild('date_ouverture', $beneficiaires_abondement->date_ouverture);
+                $employe_xml->addChild('montant_abondement', $beneficiaires_abondement->montant_abondement);
+                $employe_xml->addChild('montant_annuel_revenu_imposable', $beneficiaires_abondement->montant_annuel_revenu_imposable);
+                
+
+               
+            }
+
+                
+            }
+            if ($Versement) {
+            foreach ($Versement as $versements) {
+                $employe_xml = $periode_xml->addChild('versements');
+                $employe_xml->addChild('mois', $versements->mois);
+                $employe_xml->addChild('reference', $versements->reference);
+                $employe_xml->addChild('date_versement', $versements->date_versement);
+                $employe_xml->addChild('mode_paiement', $versements->mode_paiement);
+                $employe_xml->addChild('numero_quittance', $versements->numero_quittance);
+                $employe_xml->addChild('principale', $versements->principale);
+                $employe_xml->addChild('penalite', $versements->penalite);
+                $employe_xml->addChild('majorations', $versements->majorations);
+                $employe_xml->addChild('total_verse', $versements->total_verse);
+               
+
+
+            }
+            }
+           
+        }
+    
+
+    // Formater le XML
+    $dom = dom_import_simplexml($xml)->ownerDocument;
+    $dom->formatOutput = true;
+    
+    // Générer la chaîne XML
+    $xmlString = $dom->saveXML();
+
+    // Écrivez la chaîne XML dans un fichier
+    $fileName = '/Users/rhoun/Desktop/votre_fichier.xml'; // Nom du fichier XML à générer
+    $result = file_put_contents($fileName, $xmlString);
+if ($result === false) {
+    echo "Erreur lors de l'écriture du fichier.";
+} else {
+    echo "Fichier créé avec succès.";
+}
+
+    // Retournez le nom du fichier créé pour référence
+    return $fileName;
+}
 
 }
 

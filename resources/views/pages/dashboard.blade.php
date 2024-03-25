@@ -55,6 +55,10 @@
     <td>
         <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning">Modifier</a>
         <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning">Supprimer</a>
+        <form action="{{ route('generer.xml', ['id' => $entreprise->id]) }}" method="GET">
+            @csrf
+            <button type="submit">Générer XML</button>
+        </form>
     </td>
 </tr>
 

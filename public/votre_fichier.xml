@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<entreprises>
+  <entreprise>
+    <raison_sociale>RENAUuuuT</raison_sociale>
+    <commune>Sale</commune>
+    <forme_juridique>EIRL</forme_juridique>
+    <id_fiscal>123</id_fiscal>
+    <regime>2345678</regime>
+    <modele>1234</modele>
+    <periode>
+      <annee>2019</annee>
+      <debut_exercice>2024-03-03</debut_exercice>
+      <fin_exercice>2024-03-26</fin_exercice>
+    </periode>
+  </entreprise>
+</entreprises>

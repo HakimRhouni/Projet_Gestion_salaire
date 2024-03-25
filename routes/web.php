@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/modifier-entreprise/{id}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
 	Route::put('/modifier-entreprise/{id}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
 	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
+	Route::get('/generer-xml/{id}', [EntrepriseController::class, 'creerXML'])->name('generer.xml');
 	Route::get('dashboard/{raison_sociale}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
 	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
