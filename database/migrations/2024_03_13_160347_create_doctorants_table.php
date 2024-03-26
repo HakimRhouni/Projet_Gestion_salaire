@@ -20,7 +20,7 @@ class CreateDoctorantsTable extends Migration
             $table->string('adresse');
             $table->string('numero_cin');
             $table->string('carte_sejour');
-            $table->decimal('brut_indemnites', 10, 2); // Montant brut des indemnités, décimal avec 10 chiffres au total, dont 2 décimales
+            $table->decimal('brut_indemnites', 20, 2); // Montant brut des indemnités, décimal avec 10 chiffres au total, dont 2 décimales
             $table->unsignedBigInteger('id_societe');
             $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');

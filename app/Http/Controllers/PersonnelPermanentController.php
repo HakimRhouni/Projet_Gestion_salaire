@@ -58,11 +58,11 @@ return redirect()->route('periodes.personnel_permanent', ['id_periode' => $reque
     }
   
 
-public function edit($id)
+public function edit($id,$id_periode)
 {
     $personnelPermanent = PersonnelPermanent::findOrFail($id);
     // Vous pouvez passer d'autres données nécessaires à la vue ici
-    return view('pages.modifier-personnel-permanent', compact('personnelPermanent'));
+    return view('pages.modifier-personnel-permanent', compact('personnelPermanent','id_periode'));
 }
 
 public function update(Request $request, $id)

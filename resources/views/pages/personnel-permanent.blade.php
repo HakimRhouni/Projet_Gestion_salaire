@@ -56,7 +56,7 @@
                                             <td>{{ $personnelPermanent->adresse }}</td>
                                             <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td>
                                             <td>
-                                                <a href="{{ route('personnel_permanent.edit', $personnelPermanent->id_personnel_permanent) }}" class="btn btn-warning">Modifier</a>
+                                            <a href="{{ route('personnel_permanent.edit', ['id' => $personnelPermanent->id_personnel_permanent, 'id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
                                                
                                                 <form action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST" style="display: inline;">
     @csrf

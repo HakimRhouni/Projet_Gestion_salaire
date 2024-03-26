@@ -22,8 +22,8 @@ class CreatePersonnelOccasionnelTable extends Migration
             $table->string('numero_cnss');
             $table->string('id_fiscal');
             $table->string('profession');
-            $table->decimal('montant_brut', 10, 2);
-            $table->decimal('ir_preleve', 10, 2);
+            $table->decimal('montant_brut', 20, 2);
+            $table->decimal('ir_preleve', 20, 2);
             $table->timestamps();
         });
     }

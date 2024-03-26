@@ -422,7 +422,7 @@ public function creerXML($id)
     $xmlString = $dom->saveXML();
 
     // Écrivez la chaîne XML dans un fichier
-    $fileName = '/Users/rhoun/Desktop/votre_fichier.xml'; // Nom du fichier XML à générer
+    $fileName = '/Users/rhoun/Desktop/projets/votre_fichier.xml'; // Nom du fichier XML à générer
     $result = file_put_contents($fileName, $xmlString);
     return back()->with('success', 'XML generé avec succès.');
 }

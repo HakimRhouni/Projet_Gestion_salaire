@@ -23,12 +23,12 @@ class CreateSalariesBeneficiantExonerationTable extends Migration
             $table->string('id_fiscale');
             $table->date('date_recrutement');
             $table->integer('periode_en_jours');
-            $table->decimal('brut_traitements', 10, 2);
-            $table->decimal('avantages', 10, 2);
-            $table->decimal('indemnite', 10, 2);
-            $table->decimal('revenu_brut_imposable', 10, 2);
-            $table->decimal('retenues_operees', 10, 2);
-            $table->decimal('revenu_net_imposable', 10, 2);
+            $table->decimal('brut_traitements', 20, 2);
+            $table->decimal('avantages', 20, 2);
+            $table->decimal('indemnite', 20, 2);
+            $table->decimal('revenu_brut_imposable', 20, 2);
+            $table->decimal('retenues_operees', 20, 2);
+            $table->decimal('revenu_net_imposable', 20, 2);
             $table->timestamps();
         });
     }

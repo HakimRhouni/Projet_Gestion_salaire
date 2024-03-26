@@ -19,10 +19,7 @@
                                 <a href="{{ route('beneficiaires_abondement.pdf',['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                             </div>
 
-
-                            </div>
-                            <div class="card-body">
-                                @if(count($beneficiairesAbondement) > 0)
+                            @if(count($beneficiairesAbondement) > 0)
                                 <table class="table">
                             <thead>
                                 <tr>
@@ -66,6 +63,9 @@
                                 @else
                                     <p>Aucun bénéficiaire d’abondement dans le cadre d’un plan d’épargne entreprise trouvé.</p>
                                 @endif
+                            </div>
+                            <div class="card-body">
+                               
                             </div>
                         </div>
                     </div>

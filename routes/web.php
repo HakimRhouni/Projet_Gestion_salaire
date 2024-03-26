@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
 	Route::get('/periodes/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/periodes/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
-	Route::get('/periodes/personnel_permanent/{id}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
+	Route::get('/periodes/personnel_permanent/{id}/{id_periode}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
 	//calcul
 	Route::post('/periodes/personnel_permanent/calcul-montants', [PersonnelPermanentController::class, 'calculMontants'])->name('calcul.montants');
     Route::post('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
