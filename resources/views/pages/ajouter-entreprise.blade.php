@@ -119,15 +119,17 @@
     <div class="input-group">
         <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary align-middle" type="button" id="togglePassword" onclick="toggle()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                    
-                </svg>
+            <button class="btn btn-outline-secondary align-middle" type="button" id="togglePasswordButton">
+                Afficher
             </button>
         </div>
     </div>
+</div>
+
+<button type="submit" class="btn btn-success">Ajouter</button>
+</div>
 </div>    
-                                    <button type="submit" class="btn btn-success">Ajouter</button>
+                                   
                                 </form>
                             </div>
                         </div>
@@ -138,4 +140,21 @@
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var toggleButton = document.getElementById("togglePasswordButton");
+    var passwordField = document.getElementById("mot_de_passe_compte_dgi");
+
+    toggleButton.addEventListener("click", function() {
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleButton.textContent = "Masquer";
+        } else {
+            passwordField.type = "password";
+            toggleButton.textContent = "Afficher";
+        }
+    });
+});
+    
+</script>
 
