@@ -16,7 +16,7 @@
                             <div class="card-header">
                                 <h5 class="card-title">Liste des Versements</h5>
                                 <a href="{{ route('versements.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter Versement</a>
-
+                                <a href="{{ route('versements.pdf',['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
 
                             </div>
                             <div class="card-body">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use App\Models\PersonnelOccasionnel;
@@ -95,4 +95,17 @@ public function edit($id_periode, $id)
         // Rediriger avec un message de succès
         return redirect()->route('personnel_occasionnel.index', ['id_periode' => $id_periode])->with('success', 'Personnel occasionnel supprimé avec succès.');
     }
+    public function generatePdf($id_periode)
+{
+    $personnelOccasionnel = PersonnelOccasionnel::where('id_periode', $id_periode)->get();
+
+    $html = view('pages.personnel-occasionnel-pdf', compact('personnelOccasionnel'))->render();
+
+    $pdf = new Dompdf();
+    $pdf->loadHtml($html);
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    
+    return $pdf->stream('liste-personnel-occasionnel.pdf');
+}
 }

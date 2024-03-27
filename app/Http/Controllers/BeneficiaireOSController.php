@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BeneficiaireOptionsSouscription;
 use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class BeneficiaireOSController extends Controller
 {
@@ -124,5 +125,18 @@ public function destroy($id_periode, $id_societe)
     $beneficiaire = BeneficiaireOptionsSouscription::findOrFail($id_societe);
     $beneficiaire->delete();
     return redirect()->route('beneficiairesOS.index', compact('id_periode'))->with('success', 'Bénéficiaire supprimé avec succès.');
+}
+public function generatePdf($id_periode)
+{
+    $beneficiairesOS = BeneficiaireOptionsSouscription::where('id_periode', $id_periode)->get();
+
+    $html = view('pages.beneficiairesOS-pdf', compact('beneficiairesOS'))->render();
+
+    $pdf = new Dompdf();
+    $pdf->loadHtml($html);
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    
+    return $pdf->stream('liste-beneficiairesOS-pdf.pdf');
 }
 }

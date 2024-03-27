@@ -20,10 +20,10 @@ class CreateVersementsTable extends Migration
             $table->date('date_versement');
             $table->string('mode_paiement');
             $table->string('numero_quittance');
-            $table->decimal('principale', 10, 2);
-            $table->decimal('penalite', 10, 2);
-            $table->decimal('majorations', 10, 2);
-            $table->decimal('total_verse', 10, 2);
+            $table->decimal('principale', 20, 2);
+            $table->decimal('penalite', 20, 2);
+            $table->decimal('majorations', 20, 2);
+            $table->decimal('total_verse', 20, 2);
 
             $table->unsignedBigInteger('id_societe');
             $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');

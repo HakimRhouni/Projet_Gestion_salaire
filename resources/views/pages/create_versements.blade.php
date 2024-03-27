@@ -5,7 +5,7 @@
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Ajouter Doctorant'])
 
-    @include('layouts.navbars.auth.sidenavafterperiodes')
+
 
     <div class="container-fluid py-4">
         <div class="row mt-4">

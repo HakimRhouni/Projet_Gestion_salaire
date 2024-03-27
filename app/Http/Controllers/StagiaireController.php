@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stagiaire;
 use App\Models\Periode;
+use Dompdf\Dompdf;
 
 
 class StagiaireController extends Controller
@@ -102,5 +103,27 @@ public function destroy($id_periode, $id)
     // Rediriger avec un message de succès
     return redirect()->route('stagiaires.index', ['id_periode' => $id_periode])->with('success', 'Stagiaire supprimé avec succès.');
 }
+public function generatePdf($id_periode)
+{
+    // Récupérez les stagiaires pour la période spécifiée
+    $stagiaires = Stagiaire::where('id_periode', $id_periode)->get();
 
+    // Générez le contenu HTML en utilisant la vue que vous avez créée
+    $html = view('pages.stagiaires-pdf', compact('stagiaires'))->render();
+
+    // Créez une nouvelle instance de Dompdf
+    $pdf = new Dompdf();
+
+    // Chargez le contenu HTML dans Dompdf
+    $pdf->loadHtml($html);
+
+    // Définissez le format du papier et l'orientation
+    $pdf->setPaper('A4', 'portrait');
+
+    // Rendez le PDF
+    $pdf->render();
+
+    // Affichez le PDF dans le navigateur
+    return $pdf->stream('liste-stagiaires.pdf');
+}
 }

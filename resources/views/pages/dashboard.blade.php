@@ -11,10 +11,22 @@
                             <div class="card-header pb-0">
                                 <h6>Entreprises</h6>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        
-                                        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter</a>
-                                    </div>
+                                    <div class="row">
+    <div class="col">
+        <a href="{{ route('ajouter-entreprise') }}" class="btn btn-success" aria-label="Ajouter une entreprise">Ajouter Entreprise</a>
+    </div>
+    <div class="col">
+        <a href="{{ route('entreprise.pdf') }}" class="btn btn-primary">Imprimer PDF</a>
+    </div>
+    <div class="col">
+    <form action="{{ route('entreprise.import') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="csv_file" accept=".csv" class="btn btn-primary">
+    <button type="submit" class="btn btn-success">Importer CSV</button>
+</form>
+    </div>
+</div>
+
                                     
                                 </div>
                             </div>
@@ -46,8 +58,14 @@
     <td>{{ $entreprise->modele }}</td>
     <td>{{ $entreprise->telephone }}</td>
     <td>
-        <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning">Modifier</a>
-        <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning">Supprimer</a>
+        <div class="d-flex">
+    <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2">Modifier</a>
+    <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2">Supprimer</a>
+    <form action="{{ route('generer.xml', ['id' => $entreprise->id]) }}" method="GET">
+        @csrf
+        <button type="submit" class="btn btn-primary">Générer XML</button>
+    </form>
+</div>
     </td>
 </tr>
 
@@ -163,5 +181,6 @@
         $(document).ready(function () {
         $('.dropdown-toggle').dropdown();
     });
+    
     </script>
 @endpush

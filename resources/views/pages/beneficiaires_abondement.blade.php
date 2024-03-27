@@ -16,11 +16,10 @@
                             <div class="card-header">
                                 <h5 class="card-title">Liste des bénéficiaires d’abondements dans le cadre d’un plan d’épargne entreprise</h5>
                                 <a href="{{ route('beneficiaires_abondement.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter Bénéficiaire</a>
-
-
+                                <a href="{{ route('beneficiaires_abondement.pdf',['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                             </div>
-                            <div class="card-body">
-                                @if(count($beneficiairesAbondement) > 0)
+
+                            @if(count($beneficiairesAbondement) > 0)
                                 <table class="table">
                             <thead>
                                 <tr>
@@ -64,6 +63,9 @@
                                 @else
                                     <p>Aucun bénéficiaire d’abondement dans le cadre d’un plan d’épargne entreprise trouvé.</p>
                                 @endif
+                            </div>
+                            <div class="card-body">
+                               
                             </div>
                         </div>
                     </div>

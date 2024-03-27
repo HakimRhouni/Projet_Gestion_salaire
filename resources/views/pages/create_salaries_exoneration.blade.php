@@ -3,19 +3,19 @@
 @section('content')
 
 
-@include('layouts.navbars.auth.topnav', ['title' => 'Salaries Exoneré'])
+@include('layouts.navbars.auth.topnav', ['title' => 'Créer Personnel Permanent'])
 
-
-
-div class="container-fluid py-4">
+<div class="container-fluid py-4">
     <div class="row mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5 class="card-title"> creer un salarie exoneres</h5>
-                            <form action="{{ route('salaries_exoneration.store') }}" method="POST">
+                            <h5 class="card-title">creer un salarie exoneres</h5>
+                        </div>
+                        <div class="card-body">
+                        <form action="{{ route('salaries_exoneration.store') }}" method="POST">
                                     @csrf
                                     <!-- Champ pour le nom -->
                                     <div class="form-group">
@@ -116,8 +116,6 @@ div class="container-fluid py-4">
                                     <!-- Bouton pour soumettre le formulaire -->
                                     <button type="submit" class="btn btn-primary">Créer Salarié Exonéré</button>
                                 </form>
-                           
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,4 +132,34 @@ div class="container-fluid py-4">
     <script src="{{ asset('assets/js/argon-dashboard.js') }}"></script>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Fonction pour calculer automatiquement les montants
+    $(document).ready(function() {
+        // Écouter les événements de saisie sur les champs de montant
+        $('.montant-input').on('input', function() {
+            calculateAmounts();
+        });
+    });
+
+    function calculateAmounts() {
+        var formData = $('#createPersonnelForm').serialize();
+       
+        // Envoyer les données au serveur via une requête AJAX
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("calcul.montants") }}',
+            data: formData,
+            success: function (data) {
+                // Mettre à jour les champs de formulaire avec les résultats
+                $('#montant_revenu_brut_imposable').val(data.montant_revenu_brut_imposable);
+                $('#revenu_net_imposable').val(data.revenu_net_imposable);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
 

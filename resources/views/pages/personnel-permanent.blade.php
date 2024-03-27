@@ -16,6 +16,12 @@
                             <h5 class="card-title">Personnel Permanent</h5>
                             <!-- Bouton "Ajouter Personnel Permanent" -->
                             <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
+                            <a href="{{ route('PersonnelPermanentController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
+                            <form action="{{ route('ajouter.employes.annee.precedente', ['id_periode' => $periode->id_periode]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success">Ajouter employés année précédente</button>
+            </form>
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -50,7 +56,7 @@
                                             <td>{{ $personnelPermanent->adresse }}</td>
                                             <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td>
                                             <td>
-                                                <a href="{{ route('personnel_permanent.edit', $personnelPermanent->id_personnel_permanent) }}" class="btn btn-warning">Modifier</a>
+                                            <a href="{{ route('personnel_permanent.edit', ['id' => $personnelPermanent->id_personnel_permanent, 'id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
                                                
                                                 <form action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST" style="display: inline;">
     @csrf

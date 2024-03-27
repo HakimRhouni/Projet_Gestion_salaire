@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/ajouter-entreprise', [EntrepriseController::class, 'ajouter'])->name('ajouter-entreprise');
 	Route::get('/modifier-entreprise/{id}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
 	Route::put('/modifier-entreprise/{id}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
+	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
+	Route::get('/generer-xml/{id}', [EntrepriseController::class, 'creerXML'])->name('generer.xml');
 	Route::get('dashboard/{raison_sociale}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
 	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
@@ -77,54 +79,68 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
 	Route::get('/periodes/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/periodes/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
-	Route::get('/periodes/personnel_permanent/{id}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
+	Route::get('/periodes/personnel_permanent/{id}/{id_periode}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
 	//calcul
 	Route::post('/periodes/personnel_permanent/calcul-montants', [PersonnelPermanentController::class, 'calculMontants'])->name('calcul.montants');
     Route::post('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'update'])->name('personnel_permanent.update');
     Route::delete('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
+	Route::get('/PersonnelPermanentController/{id_periode}/pdf', [PersonnelPermanentController::class, 'generatePdfPersonnelPermanent'])->name('PersonnelPermanentController.pdf');
+	Route::post('/ajouter-employes-annee-precedente/{id_periode}', [PersonnelPermanentController::class, 'ajouterEmployesAnneePrecedente'])->name('ajouter.employes.annee.precedente');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
 	Route::get('/periodes/{id_periode}/societes/{id_societe}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
 	Route::delete('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'destroy'])->name('salaries_exoneration.destroy');
 	Route::get('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');
 	Route::put('/periodes/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
+	Route::get('/salaries_exoneration/{id_periode}/pdf', [SalariesExonerationController::class, 'generatePdf'])->name('salaries_exonerationController.pdf');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel', [PersonnelOccasionnelController::class, 'index'])->name('personnel_occasionnel.index');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel/create', [PersonnelOccasionnelController::class, 'create'])->name('personnel_occasionnel.create');
 	Route::post('/periodes/personnel-occasionnel/{id_periode}', [PersonnelOccasionnelController::class, 'store'])->name('personnel_occasionnel.store');
 	Route::get('/periodes/personnel_occasionnel/{id_periode}/edit/{id}', [PersonnelOccasionnelController::class, 'edit'])->name('personnel_occasionnel.edit');
 	Route::delete('/periodes/personnel_occasionnel/{id_periode}/{id}', [PersonnelOccasionnelController::class ,'destroy'])->name('personnel_occasionnel.destroy');
 	Route::put('/periodes/personnel_occasionnel/{id_periode}/{id_personnel}', [PersonnelOccasionnelController::class ,'update'])->name('personnel_occasionnel.update');
+	Route::get('/personnel-occasionnel/pdf/{id_periode}', [PersonnelOccasionnelController::class, 'generatePdf'])->name('personnel-occasionnel.pdf');
 	Route::get('/periodes/{id_periode}/stagiaire', [StagiaireController::class,'index'])->name('stagiaires.index');
 	Route::get('/periodes/{id_periode}/stagiaires/create', [StagiaireController::class, 'create'])->name('stagiaires.create');
 	Route::post('/periodes/stagiaires/{id_periode}/{id_societe}', [StagiaireController::class, 'store'])->name('stagiaires.store');
 	Route::get('/periodes/{id_periode}/stagiaires/{id}/edit', [StagiaireController::class, 'edit'])->name('stagiaires.edit');
 	Route::put('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'update'])->name('stagiaires.update');
 	Route::delete('/periodes/{id_periode}/stagiaires/{id}', [StagiaireController::class, 'destroy'])->name('stagiaires.destroy');
+	Route::get('stagiaires/pdf/{id_periode}', [StagiaireController::class, 'generatePdf'])->name('stagiaires.pdf');
 	Route::get('/periodes/{id_periode}/doctorants', [DoctorantController::class, 'index'])->name('doctorants.index');
 	Route::get('/periodes/{id_periode}/doctorants/create', [DoctorantController::class, 'create'])->name('doctorants.create');
 	Route::post('/periodes/doctorants/{id_periode}/{id_societe}', [DoctorantController::class, 'store'])->name('doctorants.store');
 	Route::get('/periodes/{id_periode}/societes/{id_societe}/doctorants/{id}/edit', [DoctorantController::class, 'edit'])->name('doctorants.edit');
 	Route::put('/periodes/{id_periode}/societes/{id_societe}/doctorants/{id}', [DoctorantController::class, 'update'])->name('doctorants.update');
 	Route::delete('/periodes/{id_periode}/societes/{id_societe}/doctorants/{id}', [DoctorantController::class, 'destroy'])->name('doctorants.destroy');
+	Route::get('/doctorants/pdf/{id_periode}', [DoctorantController::class, 'generatePdf'])->name('doctorants.pdf');
 	Route::get('/periodes/{id_periode}/beneficiaires', [BeneficiaireOSController::class, 'index'])->name('beneficiairesOS.index');
 	Route::get('/periodes/{id_periode}/beneficiaires/create', [BeneficiaireOSController::class, 'create'])->name('beneficiairesOS.create');
 	Route::post('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'store'])->name('beneficiairesOS.store');
 	Route::get('/periodes/{id_periode}/beneficiaires/{id_societe}/edit', [BeneficiaireOSController::class, 'edit'])->name('beneficiairesOS.edit');
 	Route::put('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'update'])->name('beneficiairesOS.update');
 	Route::delete('/periodes/{id_periode}/beneficiaires/{id_societe}', [BeneficiaireOSController::class, 'destroy'])->name('beneficiairesOS.destroy');
+	Route::get('/beneficiairesOS/pdf/{id_periode}', [BeneficiaireOSController::class, 'generatePDF'])->name('beneficiairesOS.pdf');
 	Route::get('/periodes/{id_periode}/beneficiaires-abondement', [BeneficiaireAbondementController::class, 'index'])->name('beneficiairesAbondement.index');
 	Route::get('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement/create', [BeneficiaireAbondementController::class,'create'])->name('beneficiaires_abondement.create');
 	Route::post('/periodes/{id_periode}/{id_societe}/beneficiaires_abondement', [BeneficiaireAbondementController::class, 'store'])->name('beneficiaires_abondement.store');
 	Route::get('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}/edit', [BeneficiaireAbondementController::class, 'edit'])->name('beneficiaires_abondement.edit');
 	Route::put('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}', [BeneficiaireAbondementController::class, 'update'])->name('beneficiaires_abondement.update');
 	Route::delete('/periodes/{id_periode}/beneficiaires_abondement/{id_societe}/{id}', [BeneficiaireAbondementController::class, 'destroy'])->name('beneficiaires_abondement.destroy');
+	Route::get('/beneficiaires-abondement/pdf/{id_periode}', [BeneficiaireAbondementController::class, 'generatePDF'])->name('beneficiaires_abondement.pdf');
 	Route::get('/periodes/{id_periode}/versements', [VersementController::class, 'index'])->name('versements.index');
 	Route::get('/periodes/{id_periode}/{id_societe}/versements/create', [VersementController::class, 'create'])->name('versements.create');
 	Route::post('/periodes/{id_periode}/{id_societe}/versements', [VersementController::class, 'store'])->name('versements.store');
 	Route::get('/periodes/versements/{id_periode}/edit/{id}', [VersementController::class, 'edit'])->name('versements.edit');
 	Route::put('/periodes/versements/{id_periode}/update/{id}', [VersementController::class, 'update'])->name('versements.update');
 	Route::delete('/periodes/versements/{id_periode}/delete/{id}', [VersementController::class, 'destroy'])->name('versements.destroy');
+	Route::get('/versements/pdf/{id_periode}', [VersementController::class, 'generatePDF'])->name('versements.pdf');
 	Route::get('/periodes/simple-ir/{id_periode}', [SimpleIRController::class, 'index'])->name('simple_ir.index');
+	
+	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
+	Route::post('/import-entreprise', [EntrepriseController::class, 'import'])->name('entreprise.import');
+
+
 	
 
 

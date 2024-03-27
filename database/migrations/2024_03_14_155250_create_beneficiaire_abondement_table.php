@@ -24,8 +24,8 @@ class CreateBeneficiaireAbondementTable extends Migration
             $table->string('numero_plan');
             $table->integer('duree_annees');
             $table->date('date_ouverture');
-            $table->decimal('montant_abondement', 10, 2);
-            $table->decimal('montant_annuel_revenu_imposable', 10, 2);
+            $table->decimal('montant_abondement', 20, 2);
+            $table->decimal('montant_annuel_revenu_imposable', 20, 2);
             $table->unsignedBigInteger('id_societe');
             $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');

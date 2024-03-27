@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PersonnelPermanent;
 use Illuminate\Http\Request;
-use App\Models\Periode; // Assurez-vous d'importer le modèle Periode
+use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class PersonnelPermanentController extends Controller
 {
@@ -23,7 +24,7 @@ class PersonnelPermanentController extends Controller
         $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode'));
+        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode', 'periode'));
     }
     
 
@@ -57,11 +58,11 @@ return redirect()->route('periodes.personnel_permanent', ['id_periode' => $reque
     }
   
 
-public function edit($id)
+public function edit($id,$id_periode)
 {
     $personnelPermanent = PersonnelPermanent::findOrFail($id);
     // Vous pouvez passer d'autres données nécessaires à la vue ici
-    return view('pages.modifier-personnel-permanent', compact('personnelPermanent'));
+    return view('pages.modifier-personnel-permanent', compact('personnelPermanent','id_periode'));
 }
 
 public function update(Request $request, $id)
@@ -103,5 +104,85 @@ public function calculMontants(Request $request)
             'revenu_net_imposable' => $revenu_net_imposable
         ]);
     }
+
+    public function generatePdfPersonnelPermanent($id_periode)
+{
+    // Obtenez l'objet Periode correspondant à l'ID de la période
+    $periode = Periode::findOrFail($id_periode);
+
+    // Récupérez la liste des personnels permanents pour cette période
+    $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
+
+    // Générez le contenu HTML en utilisant la vue que vous avez créée
+    $html = view('pages.personnel-permanent-pdf', compact('personnelPermanents'))->render();
+
+    // Créez une nouvelle instance de Dompdf
+    $pdf = new Dompdf();
+
+    // Chargez le contenu HTML dans Dompdf
+    $pdf->loadHtml($html);
+
+    // Définissez le format du papier et l'orientation
+    $pdf->setPaper('A4', 'portrait');
+
+    // Rendez le PDF
+    $pdf->render();
+
+    // Affichez le PDF dans le navigateur
+    return $pdf->stream('liste-personnel-permanent.pdf');
+}
+
+public function ajouterEmployesAnneePrecedente($idPeriode)
+{
+    // Trouver la période actuelle
+    $periodeActuelle = Periode::findOrFail($idPeriode);
+
+    // Trouver la période de l'année précédente
+    $periodeAnneePrecedente = Periode::where('annee', $periodeActuelle->annee - 1)->first();
+
+    // Vérifier si la période de l'année précédente existe
+    if (!$periodeAnneePrecedente) {
+        echo "<script>alert('Aucune période de l\'année précédente trouvée.');</script>";
+        return redirect()->back();
+    }
+
+    // Récupérer l'ID de l'entreprise de la période actuelle
+    $idEntrepriseActuelle = $periodeActuelle->id_societe;
+
+    // Récupérer les employés permanents de l'année précédente de la même entreprise que la période actuelle
+    $employesAnneePrecedente = PersonnelPermanent::where('id_periode', $periodeAnneePrecedente->id_periode)
+        ->where('id_societe', $idEntrepriseActuelle)
+        ->get();
+
+    // Vérifier s'il n'y a aucun employé permanent de l'année précédente
+    if ($employesAnneePrecedente->isEmpty()) {
+        echo "<script>alert('Aucun personnel permanent dans l\'année précédente.');</script>";
+        return redirect()->back();
+    }
+
+    // Copier les employés de l'année précédente et les ajouter à la période actuelle
+    foreach ($employesAnneePrecedente as $employe) {
+        // Vérifier si l'employé existe déjà dans la période actuelle
+        $employeExiste = PersonnelPermanent::where('id_periode', $periodeActuelle->id_periode)
+            ->where('matricule', $employe->matricule)
+            ->exists();
+
+        // Si l'employé n'existe pas déjà, l'ajouter à la période actuelle
+        if (!$employeExiste) {
+            // Créer une copie de l'employé pour la période actuelle
+            $employeActuel = $employe->replicate();
+            $employeActuel->id_periode = $periodeActuelle->id_periode;
+            $employeActuel->save();
+        }
+    }
+
+    echo "<script>alert('Employéeeees de l\'année précédente de la même entreprise ajoutés avec succès.');</script>";
+
+    
+    return redirect()->route('periodes.personnel_permanent', ['id_periode' => $idPeriode]);
+}
+
+
+
 
 }

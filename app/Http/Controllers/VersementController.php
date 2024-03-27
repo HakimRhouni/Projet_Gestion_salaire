@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Versement;
 use Illuminate\Http\Request;
 use App\Models\Periode;
+use Dompdf\Dompdf;
 
 class VersementController extends Controller
 {
@@ -88,4 +89,17 @@ public function update(Request $request, $id_periode, $id)
         // Rediriger avec un message de succès
         return redirect()->route('versements.index', ['id_periode' => $id_periode])->with('success', 'Versement modifié avec succès.');
     }
+    public function generatePdf($id_periode)
+{
+    $versements = Versement::where('id_periode', $id_periode)->get();
+
+    $html = view('pages.versements-pdf', compact('versements'))->render();
+
+    $pdf = new Dompdf();
+    $pdf->loadHtml($html);
+    $pdf->setPaper('A4', 'portrait');
+    $pdf->render();
+    
+    return $pdf->stream('liste-versements-pdf.pdf');
+}
 }

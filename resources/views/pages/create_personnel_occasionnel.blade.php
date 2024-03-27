@@ -16,10 +16,7 @@
                             <div class="card-header">
                                 <h5 class="card-title">Personnel Occasionnel</h5>
                             </div>
-                            <div class="card-header">
-    <h5 class="card-title">Personnel Occasionnel</h5>
-    <a href="{{ route('personnel_occasionnel.create', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter</a>
-</div>
+                           
                             <div class="card-body">
                                 <div class="table-responsive">
                                 <form action="{{ route('personnel_occasionnel.store', ['id_periode' => $id_periode]) }}" method="POST">

@@ -74,9 +74,9 @@ public function create($raison_sociale)
     {
         // Récupérer la période à modifier
         $periode = Periode::findOrFail($id_periode);
-
+    
         // Afficher la vue avec le formulaire de modification de la période
-        return view('pages.modifier-periode', compact('periode'));
+        return view('pages.modifier-periode', compact('id_periode' , 'periode'));
     }
 
     // Méthode pour traiter la soumission du formulaire de modification d'une période
@@ -97,9 +97,7 @@ public function create($raison_sociale)
         $periode->update($request->all());
     
         // Rediriger vers la page des périodes avec un message de succès
-        return redirect()->route('dashboard.periode', [
-            'raison_sociale' => $periode->entreprise->raison_sociale
-        ])->with('success', 'Période modifiée avec succès.');
+        return redirect()->route('dashboard.periode', ['raison_sociale' => $periode->entreprise->raison_sociale ,'periode' => $periode ])->with('success', 'Période modifiée avec succès.');
     }
     
 }
