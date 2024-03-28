@@ -55,7 +55,7 @@
     <form action="{{ route('beneficiairesOS.destroy', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id]) }}" method="POST" style="display: inline;">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-primary">Supprimer</button>
+        <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
     </form>
 </td>
 

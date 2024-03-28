@@ -52,7 +52,7 @@
         <form action="{{ route('versements.destroy', ['id_periode' => $id_periode, 'id' => $versement->id]) }}" method="POST" style="display: inline-block;">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
         </form>
         </td>
                             </tr>

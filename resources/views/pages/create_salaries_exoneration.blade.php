@@ -68,43 +68,43 @@
                                     <!-- Champ pour la période en jours -->
                                     <div class="form-group">
                                         <label for="periode_en_jours">Période en Jours</label>
-                                        <input type="number" name="periode_en_jours" id="periode_en_jours" class="form-control">
+                                        <input type="number" name="periode_en_jours" id="periode_en_jours" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour les traitements bruts -->
                                     <div class="form-group">
                                         <label for="brut_traitements">Traitements Bruts</label>
-                                        <input type="number" name="brut_traitements" id="brut_traitements" class="form-control">
+                                        <input type="number" name="brut_traitements" id="brut_traitements" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour les avantages -->
                                     <div class="form-group">
                                         <label for="avantages">Avantages</label>
-                                        <input type="number" name="avantages" id="avantages" class="form-control">
+                                        <input type="number" name="avantages" id="avantages" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour les indemnités -->
                                     <div class="form-group">
                                         <label for="indemnite">Indemnités</label>
-                                        <input type="number" name="indemnite" id="indemnite" class="form-control">
+                                        <input type="number" name="indemnite" id="indemnite" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour le revenu brut imposable -->
                                     <div class="form-group">
                                         <label for="revenu_brut_imposable">Revenu Brut Imposable</label>
-                                        <input type="number" name="revenu_brut_imposable" id="revenu_brut_imposable" class="form-control">
+                                        <input type="number" name="revenu_brut_imposable" id="revenu_brut_imposable" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour les retenues opérées -->
                                     <div class="form-group">
                                         <label for="retenues_operees">Retenues Opérées</label>
-                                        <input type="number" name="retenues_operees" id="retenues_operees" class="form-control">
+                                        <input type="number" name="retenues_operees" id="retenues_operees" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ pour le revenu net imposable -->
                                     <div class="form-group">
                                         <label for="revenu_net_imposable">Revenu Net Imposable</label>
-                                        <input type="number" name="revenu_net_imposable" id="revenu_net_imposable" class="form-control">
+                                        <input type="number" name="revenu_net_imposable" id="revenu_net_imposable" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     </div>
 
                                     <!-- Champ caché pour l'ID de la société -->

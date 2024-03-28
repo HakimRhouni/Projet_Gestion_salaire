@@ -56,23 +56,23 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="salaire_base_annuel" class="form-label">Salaire de base annuel</label>
-                                    <input type="text" class="form-control" id="salaire_base_annuel" name="salaire_base_annuel" value="{{ $personnelPermanent->salaire_base_annuel }}">
+                                    <input type="text" class="form-control" id="salaire_base_annuel" name="salaire_base_annuel" value="{{ $personnelPermanent->salaire_base_annuel }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_brut" class="form-label">Montant Brut</label>
-                                    <input type="text" class="form-control" id="montant_brut" name="montant_brut" value="{{ $personnelPermanent->montant_brut }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_brut" name="montant_brut" value="{{ $personnelPermanent->montant_brut }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_avantages" class="form-label">Montant Avantages</label>
-                                    <input type="text" class="form-control" id="montant_avantages" name="montant_avantages" value="{{ $personnelPermanent->montant_avantages }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_avantages" name="montant_avantages" value="{{ $personnelPermanent->montant_avantages }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_indemnites" class="form-label">Montant Indemnités</label>
-                                    <input type="text" class="form-control" id="montant_indemnites" name="montant_indemnites" value="{{ $personnelPermanent->montant_indemnites }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_indemnites" name="montant_indemnites" value="{{ $personnelPermanent->montant_indemnites }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_exoneres" class="form-label">Montant Exonérés</label>
-                                    <input type="text" class="form-control" id="montant_exoneres" name="montant_exoneres" value="{{ $personnelPermanent->montant_exoneres }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_exoneres" name="montant_exoneres" value="{{ $personnelPermanent->montant_exoneres }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_revenu_brut_imposable" class="form-label">Montant du revenu brut imposable</label>
@@ -80,19 +80,19 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_frais_professionnels" class="form-label">Montant Frais Professionnels</label>
-                                    <input type="text" class="form-control" id="montant_frais_professionnels" name="montant_frais_professionnels" value="{{ $personnelPermanent->montant_frais_professionnels }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_frais_professionnels" name="montant_frais_professionnels" value="{{ $personnelPermanent->montant_frais_professionnels }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_cotisations" class="form-label">Montant Cotisations</label>
-                                    <input type="text" class="form-control" id="montant_cotisations" name="montant_cotisations" value="{{ $personnelPermanent->montant_cotisations }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_cotisations" name="montant_cotisations" value="{{ $personnelPermanent->montant_cotisations }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_autres_retenues" class="form-label">Montant Autres Retenues</label>
-                                    <input type="text" class="form-control" id="montant_autres_retenues" name="montant_autres_retenues" value="{{ $personnelPermanent->montant_autres_retenues }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_autres_retenues" name="montant_autres_retenues" value="{{ $personnelPermanent->montant_autres_retenues }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_echeances" class="form-label">Montant Echéances</label>
-                                    <input type="text" class="form-control" id="montant_echeances" name="montant_echeances" value="{{ $personnelPermanent->montant_echeances }}" onchange="calculateAmounts()">
+                                    <input type="text" class="form-control" id="montant_echeances" name="montant_echeances" value="{{ $personnelPermanent->montant_echeances }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="revenu_net_imposable" class="form-label">Revenu Net Imposable</label>
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="nb_reductions_charge_famille" class="form-label">Nombre Réductions Charge Famille</label>
-                                    <input type="text" class="form-control" id="nb_reductions_charge_famille" name="nb_reductions_charge_famille" value="{{ $personnelPermanent->nb_reductions_charge_famille }}">
+                                    <input type="text" class="form-control" id="nb_reductions_charge_famille" name="nb_reductions_charge_famille" value="{{ $personnelPermanent->nb_reductions_charge_famille }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="periode_jours" class="form-label">Période Jours</label>
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="ir_preleve" class="form-label">IR Prélevé</label>
-                                    <input type="text" class="form-control" id="ir_preleve" name="ir_preleve" value="{{ $personnelPermanent->ir_preleve }}">
+                                    <input type="text" class="form-control" id="ir_preleve" name="ir_preleve" value="{{ $personnelPermanent->ir_preleve }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                 </div>
                                 <div class="mb-3">
                                     <label for="date_autorisation_construire" class="form-label">Date Autorisation Construire</label>

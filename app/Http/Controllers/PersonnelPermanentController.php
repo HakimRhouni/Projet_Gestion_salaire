@@ -44,7 +44,27 @@ public function store(Request $request)
             'lf_employe' => 'required|string',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            // Ajoutez les règles de validation pour les autres champs si nécessaire
+            'cin' => 'nullable|string|max:255',
+            'carte_sejour' => 'nullable|string|max:255',
+            'cnss' => 'nullable|string|max:255',
+            'situation_famille' => 'nullable|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'salaire_base_annuel' => 'nullable|numeric',
+            'montant_brut' => 'nullable|numeric',
+            'montant_avantages' => 'nullable|numeric',
+            'montant_indemnites' => 'nullable|numeric',
+            'montant_exoneres' => 'nullable|numeric',
+            'montant_revenu_brut_imposable' => 'nullable|numeric',
+            'montant_frais_professionnels' => 'nullable|numeric',
+            'montant_cotisations' => 'nullable|numeric',
+            'montant_autres_retenues' => 'nullable|numeric',
+            'montant_echeances' => 'nullable|numeric',
+            'revenu_net_imposable' => 'nullable|numeric',
+            'nb_reductions_charge_famille' => 'nullable|integer',
+            'periode_jours' => 'nullable|integer',
+            'date_permis_habiter' => 'nullable|date',
+            'ir_preleve' => 'nullable|numeric',
+            'date_autorisation_construire' => 'nullable|date',
         ]);
 
         // Créer un nouveau personnel permanent avec les données validées

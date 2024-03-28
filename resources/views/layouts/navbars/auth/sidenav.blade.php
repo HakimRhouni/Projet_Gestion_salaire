@@ -31,7 +31,7 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            
+            @if(auth()->user()->hasRole('user'))
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-management' ? 'active' : '' }}" href="{{ route('user-management') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -40,18 +40,10 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-           
-            @if(auth()->user()->hasRole('admin'))
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-app text-info text-sm opacity-10"></i>
-                    </div> 
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
             @endif
+           
+            
+           
 
             @if (Str::startsWith(request()->path(), 'periode'))
             <li class="nav-item">

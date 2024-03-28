@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entreprise;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Response;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -422,9 +423,14 @@ public function creerXML($id)
     $xmlString = $dom->saveXML();
 
     // Écrivez la chaîne XML dans un fichier
-    $fileName = '/Users/rhoun/Desktop/projets/votre_fichier.xml'; // Nom du fichier XML à générer
-    $result = file_put_contents($fileName, $xmlString);
-    return back()->with('success', 'XML generé avec succès.');
+    $fileName = $entreprise->raison_sociale . '_' . date('Y-m-d_H-i-s') . '.xml';
+
+
+    // Enregistrer le fichier dans le stockage temporaire
+    return Response::make($xmlString, 200, [
+        'Content-Type' => 'application/xml',
+        'Content-Disposition' => 'attachment; filename="'.$fileName.'"'
+    ]);
 }
 
 }

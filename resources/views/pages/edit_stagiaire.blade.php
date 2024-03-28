@@ -52,23 +52,23 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="montant_brut" class="form-label">Montant Brut</label>
-                                        <input type="number" class="form-control" id="montant_brut" name="montant_brut" value="{{ $stagiaire->montant_brut }}" required>
+                                        <input type="number" class="form-control" id="montant_brut" name="montant_brut" value="{{ $stagiaire->montant_brut }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="indemnite" class="form-label">Indemnité</label>
-                                        <input type="number" class="form-control" id="indemnite" name="indemnite" value="{{ $stagiaire->indemnite }}" required>
+                                        <input type="number" class="form-control" id="indemnite" name="indemnite" value="{{ $stagiaire->indemnite }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="retenues" class="form-label">Retenues</label>
-                                        <input type="number" class="form-control" id="retenues" name="retenues" value="{{ $stagiaire->retenues }}" required>
+                                        <input type="number" class="form-control" id="retenues" name="retenues" value="{{ $stagiaire->retenues }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="net_imposable" class="form-label">Net Imposable</label>
-                                        <input type="number" class="form-control" id="net_imposable" name="net_imposable" value="{{ $stagiaire->net_imposable }}" required>
+                                        <input type="number" class="form-control" id="net_imposable" name="net_imposable" value="{{ $stagiaire->net_imposable }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="net_imposable" class="form-label">Periode</label>
-                                        <input type="number" class="form-control" id="periode" name="periode" value="{{ $stagiaire->periode }}" required>
+                                        <input type="number" class="form-control" id="periode" name="periode" value="{{ $stagiaire->periode }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                                     </div>
                                     <!-- Ajoutez d'autres champs de formulaire ici -->
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>

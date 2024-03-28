@@ -53,7 +53,7 @@
 <form action="{{ route('doctorants.destroy', ['id_periode' => $doctorant->id_periode, 'id_societe' => $doctorant->id_societe, 'id' => $doctorant->id]) }}" method="POST" style="display: inline;">
     @csrf
     @method('DELETE')
-    <button type="submit" class="btn btn-primary">Supprimer</button>
+    <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
 </form>
 </td>
                                                     </tr>

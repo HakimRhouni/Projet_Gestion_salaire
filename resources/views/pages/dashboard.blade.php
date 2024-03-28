@@ -60,11 +60,13 @@
     <td>
         <div class="d-flex">
     <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2">Modifier</a>
-    <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2">Supprimer</a>
+    <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</a>
     <form action="{{ route('generer.xml', ['id' => $entreprise->id]) }}" method="GET">
-        @csrf
-        <button type="submit" class="btn btn-primary">Générer XML</button>
-    </form>
+    @csrf
+    <button type="submit" class="btn btn-primary">
+        <i class="fas fa-file-code"></i> Générer XML
+    </button>
+</form>
 </div>
     </td>
 </tr>

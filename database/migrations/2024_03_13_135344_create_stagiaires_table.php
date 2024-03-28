@@ -22,10 +22,10 @@ class CreateStagiairesTable extends Migration
             $table->string('carte_sejour');
             $table->string('numero_cnss');
             $table->string('id_fiscal');
-            $table->decimal('montant_brut');
-            $table->decimal('indemnite');
-            $table->decimal('retenues');
-            $table->decimal('net_imposable');
+            $table->decimal('montant_brut', 20, 2);
+            $table->decimal('indemnite', 20, 2);
+            $table->decimal('retenues', 20, 2);
+            $table->decimal('net_imposable', 20, 2);
             $table->unsignedBigInteger('periode');
             $table->unsignedBigInteger('id_societe');
             $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
