@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\BeneficiaireOptionsSouscription;
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class BeneficiaireOSController extends Controller
 {
@@ -13,17 +14,20 @@ class BeneficiaireOSController extends Controller
     {
         $beneficiairesOS = BeneficiaireOptionsSouscription::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
     $id_societe = $periode->id_societe;
     
-        return view('pages.beneficiairesOS', compact('beneficiairesOS', 'id_societe','id_periode'));
+        return view('pages.beneficiairesOS', compact('beneficiairesOS', 'id_societe','id_periode','entreprise'));
     }
     public function create($id_periode)
     {
-        // Récupérer la période correspondante
+        
         $periode = Periode::findOrFail($id_periode);
         $id_societe = $periode->id_societe;
-        // Passer l'ID de la période à la vue pour l'utiliser dans le formulaire
-        return view('pages.create_beneficiaire_os', compact('id_periode','id_societe'));
+        $entreprise = $periode->entreprise;
+        
+        return view('pages.create_beneficiaire_os', compact('id_periode','id_societe','entreprise'));
     }
     public function store(Request $request, $id_periode)
     {
@@ -118,7 +122,9 @@ public function update(Request $request, $id_periode, $id_societe)
 public function edit($id_periode, $id_societe)
 {
     $beneficiaire = BeneficiaireOptionsSouscription::findOrFail($id_societe);
-    return view('pages.edit_beneficiaire_os', compact('beneficiaire', 'id_periode'));
+    $periode = Periode::findOrFail($id_periode);
+    $entreprise = $periode->entreprise;
+    return view('pages.edit_beneficiaire_os', compact('beneficiaire', 'id_periode','entreprise'));
 }
 public function destroy($id_periode, $id_societe)
 {

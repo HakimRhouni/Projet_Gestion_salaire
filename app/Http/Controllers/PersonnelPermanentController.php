@@ -6,16 +6,18 @@ use App\Models\PersonnelPermanent;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class PersonnelPermanentController extends Controller
 {
     
 
     
-    public function showPersonnelPermanent($id_periode)
+    public function showPersonnelPermanent($id_periode )
     {
         // Obtenez l'objet Periode correspondant à l'ID de la période
         $periode = Periode::findOrFail($id_periode);
+        $entreprise = $periode->entreprise;
         
         // Maintenant, vous pouvez accéder à l'ID de la société via la relation avec la méthode entreprise()
         $id_societe = $periode->entreprise->id;
@@ -24,14 +26,16 @@ class PersonnelPermanentController extends Controller
         $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode', 'periode'));
+        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode', 'periode','entreprise'));
     }
     
 
 public function create($id_societe, $id_periode)
 {
-    
-    return view('pages.create-personnel-permanent', compact('id_societe', 'id_periode'));
+    $periode = Periode::findOrFail($id_periode);
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
+    return view('pages.create-personnel-permanent', compact('id_societe', 'id_periode','entreprise'));
 }
 
 public function store(Request $request)
@@ -81,13 +85,45 @@ return redirect()->route('periodes.personnel_permanent', ['id_periode' => $reque
 public function edit($id,$id_periode)
 {
     $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    $periode = Periode::findOrFail($id_periode);
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
     // Vous pouvez passer d'autres données nécessaires à la vue ici
-    return view('pages.modifier-personnel-permanent', compact('personnelPermanent','id_periode'));
+    return view('pages.modifier-personnel-permanent', compact('personnelPermanent','id_periode','entreprise'));
 }
 
 public function update(Request $request, $id)
 {
     $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    $request->validate([
+           
+            'matricule' => 'required|string',
+            'lf_employe' => 'required|string',
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'cin' => 'nullable|string|max:255',
+            'carte_sejour' => 'nullable|string|max:255',
+            'cnss' => 'nullable|string|max:255',
+            'situation_famille' => 'nullable|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'salaire_base_annuel' => 'nullable|numeric',
+            'montant_brut' => 'nullable|numeric',
+            'montant_avantages' => 'nullable|numeric',
+            'montant_indemnites' => 'nullable|numeric',
+            'montant_exoneres' => 'nullable|numeric',
+            'montant_revenu_brut_imposable' => 'nullable|numeric',
+            'montant_frais_professionnels' => 'nullable|numeric',
+            'montant_cotisations' => 'nullable|numeric',
+            'montant_autres_retenues' => 'nullable|numeric',
+            'montant_echeances' => 'nullable|numeric',
+            'revenu_net_imposable' => 'nullable|numeric',
+            'nb_reductions_charge_famille' => 'nullable|integer',
+            'periode_jours' => 'nullable|integer',
+            'date_permis_habiter' => 'nullable|date',
+            'ir_preleve' => 'nullable|numeric',
+            'date_autorisation_construire' => 'nullable|date',
+        ]);
+
     $personnelPermanent->update($request->all());
     $id_periode = $personnelPermanent->id_periode;
     return redirect()->route('periodes.personnel_permanent', ['id_periode' => $id_periode])->with('success', 'Personnel permanent mis à jour avec succès');

@@ -6,28 +6,31 @@ use Illuminate\Http\Request;
 use App\Models\Periode;
 use App\Models\SalaireBeneficiantExoneration;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class SalariesExonerationController extends Controller
 {
     public function index($id_periode)
     {
         $periode = Periode::findOrFail($id_periode);
-        
-        // Maintenant, vous pouvez accéder à l'ID de la société via la relation avec la méthode entreprise()
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
         $id_societe = $periode->entreprise->id;
         
         // Récupérez la liste des personnels permanents pour cette période
         $salaries_exoneres = SalaireBeneficiantExoneration::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.salaries_exoneration', compact('salaries_exoneres', 'id_societe', 'id_periode'));
+        return view('pages.salaries_exoneration', compact('salaries_exoneres', 'id_societe', 'id_periode','entreprise'));
     }
     public function create($id_periode)
     {
         $periode = Periode::findOrFail($id_periode);
         $id_societe = $periode->entreprise->id;
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
 
-        return view('pages.create_salaries_exoneration',compact('id_periode','id_societe'));
+        return view('pages.create_salaries_exoneration',compact('id_periode','id_societe','entreprise'));
     }
 
     public function store(Request $request)
@@ -77,9 +80,12 @@ class SalariesExonerationController extends Controller
     // Trouver le salarié exonéré à éditer
     $salarie = SalaireBeneficiantExoneration::findOrFail($id);
     $id_periode = $salarie->id_periode;
+    $periode = Periode::findOrFail($id_periode);
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
 
     // Passer les données à la vue pour l'édition
-    return view('pages.edit_salaries_exoneration', compact('salarie', 'id_periode'));
+    return view('pages.edit_salaries_exoneration', compact('salarie', 'id_periode','entreprise'));
 }
 public function update(Request $request, $id)
 {

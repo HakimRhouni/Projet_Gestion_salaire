@@ -158,7 +158,7 @@ public function import(Request $request)
 
     // Vérifier s'il y a des erreurs de validation
     if ($validator->fails()) {
-        return "Error" ;
+        abort(404, 'Erreur 404: Fichier non trouvé');
     }
 
     // Vérifier si un fichier a été téléchargé
@@ -213,7 +213,7 @@ public function import(Request $request)
     }
 
     // Rediriger en cas d'échec
-    return back()->with('error', 'Une erreur s\'est produite lors de l\'importation des données.');
+    return back()->with('erreur 404 verifier votre fichier', 'Une erreur s\'est produite lors de l\'importation des données.');
 }
 
 public function creerXML($id)

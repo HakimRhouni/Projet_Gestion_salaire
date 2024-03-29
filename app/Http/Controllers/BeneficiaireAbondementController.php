@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\BeneficiaireAbondement; 
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class BeneficiaireAbondementController extends Controller
 {
@@ -15,14 +16,19 @@ class BeneficiaireAbondementController extends Controller
         $beneficiairesAbondement = BeneficiaireAbondement::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
     $id_societe = $periode->id_societe;
-
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
         // Retournez la vue avec les données des bénéficiaires d'abondement
-        return view('pages.beneficiaires_abondement',  compact('beneficiairesAbondement', 'id_periode', 'id_societe'));
+        return view('pages.beneficiaires_abondement',  compact('beneficiairesAbondement', 'id_periode', 'id_societe','entreprise'));
     }
 
     public function create($id_periode, $id_societe)
     {
-        return view('pages.create_beneficiaires_abondement', compact('id_periode', 'id_societe'));
+        $periode = Periode::findOrFail($id_periode);
+    $id_societe = $periode->id_societe;
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
+        return view('pages.create_beneficiaires_abondement', compact('id_periode', 'id_societe','entreprise'));
     }
 
     public function store(Request $request, $id_periode,$id_societe)
@@ -58,8 +64,12 @@ class BeneficiaireAbondementController extends Controller
     }
     public function edit($id_periode, $id_societe, $id)
     {
+        $periode = Periode::findOrFail($id_periode);
+    $id_societe = $periode->id_societe;
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
         $beneficiaire = BeneficiaireAbondement::findOrFail($id);
-        return view('pages.edit_beneficiaire_abondement', compact('beneficiaire', 'id_periode', 'id_societe'));
+        return view('pages.edit_beneficiaire_abondement', compact('beneficiaire', 'id_periode', 'id_societe','entreprise'));
     }
     public function destroy($id_periode, $id_societe, $id)
     {

@@ -68,7 +68,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_indemnites" class="form-label">Montant Indemnités</label>
-                                    <input type="text" class="form-control" id="montant_indemnites" name="montant_indemnites" value="{{ $personnelPermanent->montant_indemnites }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <input type="text" class="form-control @error('montant_indemnites') is-invalid @enderror" class="form-control" id="montant_indemnites" name="montant_indemnites" value="{{ $personnelPermanent->montant_indemnites }}" onchange="calculateAmounts()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                     @error('montant_indemnites')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="montant_exoneres" class="form-label">Montant Exonérés</label>

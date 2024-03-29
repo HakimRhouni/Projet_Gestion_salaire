@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Stagiaire;
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
+
 
 
 class StagiaireController extends Controller
@@ -17,18 +19,21 @@ class StagiaireController extends Controller
     
     // Récupérer l'id de la société pour la période spécifiée
     $periode = Periode::findOrFail($id_periode);
+    $raison_sociale = $periode->entreprise->raison_sociale;
+    $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
     $id_societe = $periode->id_societe;
 
     // Retourner la vue "Stagiaire" en passant les données des stagiaires et l'id de la société
-    return view('pages.Stagiaire', compact('stagiaires', 'id_periode', 'id_societe'));
+    return view('pages.Stagiaire', compact('stagiaires', 'id_periode', 'id_societe','entreprise'));
 }
     
     public function create($id_periode)
     {
         $periode = Periode::findOrFail($id_periode);
-        $id_societe = $periode->entreprise; // Assurez-vous que votre modèle Periode a une relation nommée "entreprise"
+        $id_societe = $periode->entreprise; 
+        $entreprise = $periode->entreprise;
     
-        return view('pages.create_stagiaire', compact('id_periode', 'id_societe'));
+        return view('pages.create_stagiaire', compact('id_periode', 'id_societe', 'entreprise'));
     }
 
     public function store(Request $request, $id_periode, $id_societe)
@@ -63,9 +68,10 @@ class StagiaireController extends Controller
 {
     $stagiaire = Stagiaire::findOrFail($id);
     $periode = Periode::findOrFail($id_periode);
-    $id_societe = $periode->entreprise; // Assurez-vous que votre modèle Periode a une relation nommée "entreprise"
+    $id_societe = $periode->entreprise; 
+    $entreprise = $periode->entreprise;
 
-    return view('pages.edit_stagiaire', compact('stagiaire', 'id_periode', 'id_societe'));
+    return view('pages.edit_stagiaire', compact('stagiaire', 'id_periode', 'id_societe','entreprise'));
 }
 public function update(Request $request, $id_periode, $id)
 {

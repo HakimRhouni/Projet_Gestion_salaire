@@ -6,6 +6,7 @@ use App\Models\Versement;
 use Illuminate\Http\Request;
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class VersementController extends Controller
 {
@@ -13,20 +14,24 @@ class VersementController extends Controller
     {
         // Récupérer l'id de la société à partir de la période
         $id_societe = Periode::findOrFail($id_periode)->id_societe;
-    
+        $periode = Periode::findOrFail($id_periode);
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
         // Récupérer les versements pour la période spécifiée
         $versements = Versement::where('id_periode', $id_periode)->get();
     
         // Retourner la vue avec les versements et l'id de la société
-        return view('pages.versements', compact('versements', 'id_periode', 'id_societe'));
+        return view('pages.versements', compact('versements', 'id_periode', 'id_societe','entreprise'));
     }
     public function create($id_periode)
 {
     // Récupérer l'id de la société à partir de la période
     $id_societe = Periode::findOrFail($id_periode)->id_societe;
+    $periode = Periode::findOrFail($id_periode);
+    $entreprise = $periode->entreprise;
 
     // Retourner la vue avec les données nécessaires
-    return view('pages.create_Versements', compact('id_periode', 'id_societe'));
+    return view('pages.create_Versements', compact('id_periode', 'id_societe','entreprise'));
 }
 
     public function store(Request $request, $id_periode,$id_societe)
@@ -56,7 +61,9 @@ class VersementController extends Controller
     public function edit($id_periode, $id)
 {
     $versement = Versement::findOrFail($id);
-    return view('pages.edit_versement', compact('versement', 'id_periode'));
+    $periode = Periode::findOrFail($id_periode);
+    $entreprise = $periode->entreprise;
+    return view('pages.edit_versement', compact('versement', 'id_periode','entreprise'));
 }
 
 public function destroy($id_periode, $id)

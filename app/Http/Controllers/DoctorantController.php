@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Doctorant;
 use App\Models\Periode;
 use Dompdf\Dompdf;
+use App\Models\Entreprise;
 
 class DoctorantController extends Controller
 {
@@ -14,10 +15,12 @@ class DoctorantController extends Controller
         // Récupérer tous les doctorants depuis la base de données
         $doctorants = Doctorant::where('id_periode', $id_periode)->get();
         $periode = Periode::findOrFail($id_periode);
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
     $id_societe = $periode->id_societe;
         
         // Retourner la vue "doctorants" en passant les données des doctorants
-        return view('pages.Doctorants', compact('doctorants', 'id_periode', 'id_societe'));
+        return view('pages.Doctorants', compact('doctorants', 'id_periode', 'id_societe','entreprise'));
     }
     public function store(Request $request,$id_periode, $id_societe)
     {
@@ -46,13 +49,16 @@ class DoctorantController extends Controller
     {
         $periode = Periode::findOrFail($id_periode);
         $id_societe = $periode->entreprise;
-        return view('pages.create_doctorant' ,compact('id_periode', 'id_societe'));
+        $entreprise = $periode->entreprise;
+        return view('pages.create_doctorant' ,compact('id_periode', 'id_societe','entreprise'));
         
     }
     public function edit($id_periode, $id_societe, $id)
     {
+        $periode = Periode::findOrFail($id_periode);
         $doctorant = Doctorant::findOrFail($id);
-        return view('pages.edit_doctorant', compact('doctorant', 'id_periode', 'id_societe'));
+        $entreprise = $periode->entreprise;
+        return view('pages.edit_doctorant', compact('doctorant', 'id_periode', 'id_societe','entreprise'));
     }
 
     // Méthode pour mettre à jour les informations d'un doctorant

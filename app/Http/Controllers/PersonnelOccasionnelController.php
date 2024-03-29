@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\Periode;
+use App\Models\Entreprise;
 use App\Models\PersonnelOccasionnel;
 class PersonnelOccasionnelController extends Controller
 {
     public function index($id_periode)
     {
         $periode = Periode::findOrFail($id_periode);
-        
+        $raison_sociale = $periode->entreprise->raison_sociale;
+        $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
         // Maintenant, vous pouvez accéder à l'ID de la société via la relation avec la méthode entreprise()
         $id_societe = $periode->entreprise->id;
         
@@ -18,12 +20,13 @@ class PersonnelOccasionnelController extends Controller
         $personnelOcasionnel = PersonnelOccasionnel::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.personnel_Ocasionnel', compact('personnelOcasionnel', 'id_societe', 'id_periode'));
+        return view('pages.personnel_Ocasionnel', compact('personnelOcasionnel', 'id_societe', 'id_periode','entreprise'));
     }
     public function create($id_periode)
 {
     $periode = Periode::findOrFail($id_periode);
-    $entreprise = $periode->entreprise; // Assurez-vous que votre modèle Periode a une relation nommée "entreprise"
+    
+    $entreprise = $periode->entreprise; 
 
     return view('pages.create_personnel_occasionnel', compact('id_periode', 'entreprise'));
 }

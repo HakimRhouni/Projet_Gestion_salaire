@@ -72,10 +72,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/generer-xml/{id}', [EntrepriseController::class, 'creerXML'])->name('generer.xml');
 	Route::get('dashboard/{raison_sociale}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
-	Route::post('/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
-	Route::delete('/periodes/{id_periode}', [PeriodesController::class, 'destroy'])->name('periodes.destroy');
-	Route::get('/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
-	Route::put('/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
+	Route::post('dashboard/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
+	Route::delete('dashboard/periodes/{id_periode}', [PeriodesController::class, 'destroy'])->name('periodes.destroy');
+	Route::get('dashboard/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
+	Route::put('dashboard/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
 	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
 	Route::get('/periodes/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/periodes/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
