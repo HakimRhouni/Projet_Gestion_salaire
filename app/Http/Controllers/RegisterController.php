@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -20,7 +20,13 @@ class RegisterController extends Controller
             'password' => 'required|min:5|max:255',
             'terms' => 'required'
         ]);
+        
         $user = User::create($attributes);
+
+        // Récupère le rôle 'user' et l'attribue à l'utilisateur
+        $defaultRole = Role::where('name', 'user')->first(); 
+        $user->assignRole($defaultRole); 
+
         auth()->login($user);
 
         return redirect('/dashboard');
