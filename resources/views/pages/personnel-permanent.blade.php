@@ -15,12 +15,20 @@
                         <div class="card-header">
                             <h5 class="card-title">Personnel Permanent</h5>
                             <!-- Bouton "Ajouter Personnel Permanent" -->
-                            <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
-                            <a href="{{ route('PersonnelPermanentController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
-                            <form action="{{ route('ajouter.employes.annee.precedente', ['id_periode' => $periode->id_periode]) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success">Ajouter employés année précédente</button>
-            </form>
+                           <div class="row">
+    <div class="col">
+        <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
+    </div>
+    <div class="col">
+        <a href="{{ route('PersonnelPermanentController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
+    </div>
+    <div class="col">
+        <form action="{{ route('ajouter.employes.annee.precedente', ['id_periode' => $periode->id_periode]) }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-success">Ajouter employés année précédente</button>
+        </form>
+    </div>
+</div>
 
                         </div>
                         <div class="card-body">
