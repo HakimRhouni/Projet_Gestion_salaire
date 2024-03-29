@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="brut_indemnites" class="form-label">Brut des Indemnités</label>
-                                        <input type="number" class="form-control" id="brut_indemnites" name="brut_indemnites" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                        <input type="text" class="form-control" id="brut_indemnites" name="brut_indemnites" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
                                     </div>
                                     <!-- Ajoutez d'autres champs de formulaire ici -->
                                     <button type="submit" class="btn btn-primary">Enregistrer</button>

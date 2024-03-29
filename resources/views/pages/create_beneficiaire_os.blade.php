@@ -91,7 +91,7 @@
                                 <label for="nbr_actions_acquises" class="col-md-4 col-form-label text-md-right">{{ __('Nombre d\'actions acquises') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="nbr_actions_acquises" type="number" class="form-control" name="nbr_actions_acquises"  onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                    <input id="nbr_actions_acquises" type="text" class="form-control" name="nbr_actions_acquises"  onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
                                 </div>
                             </div>
 
@@ -99,7 +99,7 @@
                                 <label for="nbr_actions_distribuees" class="col-md-4 col-form-label text-md-right">{{ __('Nombre d\'actions distribuées') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="nbr_actions_distribuees" type="number" class="form-control" name="nbr_actions_distribuees" onkeypress="return event.charCode >= 48 && event.charCode <= 57"  required>
+                                    <input id="nbr_actions_distribuees" type="text" class="form-control" name="nbr_actions_distribuees" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44"  required>
                                 </div>
                             </div>
 
@@ -107,7 +107,7 @@
                                 <label for="prix_acquisition" class="col-md-4 col-form-label text-md-right">{{ __('Prix d\'acquisition') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="prix_acquisition" type="number" class="form-control" name="prix_acquisition" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                    <input id="prix_acquisition" type="text" class="form-control" name="prix_acquisition" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44"  required>
                                 </div>
                             </div>
 
@@ -115,7 +115,7 @@
                                 <label for="date_attribution" class="col-md-4 col-form-label text-md-right">{{ __('Date d\'attribution') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="date_attribution" type="date" class="form-control" name="date_attribution" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                    <input id="date_attribution" type="date" class="form-control" name="date_attribution"  required>
                                 </div>
                             </div>
 
@@ -123,7 +123,7 @@
                                 <label for="valeur_action_attribution" class="col-md-4 col-form-label text-md-right">{{ __('Valeur de l\'action à l\'attribution') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="valeur_action_attribution" type="number" class="form-control" name="valeur_action_attribution" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                    <input id="valeur_action_attribution" type="text" class="form-control" name="valeur_action_attribution" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
                                 </div>
                             </div>
 
@@ -139,7 +139,7 @@
                                 <label for="valeur_action_levee" class="col-md-4 col-form-label text-md-right">{{ __('Valeur de l\'action levée') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="valeur_action_levee" type="number" class="form-control" name="valeur_action_levee" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <input id="valeur_action_levee" type="text" class="form-control" name="valeur_action_levee" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
                                 </div>
                             </div>
 
@@ -163,7 +163,7 @@
                                 <label for="montant_abondement" class="col-md-4 col-form-label text-md-right">{{ __('Montant de l\'abondement') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="montant_abondement" type="number" class="form-control" name="montant_abondement" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <input id="montant_abondement" type="text" class="form-control" name="montant_abondement" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
                                 </div>
                             </div>
 
@@ -171,7 +171,7 @@
                                 <label for="complement_salaire" class="col-md-4 col-form-label text-md-right">{{ __('Complément de salaire') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="complement_salaire" type="number" class="form-control" name="complement_salaire" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <input id="complement_salaire" type="text" class="form-control" name="complement_salaire" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
                                 </div>
                             </div>
 

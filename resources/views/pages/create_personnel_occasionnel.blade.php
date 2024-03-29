@@ -57,11 +57,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="montant_brut" class="form-label">Montant Brut</label>
-                                        <input type="number" class="form-control" id="montant_brut" name="montant_brut" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                        <input type="text" class="form-control" id="montant_brut" name="montant_brut" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="ir_preleve" class="form-label">IR Prélevé</label>
-                                        <input type="number" class="form-control" id="ir_preleve" name="ir_preleve" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                                        <input type="text" class="form-control" id="ir_preleve" name="ir_preleve" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Ajouter</button>
                                 </form>

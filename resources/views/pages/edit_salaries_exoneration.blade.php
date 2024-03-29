@@ -75,37 +75,37 @@
         <!-- Champ pour les traitements bruts -->
         <div class="form-group">
             <label for="brut_traitements">Traitements Bruts</label>
-            <input type="number" name="brut_traitements" id="brut_traitements" class="form-control" value="{{ $salarie->brut_traitements }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="brut_traitements" id="brut_traitements" class="form-control" value="{{ $salarie->brut_traitements }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Champ pour les avantages -->
         <div class="form-group">
             <label for="avantages">Avantages</label>
-            <input type="number" name="avantages" id="avantages" class="form-control" value="{{ $salarie->avantages }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="avantages" id="avantages" class="form-control" value="{{ $salarie->avantages }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Champ pour les indemnités -->
         <div class="form-group">
             <label for="indemnite">Indemnités</label>
-            <input type="number" name="indemnite" id="indemnite" class="form-control" value="{{ $salarie->indemnite }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="indemnite" id="indemnite" class="form-control" value="{{ $salarie->indemnite }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Champ pour le revenu brut imposable -->
         <div class="form-group">
             <label for="revenu_brut_imposable">Revenu Brut Imposable</label>
-            <input type="number" name="revenu_brut_imposable" id="revenu_brut_imposable" class="form-control" value="{{ $salarie->revenu_brut_imposable }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="revenu_brut_imposable" id="revenu_brut_imposable" class="form-control" value="{{ $salarie->revenu_brut_imposable }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Champ pour les retenues opérées -->
         <div class="form-group">
             <label for="retenues_operees">Retenues Opérées</label>
-            <input type="number" name="retenues_operees" id="retenues_operees" class="form-control" value="{{ $salarie->retenues_operees }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="retenues_operees" id="retenues_operees" class="form-control" value="{{ $salarie->retenues_operees }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Champ pour le revenu net imposable -->
         <div class="form-group">
             <label for="revenu_net_imposable">Revenu Net Imposable</label>
-            <input type="number" name="revenu_net_imposable" id="revenu_net_imposable" class="form-control" value="{{ $salarie->revenu_net_imposable }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <input type="text" name="revenu_net_imposable" id="revenu_net_imposable" class="form-control" value="{{ $salarie->revenu_net_imposable }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44">
         </div>
 
         <!-- Bouton pour soumettre le formulaire -->
