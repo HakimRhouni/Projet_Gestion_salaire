@@ -112,7 +112,7 @@
 
                             <div class="mb-3">
                                 <label for="montant_abondement" class="form-label">{{ __('Montant abondement') }}</label>
-                                <input id="montant_abondement" type="text" step="0.01" class="form-control @error('montant_abondement') is-invalid @enderror" name="montant_abondement" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" value="{{ old('montant_abondement') }}" required>
+                                <input id="montant_abondement" type="text" step="0.01" class="form-control @error('montant_abondement') is-invalid @enderror" name="montant_abondement" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" value="{{ old('montant_abondement') }}" required>
                                 @error('montant_abondement')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -122,7 +122,7 @@
 
                             <div class="mb-3">
                                 <label for="montant_annuel_revenu_imposable" class="form-label">{{ __('Montant annuel du revenu imposable') }}</label>
-                                <input id="montant_annuel_revenu_imposable" type="text" step="0.01" class="form-control @error('montant_annuel_revenu_imposable') is-invalid @enderror" name="montant_annuel_revenu_imposable" value="{{ old('montant_annuel_revenu_imposable') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
+                                <input id="montant_annuel_revenu_imposable" type="text" step="0.01" class="form-control @error('montant_annuel_revenu_imposable') is-invalid @enderror" name="montant_annuel_revenu_imposable" value="{{ old('montant_annuel_revenu_imposable') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
                                 @error('montant_annuel_revenu_imposable')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -109,7 +109,7 @@
                                 <label for="penalite" class="col-md-4 col-form-label text-md-right">{{ __('Pénalité') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="penalite" type="text" class="form-control @error('penalite') is-invalid @enderror" name="penalite" value="{{ old('penalite') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
+                                    <input id="penalite" type="text" class="form-control @error('penalite') is-invalid @enderror" name="penalite" value="{{ old('penalite') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
 
                                     @error('penalite')
                                         <span class="invalid-feedback" role="alert">
@@ -123,7 +123,7 @@
                                 <label for="majorations" class="col-md-4 col-form-label text-md-right">{{ __('Majorations') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="majorations" type="text" class="form-control @error('majorations') is-invalid @enderror" name="majorations" value="{{ old('majorations') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
+                                    <input id="majorations" type="text" class="form-control @error('majorations') is-invalid @enderror" name="majorations" value="{{ old('majorations') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
 
                                     @error('majorations')
                                         <span class="invalid-feedback" role="alert">
@@ -137,7 +137,7 @@
                                 <label for="total_verse" class="col-md-4 col-form-label text-md-right">{{ __('Total versé') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="total_verse" type="text" class="form-control @error('total_verse') is-invalid @enderror" name="total_verse" value="{{ old('total_verse') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
+                                    <input id="total_verse" type="text" class="form-control @error('total_verse') is-invalid @enderror" name="total_verse" value="{{ old('total_verse') }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
 
                                     @error('total_verse')
                                         <span class="invalid-feedback" role="alert">

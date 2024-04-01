@@ -15,29 +15,45 @@
         <h1>Créer une nouvelle période pour l'entreprise {{ $entreprise->raison_sociale }}</h1>
 
         <form method="POST" action="{{ route('periodes.store') }}">
-            @csrf
-            <input type="hidden" name="id_societe" value="{{ $entreprise->id }}">
-            <input type="hidden" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
+    @csrf
+    <input type="hidden" name="id_societe" value="{{ $entreprise->id }}">
+    <input type="hidden" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
 
-            <div class="mb-3">
-                <label for="annee" class="form-label">Année</label>
-                <input type="text" class="form-control" id="annee" name="annee" placeholder="Année">
-            </div>
+    <div class="mb-3">
+        <label for="annee" class="form-label">Année</label>
+        <input type="text" class="form-control @error('annee') is-invalid @enderror" id="annee" name="annee" placeholder="Année">
+        @error('annee')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
-            <div class="mb-3">
-                <label for="debut_exercice" class="form-label">Début de l'exercice</label>
-                <input type="date" class="form-control" id="debut_exercice" name="debut_exercice">
-            </div>
+    <div class="mb-3">
+        <label for="debut_exercice" class="form-label">Début de l'exercice</label>
+        <input type="date" class="form-control @error('debut_exercice') is-invalid @enderror" id="debut_exercice" name="debut_exercice">
+        @error('debut_exercice')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
-            <div class="mb-3">
-                <label for="fin_exercice" class="form-label">Fin de l'exercice</label>
-                <input type="date" class="form-control" id="fin_exercice" name="fin_exercice">
-            </div>
+    <div class="mb-3">
+        <label for="fin_exercice" class="form-label">Fin de l'exercice</label>
+        <input type="date" class="form-control @error('fin_exercice') is-invalid @enderror" id="fin_exercice" name="fin_exercice">
+        @error('fin_exercice')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
-            <!-- Ajoutez d'autres champs du formulaire si nécessaire -->
+    <!-- Ajoutez d'autres champs du formulaire si nécessaire -->
 
-            <button type="submit" class="btn btn-primary">Créer période</button>
-        </form>
+    <button type="submit" class="btn btn-primary">Créer période</button>
+</form>
+
     </div>
                     </div>
                 </div>

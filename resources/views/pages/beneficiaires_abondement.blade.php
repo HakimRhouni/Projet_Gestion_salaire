@@ -3,7 +3,7 @@
 @section('content')
     
 
-    @include('layouts.navbars.auth.topnav', ['title' => 'Doctorants'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'bénéficiaires d’abondements dans le cadre d’un plan d’épargne entreprise'])
 
    
 
@@ -18,7 +18,7 @@
                                 <a href="{{ route('beneficiaires_abondement.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Ajouter Bénéficiaire</a>
                                 <a href="{{ route('beneficiaires_abondement.pdf',['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                             </div>
-
+                            <div class="table-responsive">
                             @if(count($beneficiairesAbondement) > 0)
                                 <table class="table">
                             <thead>
@@ -63,7 +63,7 @@
                                 @else
                                     <p>Aucun bénéficiaire d’abondement dans le cadre d’un plan d’épargne entreprise trouvé.</p>
                                 @endif
-                            </div>
+                                </div></div>
                             <div class="card-body">
                                
                             </div>

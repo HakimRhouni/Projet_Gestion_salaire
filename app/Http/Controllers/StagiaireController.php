@@ -47,10 +47,10 @@ class StagiaireController extends Controller
             'carte_sejour' => 'required',
             'numero_cnss' => 'required',
             'id_fiscal' => 'required',
-            'montant_brut' => 'required',
-            'indemnite' => 'required',
-            'retenues' => 'required',
-            'net_imposable' => 'required',
+            'montant_brut' => 'required | numeric',
+            'indemnite' => 'required | numeric',
+            'retenues' => 'required | numeric',
+            'net_imposable' => 'required | numeric',
             'periode' => 'required',
         ]);
 

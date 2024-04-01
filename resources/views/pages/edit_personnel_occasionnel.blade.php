@@ -27,45 +27,81 @@
                                         <input type="hidden" name="id_societe" value="{{ $entreprise->id }}">
                                         <input type="hidden" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
                                         <div class="mb-3">
-                                            <label for="nom" class="form-label">Nom</label>
-                                            <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom', $personnel->nom) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="prenom" class="form-label">Prénom</label>
-                                            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ old('prenom', $personnel->prenom) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="adresse" class="form-label">Adresse</label>
-                                            <input type="text" class="form-control" id="adresse" name="adresse" value="{{ old('adresse', $personnel->adresse) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="cin" class="form-label">CIN</label>
-                                            <input type="text" class="form-control" id="cin" name="cin" value="{{ old('cin', $personnel->cin) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="carte_sejour" class="form-label">Carte de Séjour</label>
-                                            <input type="text" class="form-control" id="carte_sejour" name="carte_sejour" value="{{ old('carte_sejour', $personnel->carte_sejour) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="numero_cnss" class="form-label">Numéro CNSS</label>
-                                            <input type="text" class="form-control" id="numero_cnss" name="numero_cnss" value="{{ old('numero_cnss', $personnel->numero_cnss) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="id_fiscal" class="form-label">ID Fiscal</label>
-                                            <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" value="{{ old('id_fiscal', $personnel->id_fiscal) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="profession" class="form-label">Profession</label>
-                                            <input type="text" class="form-control" id="profession" name="profession" value="{{ old('profession', $personnel->profession) }}" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="montant_brut" class="form-label">Montant Brut</label>
-                                            <input type="text" class="form-control" id="montant_brut" name="montant_brut" value="{{ old('montant_brut', $personnel->montant_brut) }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57  || event.charCode === 44" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="ir_preleve" class="form-label">IR Prélevé</label>
-                                            <input type="text" class="form-control" id="ir_preleve" name="ir_preleve" value="{{ old('ir_preleve', $personnel->ir_preleve) }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57  || event.charCode === 44" required>
-                                        </div>
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ old('nom', $personnel->nom) }}" required>
+        @error('nom')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom</label>
+        <input type="text" class="form-control @error('prenom') is-invalid @enderror" id="prenom" name="prenom" value="{{ old('prenom', $personnel->prenom) }}" required>
+        @error('prenom')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="mb-3">
+    <label for="adresse" class="form-label">Adresse</label>
+    <input type="text" class="form-control @error('adresse') is-invalid @enderror" id="adresse" name="adresse" value="{{ old('adresse', $personnel->adresse) }}" required>
+    @error('adresse')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+<div class="mb-3">
+        <label for="cin" class="form-label">CIN</label>
+        <input type="text" class="form-control @error('cin') is-invalid @enderror" id="cin" name="cin" value="{{ old('cin', $personnel->cin) }}" required>
+        @error('cin')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
+        <label for="carte_sejour" class="form-label">Carte de Séjour</label>
+        <input type="text" class="form-control @error('carte_sejour') is-invalid @enderror" id="carte_sejour" name="carte_sejour" value="{{ old('carte_sejour', $personnel->carte_sejour) }}" required>
+        @error('carte_sejour')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="mb-3">
+    <label for="numero_cnss" class="form-label">Numéro CNSS</label>
+    <input type="text" class="form-control @error('numero_cnss') is-invalid @enderror" id="numero_cnss" name="numero_cnss" value="{{ old('numero_cnss', $personnel->numero_cnss) }}" required>
+    @error('numero_cnss')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="id_fiscal" class="form-label">ID Fiscal</label>
+    <input type="text" class="form-control @error('id_fiscal') is-invalid @enderror" id="id_fiscal" name="id_fiscal" value="{{ old('id_fiscal', $personnel->id_fiscal) }}" required>
+    @error('id_fiscal')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="profession" class="form-label">Profession</label>
+    <input type="text" class="form-control @error('profession') is-invalid @enderror" id="profession" name="profession" value="{{ old('profession', $personnel->profession) }}" required>
+    @error('profession')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="montant_brut" class="form-label">Montant Brut</label>
+    <input type="text" class="form-control @error('montant_brut') is-invalid @enderror" id="montant_brut" name="montant_brut" value="{{ old('montant_brut', $personnel->montant_brut) }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57  || event.charCode === 46" required>
+    @error('montant_brut')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="mb-3">
+    <label for="ir_preleve" class="form-label">IR Prélevé</label>
+    <input type="text" class="form-control @error('ir_preleve') is-invalid @enderror" id="ir_preleve" name="ir_preleve" value="{{ old('ir_preleve', $personnel->ir_preleve) }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57  || event.charCode === 46" required>
+    @error('ir_preleve')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
                                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                                     </form>
                                 </div>

@@ -16,61 +16,122 @@
                                 <h5 class="card-title">Ajouter Stagiaire</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('stagiaires.store', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id_societe" value="{{ $id_societe }}">
-                                    <input type="hidden" name="id_periode" value="{{ $id_periode }}">
-                                    <div class="mb-3">
-                                        <label for="nom" class="form-label">Nom</label>
-                                        <input type="text" class="form-control" id="nom" name="nom" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="prenom" class="form-label">Prénom</label>
-                                        <input type="text" class="form-control" id="prenom" name="prenom" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="adresse" class="form-label">Adresse</label>
-                                        <input type="text" class="form-control" id="adresse" name="adresse" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="cin" class="form-label">CIN</label>
-                                        <input type="text" class="form-control" id="cin" name="cin" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="carte_sejour" class="form-label">Carte de séjour</label>
-                                        <input type="text" class="form-control" id="carte_sejour" name="carte_sejour" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="numero_cnss" class="form-label">Numéro CNSS</label>
-                                        <input type="text" class="form-control" id="numero_cnss" name="numero_cnss" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="id_fiscal" class="form-label">ID Fiscal</label>
-                                        <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="montant_brut" class="form-label">Montant Brut</label>
-                                        <input type="text" class="form-control" id="montant_brut" name="montant_brut" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="indemnite" class="form-label">Indemnité</label>
-                                        <input type="text" class="form-control" id="indemnite" name="indemnite" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="retenues" class="form-label">Retenues</label>
-                                        <input type="text" class="form-control" id="retenues" name="retenues" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="net_imposable" class="form-label">Net Imposable</label>
-                                        <input type="text" class="form-control" id="net_imposable" name="net_imposable" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="net_imposable" class="form-label">Periode</label>
-                                        <input type="text" class="form-control" id="periode" name="periode" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 44" required>
-                                    </div>
-                                    <!-- Ajoutez d'autres champs de formulaire ici -->
-                                    <button type="submit" class="btn btn-primary">Ajouter</button>
-                                </form>
+                            <form action="{{ route('stagiaires.store', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" method="POST">
+    @csrf
+    <input type="hidden" name="id_societe" value="{{ $id_societe }}">
+    <input type="hidden" name="id_periode" value="{{ $id_periode }}">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" required>
+        @error('nom')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom</label>
+        <input type="text" class="form-control @error('prenom') is-invalid @enderror" id="prenom" name="prenom" required>
+        @error('prenom')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="adresse" class="form-label">Adresse</label>
+        <input type="text" class="form-control @error('adresse') is-invalid @enderror" id="adresse" name="adresse" required>
+        @error('adresse')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="cin" class="form-label">CIN</label>
+        <input type="text" class="form-control @error('cin') is-invalid @enderror" id="cin" name="cin" required>
+        @error('cin')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="carte_sejour" class="form-label">Carte de séjour</label>
+        <input type="text" class="form-control @error('carte_sejour') is-invalid @enderror" id="carte_sejour" name="carte_sejour" required>
+        @error('carte_sejour')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="numero_cnss" class="form-label">Numéro CNSS</label>
+        <input type="text" class="form-control @error('numero_cnss') is-invalid @enderror" id="numero_cnss" name="numero_cnss" required>
+        @error('numero_cnss')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="id_fiscal" class="form-label">ID Fiscal</label>
+        <input type="text" class="form-control @error('id_fiscal') is-invalid @enderror" id="id_fiscal" name="id_fiscal" required>
+        @error('id_fiscal')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="montant_brut" class="form-label">Montant Brut</label>
+        <input type="text" class="form-control @error('montant_brut') is-invalid @enderror" id="montant_brut" name="montant_brut" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
+        @error('montant_brut')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="indemnite" class="form-label">Indemnité</label>
+        <input type="text" class="form-control @error('indemnite') is-invalid @enderror" id="indemnite" name="indemnite" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
+        @error('indemnite')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="retenues" class="form-label">Retenues</label>
+        <input type="text" class="form-control @error('retenues') is-invalid @enderror" id="retenues" name="retenues" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
+        @error('retenues')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="net_imposable" class="form-label">Net Imposable</label>
+        <input type="text" class="form-control @error('net_imposable') is-invalid @enderror" id="net_imposable" name="net_imposable" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
+        @error('net_imposable')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="mb-3">
+        <label for="periode" class="form-label">Période</label>
+        <input type="text" class="form-control @error('periode') is-invalid @enderror" id="periode" name="periode" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46" required>
+        @error('periode')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <!-- Ajoutez d'autres champs de formulaire ici -->
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+
                             </div>
                         </div>
                     </div>

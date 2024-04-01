@@ -39,8 +39,8 @@ class SalariesExonerationController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'numero_cin' => 'required|string',
-            'carte_sejour' => 'nullable|string',
+            'numero_cin' => 'nullable|string|unique:salaries_beneficiant_exoneration,numero_cin',
+            'carte_sejour' => 'nullable|string|unique:salaries_beneficiant_exoneration,carte_sejour',
             'id_societe' => 'required|numeric', 
             'id_periode' => 'required|numeric', 
             'adresse' => 'required|string',
@@ -94,8 +94,8 @@ public function update(Request $request, $id)
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'adresse' => 'required|string',
-        'numero_cin' => 'required|string',
-        'carte_sejour' => 'nullable|string',
+        'numero_cin' => 'nullable|unique:salaries_beneficiant_exoneration,numero_cin',
+        'carte_sejour' => 'nullable|string|unique:salaries_beneficiant_exoneration,carte_sejour',
         'numero_cnss' => 'required|string',
         'id_fiscale' => 'required|string',
         'date_recrutement' => 'required|date',
@@ -117,6 +117,26 @@ public function update(Request $request, $id)
     // Rediriger avec un message de succès
     return redirect()->route('salaries_exoneration.index', ['id_periode' => $id_periode])->with('success', 'Le salarié exonéré a été modifié avec succès.');
 }
+public function calculateAmounts(Request $request)
+    {
+        $montant_brut = $request->input('brut_traitements');
+        $montant_avantages = $request->input('avantages');
+        $montant_indemnites = $request->input('indemnite');
+        $montant_autres_retenues = $request->input('retenues_operees');
+
+
+        $montant_revenu_brut_imposable = $montant_brut + $montant_avantages + $montant_indemnites;
+        $revenu_net_imposable = $montant_revenu_brut_imposable - $montant_autres_retenues ;
+        $revenu_net_imposable = number_format($revenu_net_imposable, 2, '.', '');
+        $montant_revenu_brut_imposable = number_format($montant_revenu_brut_imposable, 2, '.', '');
+        // Vous pouvez retourner les montants calculés sous forme de réponse JSON
+        return response()->json([
+            'revenu_brut_imposable' => $montant_revenu_brut_imposable,
+            'revenu_net_imposable' => $revenu_net_imposable
+        ]);
+    }
+
+
 public function generatePdf($id_periode)
 {
     // Obtenez la liste des salariés exonérés pour cette période

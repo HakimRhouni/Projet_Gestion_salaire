@@ -48,8 +48,8 @@ public function store(Request $request)
             'lf_employe' => 'required|string',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'cin' => 'nullable|string|max:255',
-            'carte_sejour' => 'nullable|string|max:255',
+            'cin' => 'nullable|string|max:255|unique:personnel_permanents,cin',
+            'carte_sejour' => 'nullable|string|max:255|unique:personnel_permanents,carte_sejour',
             'cnss' => 'nullable|string|max:255',
             'situation_famille' => 'nullable|string|max:255',
             'adresse' => 'nullable|string|max:255',
@@ -101,8 +101,8 @@ public function update(Request $request, $id)
             'lf_employe' => 'required|string',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'cin' => 'nullable|string|max:255',
-            'carte_sejour' => 'nullable|string|max:255',
+            'cin' => 'nullable|string|max:255|unique:personnel_permanents,cin',
+            'carte_sejour' => 'nullable|string|max:255|unique:personnel_permanents,carte_sejour',
             'cnss' => 'nullable|string|max:255',
             'situation_famille' => 'nullable|string|max:255',
             'adresse' => 'nullable|string|max:255',
@@ -152,7 +152,7 @@ public function calculMontants(Request $request)
         $montant_echeances = $request->input('montant_echeances');
 
         $montant_revenu_brut_imposable = $montant_brut + $montant_avantages + $montant_indemnites - $montant_exoneres;
-        $revenu_net_imposable = $montant_revenu_brut_imposable - $montant_frais_professionnels + $montant_cotisations + $montant_autres_retenues + $montant_echeances;
+        $revenu_net_imposable = $montant_revenu_brut_imposable - ($montant_frais_professionnels + $montant_cotisations + $montant_autres_retenues + $montant_echeances);
 
         // Vous pouvez retourner les montants calculés sous forme de réponse JSON
         return response()->json([

@@ -18,45 +18,102 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="raison_sociale">Raison sociale</label>
-                                    <input type="text" class="form-control" id="raison_sociale" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input type="text" class="form-control" id="nom" name="nom" value="{{ $entreprise->nom }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="prenom">Prénom</label>
-                                    <input type="text" class="form-control" id="prenom" name="prenom" value="{{ $entreprise->prenom }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="n_cin">N CIN</label>
-                                    <input type="text" class="form-control" id="n_cin" name="n_cin" value="{{ $entreprise->n_cin }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="n_carte_sejour">N Carte séjour</label>
-                                    <input type="text" class="form-control" id="n_carte_sejour" name="n_carte_sejour" value="{{ $entreprise->n_carte_sejour }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="siege_social">Siège social</label>
-                                    <input type="text area" class="form-control" id="siege_social" name="siege_social" value="{{ $entreprise->siege_social }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="commune">Commune</label>
-                                    <input type="text" class="form-control" id="commune" name="commune" value="{{ $entreprise->commune }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telephone">Téléphone</label>
-                                    <input type="text" class="form-control" id="telephone" name="telephone" value="{{ $entreprise->telephone }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fax">Fax</label>
-                                    <input type="text" class="form-control" id="fax" name="fax" value="{{ $entreprise->fax }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ $entreprise->email }}">
-                                </div>
+        <label for="raison_sociale">Raison sociale</label>
+        <input type="text" class="form-control @error('raison_sociale') is-invalid @enderror" id="raison_sociale" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
+        @error('raison_sociale')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'nom' -->
+    
+    <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control @error('nom') is-invalid @enderror" id="nom" name="nom" value="{{ $entreprise->nom }}">
+        @error('nom')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'prenom' -->
+    
+    <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control @error('prenom') is-invalid @enderror" id="prenom" name="prenom" value="{{ $entreprise->prenom }}">
+        @error('prenom')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'n_cin' -->
+    
+    <div class="form-group">
+        <label for="n_cin">N CIN</label>
+        <input type="text" class="form-control @error('n_cin') is-invalid @enderror" id="n_cin" name="n_cin" value="{{ $entreprise->n_cin }}">
+        @error('n_cin')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'n_carte_sejour' -->
+    
+    <div class="form-group">
+        <label for="n_carte_sejour">N Carte séjour</label>
+        <input type="text" class="form-control @error('n_carte_sejour') is-invalid @enderror" id="n_carte_sejour" name="n_carte_sejour" value="{{ $entreprise->n_carte_sejour }}">
+        @error('n_carte_sejour')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'siege_social' -->
+    
+    <div class="form-group">
+        <label for="siege_social">Siège social</label>
+        <input type="text" class="form-control @error('siege_social') is-invalid @enderror" id="siege_social" name="siege_social" value="{{ $entreprise->siege_social }}">
+        @error('siege_social')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'commune' -->
+    
+    <div class="form-group">
+        <label for="commune">Commune</label>
+        <input type="text" class="form-control @error('commune') is-invalid @enderror" id="commune" name="commune" value="{{ $entreprise->commune }}">
+        @error('commune')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'telephone' -->
+    
+    <div class="form-group">
+        <label for="telephone">Téléphone</label>
+        <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone" value="{{ $entreprise->telephone }}">
+        @error('telephone')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'fax' -->
+    
+    <div class="form-group">
+        <label for="fax">Fax</label>
+        <input type="text" class="form-control @error('fax') is-invalid @enderror" id="fax" name="fax" value="{{ $entreprise->fax }}">
+        @error('fax')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    
+    <!-- Gestion d'erreur pour le champ 'email' -->
+    
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $entreprise->email }}">
+        @error('email')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
                                 <div class="form-group">
     <label for="forme_juridique">Forme juridique</label>
     <select class="form-control" id="forme_juridique" name="forme_juridique">
@@ -74,64 +131,131 @@
     </select>
 </div>
 
-                                <div class="form-group">
-                                    <label for="id_fiscal">Identifiant fiscal</label>
-                                    <input type="text" class="form-control" id="id_fiscal" name="id_fiscal" value="{{ $entreprise->id_fiscal }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="n_taxe_pro">N Taxe pro</label>
-                                    <input type="text" class="form-control" id="n_taxe_pro" name="n_taxe_pro" value="{{ $entreprise->n_taxe_pro }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="regime">Régime</label>
-                                    <input type="text" class="form-control" id="regime" name="regime" value="{{ $entreprise->regime }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="numero_ice">Numéro ICE</label>
-                                    <input type="text" class="form-control" id="numero_ice" name="numero_ice" value="{{ $entreprise->numero_ice }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="numero_rc">Numéro RC</label>
-                                    <input type="text" class="form-control" id="numero_rc" name="numero_rc" value="{{ $entreprise->numero_rc }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="n_cnss">N CNSS</label>
-                                    <input type="text" class="form-control" id="n_cnss" name="n_cnss" value="{{ $entreprise->n_cnss }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="modele">Modèle Comptable</label>
-                                    <input type="text" class="form-control" id="modele" name="modele" value="{{ $entreprise->modele }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="date_creation">Date Création</label>
-                                    <input type="date" class="form-control" id="date_creation" name="date_creation" value="{{ $entreprise->date_creation }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="date_premier_acte_exploitation">Date 1er acte d’exploitation</label>
-                                    <input type="date" class="form-control" id="date_premier_acte_exploitation" name="date_premier_acte_exploitation" value="{{ $entreprise->date_premier_acte_exploitation }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="debut_exercice">Début d’exercice</label>
-                                    <input type="date" class="form-control" id="debut_exercice" name="debut_exercice" value="{{ $entreprise->debut_exercice }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="compte_dgi">Compte DGI</label>
-                                    <input type="text" class="form-control" id="compte_dgi" name="compte_dgi" value="{{ $entreprise->compte_dgi }}">
-                                </div>
-                                
-                                <div class="form-group position-relative">
+<div class="form-group">
+    <label for="id_fiscal">Identifiant fiscal</label>
+    <input type="text" class="form-control @error('id_fiscal') is-invalid @enderror" id="id_fiscal" name="id_fiscal" value="{{ $entreprise->id_fiscal }}">
+    @error('id_fiscal')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'n_taxe_pro' -->
+
+<div class="form-group">
+    <label for="n_taxe_pro">N Taxe pro</label>
+    <input type="text" class="form-control @error('n_taxe_pro') is-invalid @enderror" id="n_taxe_pro" name="n_taxe_pro" value="{{ $entreprise->n_taxe_pro }}">
+    @error('n_taxe_pro')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'regime' -->
+
+<div class="form-group">
+    <label for="regime">Régime</label>
+    <input type="text" class="form-control @error('regime') is-invalid @enderror" id="regime" name="regime" value="{{ $entreprise->regime }}">
+    @error('regime')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'numero_ice' -->
+
+<div class="form-group">
+    <label for="numero_ice">Numéro ICE</label>
+    <input type="text" class="form-control @error('numero_ice') is-invalid @enderror" id="numero_ice" name="numero_ice" value="{{ $entreprise->numero_ice }}">
+    @error('numero_ice')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'numero_rc' -->
+
+<div class="form-group">
+    <label for="numero_rc">Numéro RC</label>
+    <input type="text" class="form-control @error('numero_rc') is-invalid @enderror" id="numero_rc" name="numero_rc" value="{{ $entreprise->numero_rc }}">
+    @error('numero_rc')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'n_cnss' -->
+
+<div class="form-group">
+    <label for="n_cnss">N CNSS</label>
+    <input type="text" class="form-control @error('n_cnss') is-invalid @enderror" id="n_cnss" name="n_cnss" value="{{ $entreprise->n_cnss }}">
+    @error('n_cnss')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'modele' -->
+
+<div class="form-group">
+    <label for="modele">Modèle Comptable</label>
+    <input type="text" class="form-control @error('modele') is-invalid @enderror" id="modele" name="modele" value="{{ $entreprise->modele }}">
+    @error('modele')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'date_creation' -->
+
+<div class="form-group">
+    <label for="date_creation">Date Création</label>
+    <input type="date" class="form-control @error('date_creation') is-invalid @enderror" id="date_creation" name="date_creation" value="{{ $entreprise->date_creation }}">
+    @error('date_creation')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'date_premier_acte_exploitation' -->
+
+<div class="form-group">
+    <label for="date_premier_acte_exploitation">Date 1er acte d’exploitation</label>
+    <input type="date" class="form-control @error('date_premier_acte_exploitation') is-invalid @enderror" id="date_premier_acte_exploitation" name="date_premier_acte_exploitation" value="{{ $entreprise->date_premier_acte_exploitation }}">
+    @error('date_premier_acte_exploitation')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'debut_exercice' -->
+
+<div class="form-group">
+    <label for="debut_exercice">Début d’exercice</label>
+    <input type="date" class="form-control @error('debut_exercice') is-invalid @enderror" id="debut_exercice" name="debut_exercice" value="{{ $entreprise->debut_exercice }}">
+    @error('debut_exercice')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'compte_dgi' -->
+
+<div class="form-group">
+    <label for="compte_dgi">Compte DGI</label>
+    <input type="text" class="form-control @error('compte_dgi') is-invalid @enderror" id="compte_dgi" name="compte_dgi" value="{{ $entreprise->compte_dgi }}">
+    @error('compte_dgi')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Gestion d'erreur pour le champ 'mot_de_passe_compte_dgi' -->
+
+<div class="form-group position-relative">
     <label for="mot_de_passe_compte_dgi">Mot de passe du Compte DGI</label>
     <div class="input-group">
-        <input type="password" class="form-control" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
+        <input type="password" class="form-control @error('mot_de_passe_compte_dgi') is-invalid @enderror" id="mot_de_passe_compte_dgi" name="mot_de_passe_compte_dgi">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary align-middle" type="button" id="togglePassword" onclick="toggle()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-                    
-                </svg>
+                <!-- Ajoutez ici une icône pour le bouton de bascule du mot de passe -->
             </button>
         </div>
     </div>
+    @error('mot_de_passe_compte_dgi')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
 </div>
+
                                 <button type="submit" class="btn btn-primary">Modifier</button>
                             </form>
                         </div>

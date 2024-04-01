@@ -13,29 +13,41 @@
                     <div class="card-header">Modifier Période</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('periodes.update', ['id_periode' => $periode->id_periode]) }}">
-                            @csrf
-                            @method('PUT')
+                    <form method="POST" action="{{ route('periodes.update', ['id_periode' => $periode->id_periode]) }}">
+    @csrf
+    @method('PUT')
 
-                            <div class="mb-3">
-                                <label for="annee" class="form-label">Année</label>
-                                <input type="text" class="form-control" id="annee" name="annee" value="{{ $periode->annee }}">
-                            </div>
+    <!-- Gestion d'erreur pour le champ 'annee' -->
+    <div class="mb-3">
+        <label for="annee" class="form-label">Année</label>
+        <input type="text" class="form-control @error('annee') is-invalid @enderror" id="annee" name="annee" value="{{ $periode->annee }}">
+        @error('annee')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                            <div class="mb-3">
-                                <label for="debut_exercice" class="form-label">Début de l'exercice</label>
-                                <input type="date" class="form-control" id="debut_exercice" name="debut_exercice" value="{{ $periode->debut_exercice }}">
-                            </div>
+    <!-- Gestion d'erreur pour le champ 'debut_exercice' -->
+    <div class="mb-3">
+        <label for="debut_exercice" class="form-label">Début de l'exercice</label>
+        <input type="date" class="form-control @error('debut_exercice') is-invalid @enderror" id="debut_exercice" name="debut_exercice" value="{{ $periode->debut_exercice }}">
+        @error('debut_exercice')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                            <div class="mb-3">
-                                <label for="fin_exercice" class="form-label">Fin de l'exercice</label>
-                                <input type="date" class="form-control" id="fin_exercice" name="fin_exercice" value="{{ $periode->fin_exercice }}">
-                            </div>
+    <!-- Gestion d'erreur pour le champ 'fin_exercice' -->
+    <div class="mb-3">
+        <label for="fin_exercice" class="form-label">Fin de l'exercice</label>
+        <input type="date" class="form-control @error('fin_exercice') is-invalid @enderror" id="fin_exercice" name="fin_exercice" value="{{ $periode->fin_exercice }}">
+        @error('fin_exercice')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                            <!-- Ajoutez d'autres champs de formulaire pour modifier la période ici -->
+    <!-- Ajoutez d'autres champs de formulaire pour modifier la période ici -->
 
-                            <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        </form>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>
                     </div>
                 </div>
                 </div>

@@ -91,7 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
 	Route::delete('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'destroy'])->name('salaries_exoneration.destroy');
 	Route::get('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');
-	Route::put('/periodes/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
+	Route::post('/periodes/salaries_exoneration/{id}', [SalariesExonerationController::class, 'update'])->name('salaries_exoneration.update');
+	//calculate
+	Route::post('/periodes/salaries-exoneration/calcul-montants', [SalariesExonerationController::class, 'calculateAmounts'])->name('calcul.SalariesExonerationMontants');
 	Route::get('/salaries_exoneration/{id_periode}/pdf', [SalariesExonerationController::class, 'generatePdf'])->name('salaries_exonerationController.pdf');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel', [PersonnelOccasionnelController::class, 'index'])->name('personnel_occasionnel.index');
 	Route::get('/periodes/periodes/{id_periode}/personnel-occasionnel/create', [PersonnelOccasionnelController::class, 'create'])->name('personnel_occasionnel.create');
