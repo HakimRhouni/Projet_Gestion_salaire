@@ -10,8 +10,6 @@ export default defineConfig({
         
     ],
     build: {
-        rollupOptions: {
-            external: ['perfect-scrollbar']
-        }
+        outDir: 'dist', // Définir le répertoire de sortie sur "dist"
     }
 });
