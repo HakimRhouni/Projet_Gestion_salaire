@@ -9,7 +9,7 @@ class CreateEntreprisesTable extends Migration
     public function up()
     {
         Schema::create('entreprises', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_entreprise');
             $table->string('raison_sociale')->nullable(false); // Raison Sociale, champ obligatoire
             $table->string('nom')->nullable(); // Nom
             $table->string('prenom')->nullable(); // Prénom

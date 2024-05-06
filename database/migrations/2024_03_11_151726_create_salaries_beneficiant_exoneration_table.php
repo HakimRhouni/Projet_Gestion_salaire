@@ -9,9 +9,9 @@ class CreateSalariesBeneficiantExonerationTable extends Migration
     public function up()
     {
         Schema::create('salaries_beneficiant_exoneration', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_salarie_beneficiant_exoneration');
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->string('nom');

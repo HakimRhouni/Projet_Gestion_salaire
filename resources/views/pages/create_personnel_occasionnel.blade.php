@@ -21,7 +21,7 @@
                                 <div class="table-responsive">
                                 <form action="{{ route('personnel_occasionnel.store', ['id_periode' => $id_periode]) }}" method="POST">
     @csrf
-    <input type="hidden" name="id_societe" value="{{ $entreprise->id }}">
+    <input type="hidden" name="id_societe" value="{{ $entreprise->id_entreprise }}">
     <input type="hidden" name="raison_sociale" value="{{ $entreprise->raison_sociale }}">
     
     <div class="mb-3">

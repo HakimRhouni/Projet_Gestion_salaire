@@ -10,6 +10,7 @@ class BeneficiaireOptionsSouscription extends Model
     use HasFactory;
 
     protected $table = 'beneficiaires_options_souscription';
+    protected $primaryKey = 'id_beneficiaire_options_souscription';
 
     protected $fillable = [
         'nom',
@@ -39,7 +40,7 @@ class BeneficiaireOptionsSouscription extends Model
 
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode

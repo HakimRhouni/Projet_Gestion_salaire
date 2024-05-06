@@ -51,10 +51,10 @@
                                                     <td>{{ $personnel->ir_preleve }}</td>
                                                     <td>
             <!-- Bouton Modifier -->
-            <a href="{{ route('personnel_occasionnel.edit', ['id_periode' => $id_periode, 'id' => $personnel->id]) }}" class="btn btn-sm btn-warning">Modifier</a>
+            <a href="{{ route('personnel_occasionnel.edit', ['id_periode' => $id_periode, 'id' => $personnel->id_personnel_occasionnel]) }}" class="btn btn-sm btn-warning">Modifier</a>
             
             <!-- Bouton Supprimer -->
-            <form action="{{ route('personnel_occasionnel.destroy', ['id_periode' => $id_periode, 'id' => $personnel->id]) }}" method="POST" style="display: inline;">
+            <form action="{{ route('personnel_occasionnel.destroy', ['id_periode' => $id_periode, 'id' => $personnel->id_personnel_occasionnel]) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel occasionnel?')">Supprimer</button>

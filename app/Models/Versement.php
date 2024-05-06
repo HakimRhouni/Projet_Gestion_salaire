@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Versement extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'id_versement';
 
     protected $fillable = [
         'mois',
@@ -19,8 +21,8 @@ class Versement extends Model
         'penalite',
         'majorations',
         'total_verse',
-        'id_societe',
         'id_periode',
+        'id_societe',
     ];
 
     // Relation avec la société

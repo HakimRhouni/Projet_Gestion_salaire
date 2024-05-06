@@ -11,7 +11,7 @@ class CreatePeriodesTable extends Migration
         Schema::create('periodes', function (Blueprint $table) {
             $table->id('id_periode');
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->integer('annee');
             $table->date('debut_exercice');
             $table->date('fin_exercice');

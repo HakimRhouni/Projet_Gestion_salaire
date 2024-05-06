@@ -10,6 +10,7 @@ class SalaireBeneficiantExoneration extends Model
     use HasFactory;
 
     protected $table = 'salaries_beneficiant_exoneration';
+    protected $primaryKey = 'id_salarie_beneficiant_exoneration';
 
     protected $fillable = [
         'id_periode',
@@ -33,7 +34,7 @@ class SalaireBeneficiantExoneration extends Model
 
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode

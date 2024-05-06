@@ -10,6 +10,7 @@ class PersonnelOccasionnel extends Model
     use HasFactory;
 
     protected $table = 'personnel_occasionnel';
+    protected $primaryKey = 'id_personnel_occasionnel';
 
     protected $fillable = [
         'nom',
@@ -25,7 +26,7 @@ class PersonnelOccasionnel extends Model
     ];
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode

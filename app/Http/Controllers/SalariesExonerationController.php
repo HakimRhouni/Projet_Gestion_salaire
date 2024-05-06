@@ -15,22 +15,22 @@ class SalariesExonerationController extends Controller
         $periode = Periode::findOrFail($id_periode);
         $raison_sociale = $periode->entreprise->raison_sociale;
         $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
-        $id_societe = $periode->entreprise->id;
+        $id_entreprise = $periode->entreprise->id_entreprise;
         
         // Récupérez la liste des personnels permanents pour cette période
         $salaries_exoneres = SalaireBeneficiantExoneration::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.salaries_exoneration', compact('salaries_exoneres', 'id_societe', 'id_periode','entreprise'));
+        return view('pages.salaries_exoneration', compact('salaries_exoneres', 'id_entreprise' , 'id_periode','entreprise'));
     }
     public function create($id_periode)
     {
         $periode = Periode::findOrFail($id_periode);
-        $id_societe = $periode->entreprise->id;
+        $id_entreprise = $periode->entreprise->id_entreprise;
         $raison_sociale = $periode->entreprise->raison_sociale;
         $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
 
-        return view('pages.create_salaries_exoneration',compact('id_periode','id_societe','entreprise'));
+        return view('pages.create_salaries_exoneration',compact('id_periode','id_entreprise','entreprise'));
     }
 
     public function store(Request $request)
@@ -94,8 +94,8 @@ public function update(Request $request, $id)
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'adresse' => 'required|string',
-        'numero_cin' => 'nullable|unique:salaries_beneficiant_exoneration,numero_cin',
-        'carte_sejour' => 'nullable|string|unique:salaries_beneficiant_exoneration,carte_sejour',
+        'numero_cin' => 'nullable',
+        'carte_sejour' => 'nullable',
         'numero_cnss' => 'required|string',
         'id_fiscale' => 'required|string',
         'date_recrutement' => 'required|date',

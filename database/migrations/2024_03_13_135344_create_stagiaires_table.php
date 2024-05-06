@@ -14,7 +14,7 @@ class CreateStagiairesTable extends Migration
     public function up()
     {
         Schema::create('stagiaires', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_stagiaire');
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse');
@@ -28,7 +28,7 @@ class CreateStagiairesTable extends Migration
             $table->decimal('net_imposable', 20, 2);
             $table->unsignedBigInteger('periode');
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->timestamps();

@@ -9,7 +9,7 @@ class PersonnelPermanent extends Model
 {
     use HasFactory;
 
-    protected $table = 'personnel_permanent';
+    protected $table = 'personnel_permanents';
     protected $primaryKey = 'id_personnel_permanent';
 
     protected $fillable = [
@@ -45,7 +45,7 @@ class PersonnelPermanent extends Model
     // Relation avec le modèle Entreprise
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode

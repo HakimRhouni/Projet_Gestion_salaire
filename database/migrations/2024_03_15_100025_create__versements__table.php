@@ -14,7 +14,7 @@ class CreateVersementsTable extends Migration
     public function up()
     {
         Schema::create('versements', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_versement');
             $table->string('mois');
             $table->string('reference');
             $table->date('date_versement');
@@ -26,7 +26,7 @@ class CreateVersementsTable extends Migration
             $table->decimal('total_verse', 20, 2);
 
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->timestamps();

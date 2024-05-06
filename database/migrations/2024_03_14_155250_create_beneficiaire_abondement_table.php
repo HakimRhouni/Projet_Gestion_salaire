@@ -14,7 +14,7 @@ class CreateBeneficiaireAbondementTable extends Migration
     public function up()
     {
         Schema::create('beneficiaires_abondement', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_beneficiaire_abondement');
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse');
@@ -27,7 +27,7 @@ class CreateBeneficiaireAbondementTable extends Migration
             $table->decimal('montant_abondement', 20, 2);
             $table->decimal('montant_annuel_revenu_imposable', 20, 2);
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->timestamps();

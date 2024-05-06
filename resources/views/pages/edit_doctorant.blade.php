@@ -17,7 +17,7 @@
                                 <h5 class="card-title">Modifier Doctorant</h5>
                             </div>
                             <div class="card-body">
-                            <form action="{{ route('doctorants.update', ['id_periode' => $id_periode, 'id_societe' => $id_societe, 'id' => $doctorant->id]) }}" method="POST">
+                            <form action="{{ route('doctorants.update', ['id_periode' => $id_periode, 'id_societe' => $id_societe, 'id' => $doctorant->id_doctorant]) }}" method="POST">
     @csrf
     @method('PUT')
     <input type="hidden" name="id_periode" value="{{ $id_periode }}">

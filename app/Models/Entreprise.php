@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entreprise extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'id_entreprise';
     protected $fillable = [
         'raison_sociale',
         'nom',
@@ -40,6 +40,6 @@ class Entreprise extends Model
     }
     public function periodes()
 {
-    return $this->hasMany(Periode::class, 'id_societe', 'id');
+    return $this->hasMany(Periode::class, 'id_societe', 'id_entreprise');
 }
 }

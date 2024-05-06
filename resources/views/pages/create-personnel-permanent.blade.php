@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <form id="createPersonnelForm" action="{{ route('personnel_permanent.store') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="id_societe" value="{{ $id_societe }}">
+                                <input type="hidden" name="id_societe" value="{{ $id_entreprise }}">
                                 <input type="hidden" name="id_periode" value="{{ $id_periode }}">
                                 
                                 <div class="mb-3">

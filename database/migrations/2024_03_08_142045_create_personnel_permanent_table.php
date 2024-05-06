@@ -13,10 +13,10 @@ class CreatePersonnelPermanentTable extends Migration
      */
     public function up()
     {
-        Schema::create('personnel_permanent', function (Blueprint $table) {
+        Schema::create('personnel_permanents', function (Blueprint $table) {
             $table->id('id_personnel_permanent');
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->string('matricule');

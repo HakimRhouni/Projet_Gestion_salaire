@@ -14,7 +14,7 @@ class CreateDoctorantsTable extends Migration
     public function up()
     {
         Schema::create('doctorants', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_doctorant');
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse');
@@ -22,7 +22,7 @@ class CreateDoctorantsTable extends Migration
             $table->string('carte_sejour');
             $table->decimal('brut_indemnites', 20, 2); // Montant brut des indemnités, décimal avec 10 chiffres au total, dont 2 décimales
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->timestamps();

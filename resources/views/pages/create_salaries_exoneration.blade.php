@@ -173,7 +173,7 @@
                                 </div>
 
                                 <!-- Champ caché pour l'ID de la société -->
-                                <input type="hidden" name="id_societe" value="{{ $id_societe }}">
+                                <input type="hidden" name="id_societe" value="{{ $id_entreprise }}">
 
                                 <!-- Champ caché pour l'ID de la période -->
                                 <input type="hidden" name="id_periode" value="{{ $id_periode }}">

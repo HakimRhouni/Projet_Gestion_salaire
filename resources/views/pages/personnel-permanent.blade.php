@@ -17,7 +17,7 @@
                             <!-- Bouton "Ajouter Personnel Permanent" -->
                            <div class="row">
     <div class="col">
-        <a href="{{ route('personnel_permanent.create', ['id_societe' => $id_societe, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
+        <a href="{{ route('personnel_permanent.create', ['id_entreprise' => $id_entreprise, 'id_periode' => $id_periode]) }}" class="btn btn-primary">Ajouter Personnel Permanent</a>
     </div>
     <div class="col">
         <a href="{{ route('PersonnelPermanentController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
@@ -71,8 +71,9 @@
     @method('DELETE')
     <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel permanent?')">Supprimer</button>
 </form>
+               
 
-                                            </td> <!-- Ajout des boutons de modification et de suppression -->
+                                            </td> 
                                         </tr>
                                         @endforeach
                                     </tbody>

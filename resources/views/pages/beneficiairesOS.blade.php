@@ -51,8 +51,8 @@
                                                         <td>{{ $beneficiaire->montant_abondement }}</td>
                                                         <td>{{ $beneficiaire->complement_salaire }}</td>
                                                         <td>
-    <a href="{{ route('beneficiairesOS.edit', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id]) }}" class="btn btn-primary">Modifier</a>
-    <form action="{{ route('beneficiairesOS.destroy', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id]) }}" method="POST" style="display: inline;">
+    <a href="{{ route('beneficiairesOS.edit', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id_beneficiaire_options_souscription]) }}" class="btn btn-primary">Modifier</a>
+    <form action="{{ route('beneficiairesOS.destroy', ['id_periode' => $id_periode, 'id_societe' => $beneficiaire->id_beneficiaire_options_souscription]) }}" method="POST" style="display: inline;">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>

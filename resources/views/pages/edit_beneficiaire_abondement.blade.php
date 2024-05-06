@@ -16,7 +16,7 @@
                                 <h5 class="card-title">Modifier un bénéficiaire d'options de souscription</h5>
                             </div>
                             <div class="card-body">
-                            <form method="POST" action="{{ route('beneficiaires_abondement.update', ['id_periode' => $id_periode, 'id_societe' => $id_societe, 'id' => $beneficiaire->id]) }}">
+                            <form method="POST" action="{{ route('beneficiaires_abondement.update', ['id_periode' => $id_periode, 'id_societe' => $id_societe, 'id' => $beneficiaire->id_beneficiaire_abondement]) }}">
                             @csrf
                             @method('PUT')
 

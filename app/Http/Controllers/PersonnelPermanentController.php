@@ -20,22 +20,22 @@ class PersonnelPermanentController extends Controller
         $entreprise = $periode->entreprise;
         
         // Maintenant, vous pouvez accéder à l'ID de la société via la relation avec la méthode entreprise()
-        $id_societe = $periode->entreprise->id;
+        $id_entreprise = $periode->entreprise->id_entreprise;
         
         // Récupérez la liste des personnels permanents pour cette période
         $personnelPermanents = PersonnelPermanent::where('id_periode', $id_periode)->get();
         
         // Passez les variables à la vue
-        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_societe', 'id_periode', 'periode','entreprise'));
+        return view('pages.personnel-permanent', compact('personnelPermanents', 'id_entreprise', 'id_periode', 'periode','entreprise'));
     }
     
 
-public function create($id_societe, $id_periode)
+public function create($id_entreprise, $id_periode)
 {
     $periode = Periode::findOrFail($id_periode);
     $raison_sociale = $periode->entreprise->raison_sociale;
     $entreprise = Entreprise::where('raison_sociale', $raison_sociale)->firstOrFail();
-    return view('pages.create-personnel-permanent', compact('id_societe', 'id_periode','entreprise'));
+    return view('pages.create-personnel-permanent', compact('id_entreprise', 'id_periode','entreprise'));
 }
 
 public function store(Request $request)
@@ -92,9 +92,9 @@ public function edit($id,$id_periode)
     return view('pages.modifier-personnel-permanent', compact('personnelPermanent','id_periode','entreprise'));
 }
 
-public function update(Request $request, $id)
+public function update(Request $request, $id_entreprise)
 {
-    $personnelPermanent = PersonnelPermanent::findOrFail($id);
+    $personnelPermanent = PersonnelPermanent::findOrFail($id_entreprise);
     $request->validate([
            
             'matricule' => 'required|string',
@@ -237,8 +237,5 @@ public function ajouterEmployesAnneePrecedente($idPeriode)
     
     return redirect()->route('periodes.personnel_permanent', ['id_periode' => $idPeriode]);
 }
-
-
-
 
 }

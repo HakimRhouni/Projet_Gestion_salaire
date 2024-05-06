@@ -59,9 +59,9 @@
     <td>{{ $entreprise->telephone }}</td>
     <td>
         <div class="d-flex">
-    <a href="{{ route('modifier-entreprise.update', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2">Modifier</a>
-    <a href="{{ route('entreprise.supprimer', ['id' => $entreprise->id]) }}" class="btn btn-warning me-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</a>
-    <form action="{{ route('generer.xml', ['id' => $entreprise->id]) }}" method="GET">
+    <a href="{{ route('modifier-entreprise.update', ['id_entreprise' => $entreprise->id_entreprise]) }}" class="btn btn-warning me-2">Modifier</a>
+    <a href="{{ route('entreprise.supprimer', ['id_entreprise' => $entreprise->id_entreprise]) }}" class="btn btn-warning me-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</a>
+    <form action="{{ route('generer.xml', ['id_entreprise' => $entreprise->id_entreprise]) }}" method="GET">
     @csrf
     <button type="submit" class="btn btn-primary">
         <i class="fas fa-file-code"></i> Générer XML

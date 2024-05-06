@@ -21,7 +21,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <form action="{{ route('personnel_occasionnel.update', ['id_periode' => $id_periode, 'id_personnel' => $personnel->id]) }}" method="POST">
+                                    <form action="{{ route('personnel_occasionnel.update', ['id_periode' => $id_periode, 'id_personnel' => $personnel->id_personnel_occasionnel]) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="id_societe" value="{{ $entreprise->id }}">

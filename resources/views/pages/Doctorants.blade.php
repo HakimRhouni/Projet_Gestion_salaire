@@ -47,10 +47,10 @@
                                                         <td>{{ $doctorant->carte_sejour }}</td>
                                                         <td>{{ $doctorant->brut_indemnites }}</td>
                                                         <td>
-                                                        <a href="{{ route('doctorants.edit', ['id_periode' => $doctorant->id_periode, 'id_societe' => $doctorant->id_societe, 'id' => $doctorant->id]) }}" class="btn btn-primary">Modifier</a>
+                                                        <a href="{{ route('doctorants.edit', ['id_periode' => $doctorant->id_periode, 'id_societe' => $doctorant->id_societe, 'id' => $doctorant->id_doctorant]) }}" class="btn btn-primary">Modifier</a>
 
 <!-- Bouton Supprimer -->
-<form action="{{ route('doctorants.destroy', ['id_periode' => $doctorant->id_periode, 'id_societe' => $doctorant->id_societe, 'id' => $doctorant->id]) }}" method="POST" style="display: inline;">
+<form action="{{ route('doctorants.destroy', ['id_periode' => $doctorant->id_periode, 'id_societe' => $doctorant->id_societe, 'id' => $doctorant->id_doctorant]) }}" method="POST" style="display: inline;">
     @csrf
     @method('DELETE')
     <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>

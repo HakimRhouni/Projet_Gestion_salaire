@@ -37,7 +37,7 @@ public function store(Request $request, $id_periode)
         'nom' => 'required|string',
         'prenom' => 'required|string',
         'adresse' => 'required|string',
-        'cin' => 'required|string',
+        'cin' => 'required|unique:personnel_occasionnel,cin|string',
         'carte_sejour' => 'required|string',
         'numero_cnss' => 'required|string',
         'id_fiscal' => 'required|string',

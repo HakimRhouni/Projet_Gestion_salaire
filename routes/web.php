@@ -64,12 +64,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-	Route::get('/entreprise/supprimer/{id}', [EntrepriseController::class, 'supprimer'])->name('entreprise.supprimer');
+	Route::get('/entreprise/supprimer/{id_entreprise}', [EntrepriseController::class, 'supprimer'])->name('entreprise.supprimer');
 	Route::post('/ajouter-entreprise', [EntrepriseController::class, 'ajouter'])->name('ajouter-entreprise');
-	Route::get('/modifier-entreprise/{id}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
-	Route::put('/modifier-entreprise/{id}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
+	Route::get('/modifier-entreprise/{id_entreprise}', [EntrepriseController::class, 'showModifierForm'])->name('modifier-entreprise');
+	Route::put('/modifier-entreprise/{id_entreprise}', [EntrepriseController::class, 'modifier'])->name('modifier-entreprise.update');
 	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
-	Route::get('/generer-xml/{id}', [EntrepriseController::class, 'creerXML'])->name('generer.xml');
+	Route::get('/generer-xml/{id_entreprise}', [EntrepriseController::class, 'creerXML'])->name('generer.xml');
 	Route::get('dashboard/{raison_sociale}/periodes', [PeriodesController::class, 'index'])->name('dashboard.periode');
 	Route::get('/dashboard/{raison_sociale}/periodes/create', [PeriodesController::class, 'create'])->name('periodes.create');
 	Route::post('dashboard/periodes', [PeriodesController::class, 'store'])->name('periodes.store');
@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('dashboard/periodes/{id_periode}/edit', [PeriodesController::class, 'edit'])->name('periodes.edit');
 	Route::put('dashboard/periodes/{id_periode}', [PeriodesController::class, 'update'])->name('periodes.update');
 	Route::get('/periodes/{id_periode}/personnel-permanent', [PersonnelPermanentController::class, 'showPersonnelPermanent'])->name('periodes.personnel_permanent');
-	Route::get('/periodes/personnel-permanent/create/{id_societe}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
+	Route::get('/periodes/personnel-permanent/create/{id_entreprise}/{id_periode}', [PersonnelPermanentController::class, 'create'])->name('personnel_permanent.create');
 	Route::post('/periodes/personnel-permanent', [PersonnelPermanentController::class, 'store'])->name('personnel_permanent.store');
 	Route::get('/periodes/personnel_permanent/{id}/{id_periode}/edit', [PersonnelPermanentController::class, 'edit'])->name('personnel_permanent.edit');
 	//calcul
@@ -86,8 +86,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
 	Route::get('/PersonnelPermanentController/{id_periode}/pdf', [PersonnelPermanentController::class, 'generatePdfPersonnelPermanent'])->name('PersonnelPermanentController.pdf');
 	Route::post('/ajouter-employes-annee-precedente/{id_periode}', [PersonnelPermanentController::class, 'ajouterEmployesAnneePrecedente'])->name('ajouter.employes.annee.precedente');
+	Route::get('/personnel_permanent/{id_personnel}/generate_payroll', [PersonnelPermanentController::class, 'generatePayroll'])->name('generate.payroll');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
-	Route::get('/periodes/{id_periode}/societes/{id_societe}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
+	Route::get('/periodes/{id_periode}/societes/{id_entreprise}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
 	Route::delete('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'destroy'])->name('salaries_exoneration.destroy');
 	Route::get('/periodes/salaries-exoneration/{id}', [SalariesExonerationController::class, 'edit'])->name('salaries_exoneration.edit');

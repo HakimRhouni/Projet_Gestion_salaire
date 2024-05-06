@@ -31,23 +31,25 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($periodes as $periode)
-                                        <tr onclick="window.location ='{{ route('periodes.personnel_permanent', ['id_periode' => $periode->id_periode]) }}';" style="cursor:pointer;">
-                                                <td>{{ $periode->annee }}</td>
-                                                <td>{{ $periode->debut_exercice }}</td>
-                                                <td>{{ $periode->fin_exercice }}</td>
-                                                <td>
-                                                <div   aria-label="Actions">
-    <a href="{{ route('periodes.edit', ['id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
-     <a action="{{ route('periodes.destroy', ['id_periode' => $periode->id_periode]) }}" method="POST" class="ms-2"> <!-- ms-2 pour une marge à gauche -->
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette période ?')">Supprimer</button>
-</a>
-</div>
+                                      
 
-        </td>
-                                                <!-- Ajoutez d'autres colonnes si nécessaire -->
-                                            </tr>
+
+<tr onclick="window.location = '{{ route('periodes.personnel_permanent', ['id_periode' => $periode->id_periode]) }}';" style="cursor:pointer;">
+    <td>{{ $periode->annee }}</td>
+    <td>{{ $periode->debut_exercice }}</td>
+    <td>{{ $periode->fin_exercice }}</td>
+    <td>
+        <div aria-label="Actions" class="d-flex align-items-center">
+            <a href="{{ route('periodes.edit', ['id_periode' => $periode->id_periode]) }}" class="btn btn-warning me-2">Modifier</a>
+            <form action="{{ route('periodes.destroy', ['id_periode' => $periode->id_periode]) }}" method="POST" onclick="event.stopPropagation();">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette période ?')">Supprimer</button>
+            </form>
+        </div>
+    </td>
+</tr>
+
                                         @endforeach
                                     </tbody>
                                 </table>

@@ -14,7 +14,7 @@ class CreateBeneficiairesOptionsSouscriptionTable extends Migration
     public function up()
     {
         Schema::create('beneficiaires_options_souscription', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_beneficiaire_options_souscription');
             $table->string('nom');
             $table->string('prenom');
             $table->string('adresse');
@@ -35,7 +35,7 @@ class CreateBeneficiairesOptionsSouscriptionTable extends Migration
             $table->decimal('montant_abondement', 20, 2)->nullable();
             $table->decimal('complement_salaire', 20, 2)->nullable();
             $table->unsignedBigInteger('id_societe');
-            $table->foreign('id_societe')->references('id')->on('entreprises')->onDelete('cascade');
+            $table->foreign('id_societe')->references('id_entreprise')->on('entreprises')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id_periode')->on('periodes')->onDelete('cascade');
             $table->timestamps();

@@ -9,6 +9,7 @@ class Stagiaire extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_stagiaire';
     protected $fillable = [
         'nom',
         'prenom',
@@ -22,13 +23,13 @@ class Stagiaire extends Model
         'retenues',
         'net_imposable',
         'periode',
-        'periode_id', // Clé étrangère pour la période
-        'entreprise_id', // Clé étrangère pour l'entreprise
+        'id_periode',
+        'id_societe',
     ];
 
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode

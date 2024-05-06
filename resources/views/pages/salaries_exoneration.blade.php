@@ -16,7 +16,7 @@ div class="container-fluid py-4">
                         <div class="card-header">
                             <h5 class="card-title">salaries exoneres</h5>
                             
-                            <a href="{{ route('salaries_exoneration.create', ['id_periode' => $id_periode, 'id_societe' => $id_societe]) }}" class="btn btn-primary">Créer un salarié exonéré</a>
+                            <a href="{{ route('salaries_exoneration.create', ['id_periode' => $id_periode, 'id_entreprise' => $id_entreprise]) }}" class="btn btn-primary">Créer un salarié exonéré</a>
                             <a href="{{ route('salaries_exonerationController.pdf', ['id_periode' => $id_periode]) }}" class="btn btn-primary">Imprimer PDF</a>
                         </div>
                         <div class="card-body">
@@ -53,10 +53,10 @@ div class="container-fluid py-4">
                         <td>{{ $salarie->retenues_operees }}</td>
                         <td>{{ $salarie->revenu_net_imposable }}</td>
                         <td>
-                        <a href="{{ route('salaries_exoneration.edit', $salarie->id) }}" class="btn btn-primary btn-sm">Modifier</a>
+                        <a href="{{ route('salaries_exoneration.edit', $salarie->id_salarie_beneficiant_exoneration) }}" class="btn btn-primary btn-sm">Modifier</a>
                                                
                                                 <!-- Bouton de suppression -->
-                                                <form action="{{ route('salaries_exoneration.destroy', $salarie->id , ) }}" method="POST" style="display: inline;">
+                                                <form action="{{ route('salaries_exoneration.destroy', $salarie->id_salarie_beneficiant_exoneration) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce salarié exonéré?')">Supprimer</button>

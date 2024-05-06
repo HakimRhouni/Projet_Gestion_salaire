@@ -17,7 +17,7 @@
                                 <h5 class="card-title">Modifier Stagiaire</h5>
                             </div>
                             <div class="card-body">
-                            <form action="{{ route('stagiaires.update', ['id_periode' => $id_periode, 'id' => $stagiaire->id]) }}" method="POST">
+                            <form action="{{ route('stagiaires.update', ['id_periode' => $id_periode, 'id' => $stagiaire->id_stagiaire]) }}" method="POST">
     @csrf
     @method('PUT')
     <input type="hidden" name="id_societe" value="{{ $id_societe }}">

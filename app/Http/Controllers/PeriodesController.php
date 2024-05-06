@@ -60,9 +60,6 @@ public function create($raison_sociale)
         // Trouver la période à supprimer
         $periode = Periode::findOrFail($id_periode);
     
-        // Récupérer l'id de la société associée à la période
-        $id_societe = $periode->id_societe;
-    
         // Supprimer la période
         $periode->delete();
     
@@ -70,6 +67,7 @@ public function create($raison_sociale)
         
         return redirect()->back()->with('success', 'Entreprise supprimée avec succès.');
     }
+    
     public function edit($id_periode)
     {
         // Récupérer la période à modifier

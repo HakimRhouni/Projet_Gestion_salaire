@@ -49,8 +49,8 @@
                                 <td>{{ $versement->majorations }}</td>
                                 <td>{{ $versement->total_verse }}</td>
                                 <td>
-                                <a href="{{ route('versements.edit', ['id_periode' => $id_periode, 'id' => $versement->id]) }}" class="btn btn-primary">Modifier</a>
-        <form action="{{ route('versements.destroy', ['id_periode' => $id_periode, 'id' => $versement->id]) }}" method="POST" style="display: inline-block;">
+                                <a href="{{ route('versements.edit', ['id_periode' => $id_periode, 'id' => $versement->id_versement]) }}" class="btn btn-primary">Modifier</a>
+        <form action="{{ route('versements.destroy', ['id_periode' => $id_periode, 'id' => $versement->id_versement]) }}" method="POST" style="display: inline-block;">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>

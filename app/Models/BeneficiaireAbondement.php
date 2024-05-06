@@ -10,6 +10,7 @@ class BeneficiaireAbondement extends Model
     use HasFactory;
 
     protected $table = 'beneficiaires_abondement';
+    protected $primaryKey = 'id_beneficiaire_abondement';
 
     protected $fillable = [
         'nom',
@@ -30,7 +31,7 @@ class BeneficiaireAbondement extends Model
     // Relation avec l'entreprise
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec la période

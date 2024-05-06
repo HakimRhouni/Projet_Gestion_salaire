@@ -14,7 +14,7 @@
                             <h5 class="card-title">Modifier salarie exoneres</h5>
                         </div>
                         <div class="card-body">
-                        <form id="createPersonnelForm" action="{{ route('salaries_exoneration.update', $salarie->id) }}" method="POST">
+                        <form id="createPersonnelForm" action="{{ route('salaries_exoneration.update', $salarie->id_salarie_beneficiant_exoneration) }}" method="POST">
         @csrf
         @method('POST') <!-- Méthode HTTP PUT pour la mise à jour des données -->
 

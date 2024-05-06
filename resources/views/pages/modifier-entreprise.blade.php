@@ -14,7 +14,7 @@
                             <h5 class="h3 mb-0">Modifier l'entreprise {{ $entreprise->raison_sociale }}</h5>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('modifier-entreprise', ['id' => $entreprise->id]) }}" method="POST">
+                            <form action="{{ route('modifier-entreprise', ['id_entreprise' => $entreprise->id_entreprise]) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

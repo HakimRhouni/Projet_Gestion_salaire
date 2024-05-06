@@ -9,6 +9,7 @@ class Doctorant extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_doctorant';
     protected $fillable = [
         'nom',
         'prenom',
@@ -25,7 +26,7 @@ class Doctorant extends Model
      */
     public function entreprise()
     {
-        return $this->belongsTo(Entreprise::class, 'id_societe', 'id');
+        return $this->belongsTo(Entreprise::class, 'id_societe', 'id_entreprise');
     }
 
     // Relation avec le modèle Periode
