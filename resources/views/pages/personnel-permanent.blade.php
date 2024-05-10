@@ -64,16 +64,14 @@
                                             <td>{{ $personnelPermanent->adresse }}</td>
                                             <td>{{ $personnelPermanent->montant_revenu_brut_imposable }}</td>
                                             <td>
-                                            <a href="{{ route('personnel_permanent.edit', ['id' => $personnelPermanent->id_personnel_permanent, 'id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
-                                               
-                                                <form action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST" style="display: inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel permanent?')">Supprimer</button>
-</form>
-               
-
-                                            </td> 
+    <a href="{{ route('personnel_permanent.edit', ['id' => $personnelPermanent->id_personnel_permanent, 'id_periode' => $periode->id_periode]) }}" class="btn btn-warning">Modifier</a>
+    <form action="{{ route('personnel_permanent.destroy', $personnelPermanent->id_personnel_permanent) }}" method="POST" style="display: inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel permanent?')">Supprimer</button>
+    </form>
+    <a href="{{ route('generate.payroll', ['id_personnel_permanent' => $personnelPermanent->id_personnel_permanent]) }}"   class="btn btn-info">Bulletin de paie</a>
+</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

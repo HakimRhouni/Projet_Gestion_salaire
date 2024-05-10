@@ -35,6 +35,7 @@ use App\Http\Controllers\StagiaireController;
 use App\Http\Controllers\DoctorantController;
 use App\Http\Controllers\BeneficiaireOSController;
 use App\Http\Controllers\BeneficiaireAbondementController;
+use App\Http\Controllers\Bulletin_paie_controller;
 use App\Http\Controllers\VersementController;
 use App\Http\Controllers\SimpleIRController;
 
@@ -86,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
 	Route::get('/PersonnelPermanentController/{id_periode}/pdf', [PersonnelPermanentController::class, 'generatePdfPersonnelPermanent'])->name('PersonnelPermanentController.pdf');
 	Route::post('/ajouter-employes-annee-precedente/{id_periode}', [PersonnelPermanentController::class, 'ajouterEmployesAnneePrecedente'])->name('ajouter.employes.annee.precedente');
-	Route::get('/personnel_permanent/{id_personnel}/generate_payroll', [PersonnelPermanentController::class, 'generatePayroll'])->name('generate.payroll');
+	Route::get('/personnel_permanent/{id_personnel_permanent}/generate_payroll', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payroll');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
 	Route::get('/periodes/{id_periode}/societes/{id_entreprise}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');

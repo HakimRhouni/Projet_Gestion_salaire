@@ -3,98 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulletin de paie</title>
-    <style>
-        /* Ajoutez votre style CSS ici */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Bulletin de Paie</title>
 </head>
 <body>
-    <!-- Tableau de l'entreprise -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Informations de l'entreprise</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Raison sociale</td>
-                <td>{{ $entreprise->raison_sociale }}</td>
-            </tr>
-            <tr>
-                <td>N° CNSS</td>
-                <td>{{ $entreprise->n_cnss }}</td>
-            </tr>
-            <tr>
-                <td>Adresse</td>
-                <td>{{ $entreprise->siege_social }}, {{ $entreprise->commune }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div style="display: flex; align-items: center;">
+        <h1 style="margin-right: auto;">EIGHT</h1>
+        <table border="1">
+            <caption><h2>Bulletin de Paie</h2></caption>
+            <tbody>
+                <tr>
+                    <td>Raison sociale</td>
+                    <td>{{ $entreprise->raison_sociale }}</td>
+                </tr>
+                <tr>
+                    <td>N CNSS</td>
+                    <td>{{ $entreprise->n_cnss }}</td>
+                </tr>
+                <tr>
+                    <td>Siège social</td>
+                    <td>{{ $entreprise->adresse }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- Tableau des données du personnel -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Informations du personnel</th>
-            </tr>
-        </thead>
+    <br>
+
+    <table border="1">
+        <caption><h3>Informations sur l'employé</h3></caption>
         <tbody>
             <tr>
-                <td>Matricule</td>
-                <td>{{ $personnel->matricule }}</td>
+                <td>ID Personnel</td>
+                <td>{{ $employee->id_personnel }}</td>
             </tr>
             <tr>
-                <td>Nom et prénom</td>
-                <td>{{ $personnel->nom }} {{ $personnel->prenom }}</td>
+                <td>Nom</td>
+                <td>{{ $employee->nom }}</td>
             </tr>
             <tr>
-                <td>N° CIN</td>
-                <td>{{ $personnel->cin }}</td>
+                <td>Prénom</td>
+                <td>{{ $employee->prenom }}</td>
+            </tr>
+            <tr>
+                <td>CIN</td>
+                <td>{{ $employee->cin }}</td>
             </tr>
             <tr>
                 <td>Adresse</td>
-                <td>{{ $personnel->adresse }}</td>
+                <td>{{ $employee->adresse }}</td>
             </tr>
             <tr>
                 <td>Situation familiale</td>
-                <td>{{ $personnel->situation_famille }}</td>
+                <td>{{ $employee->situation_famille }}</td>
+            </tr>
+            <tr>
+                <td>CNSS</td>
+                <td>{{ $employee->cnss }}</td>
             </tr>
         </tbody>
     </table>
 
-    <!-- Tableau des données de paie -->
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Données de paie</th>
-            </tr>
-        </thead>
+    <br>
+
+    <table border="1">
+        <caption><h3>Informations sur la rémunération</h3></caption>
         <tbody>
             <tr>
-                <td>Montant brut</td>
-                <td>{{ $personnel->montant_brut }}</td>
+                <td>Salaire de base annuel</td>
+                <td>{{ $employee->salaire_base_annuel }}</td>
             </tr>
             <tr>
-                <td>Montant avantages</td>
-                <td>{{ $personnel->montant_avantages }}</td>
+                <td>Montant des indemnités</td>
+                <td>{{ $employee->montant_indemnites }}</td>
             </tr>
             <tr>
-                <td>Montant indemnités</td>
-                <td>{{ $personnel->montant_indemnites }}</td>
+                <td>Montant des autres retenues</td>
+                <td>{{ $employee->montant_autres_retenues }}</td>
             </tr>
-            <!-- Ajoutez d'autres lignes de données de paie ici -->
         </tbody>
     </table>
 </body>
