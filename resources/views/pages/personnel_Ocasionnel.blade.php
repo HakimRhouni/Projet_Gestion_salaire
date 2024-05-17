@@ -59,6 +59,7 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel occasionnel?')">Supprimer</button>
             </form>
+            <a href="{{ route('generate.payrollPersonnelOccasionnel', ['id_personnel_occasionnel' => $personnel->id_personnel_occasionnel]) }}"   class="btn btn-info">Bulletin de paie</a>
         </td>
                                                 </tr>
                                             @endforeach

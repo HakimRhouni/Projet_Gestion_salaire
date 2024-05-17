@@ -63,6 +63,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce stagiaire?')">Supprimer</button>
                 </form>
+                <a href="{{ route('generate.payrollStagiaire', ['id_stagiaire' => $stagiaire->id_stagiaire]) }}"   class="btn btn-info">Bulletin de paie</a>
             
           
             

@@ -87,7 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/periodes/personnel_permanent/{id}', [PersonnelPermanentController::class, 'destroy'])->name('personnel_permanent.destroy');
 	Route::get('/PersonnelPermanentController/{id_periode}/pdf', [PersonnelPermanentController::class, 'generatePdfPersonnelPermanent'])->name('PersonnelPermanentController.pdf');
 	Route::post('/ajouter-employes-annee-precedente/{id_periode}', [PersonnelPermanentController::class, 'ajouterEmployesAnneePrecedente'])->name('ajouter.employes.annee.precedente');
-	Route::get('/personnel_permanent/{id_personnel_permanent}/generate_payroll', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payroll');
 	Route::get('/periodes/{id_periode}/salaries-exoneration', [SalariesExonerationController::class, 'index'])->name('salaries_exoneration.index');
 	Route::get('/periodes/{id_periode}/societes/{id_entreprise}/salaries-exoneration/create', [SalariesExonerationController::class, 'create'])->name('salaries_exoneration.create');
 	Route::post('/periodes/salaries-exoneration', [SalariesExonerationController::class, 'store'])->name('salaries_exoneration.store');
@@ -140,10 +139,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/periodes/versements/{id_periode}/delete/{id}', [VersementController::class, 'destroy'])->name('versements.destroy');
 	Route::get('/versements/pdf/{id_periode}', [VersementController::class, 'generatePDF'])->name('versements.pdf');
 	Route::get('/periodes/simple-ir/{id_periode}', [SimpleIRController::class, 'index'])->name('simple_ir.index');
-	
 	Route::get('/entreprise/pdf', [EntrepriseController::class, 'generatePdf'])->name('entreprise.pdf');
 	Route::post('/import-entreprise', [EntrepriseController::class, 'import'])->name('entreprise.import');
-
+	Route::get('/generate_payroll/PersonnelPermanent/{id_personnel_permanent}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollPersonnelpermanent');
+	Route::get('/generate_payroll/stagiaires/{id_stagiaire}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollStagiaire');
+	Route::get('/generate_payroll/salaries-exoneration/{id_salarie_exoneration}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollSalarieBeneficiantExoneration');
+	Route::get('/generate_payroll/personnel-occasionnel/{id_personnel_occasionnel}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollPersonnelOccasionnel');
+	Route::get('/generate_payroll/doctorant/{id_doctorant}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollDoctorant');
+	Route::get('/generate_payroll/beneficiaire_OS/{id_beneficiaire_OS}', [Bulletin_paie_controller::class, 'generatePayroll'])->name('generate.payrollbeneficiaire-OS');
 
 	
 

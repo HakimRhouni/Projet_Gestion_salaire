@@ -55,6 +55,7 @@
     @method('DELETE')
     <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
 </form>
+<a href="{{ route('generate.payrollDoctorant', ['id_doctorant' => $doctorant->id_doctorant]) }}"   class="btn btn-info">Bulletin de paie</a>
 </td>
                                                     </tr>
                                                 @endforeach

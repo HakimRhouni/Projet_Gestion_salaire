@@ -70,7 +70,7 @@
         @method('DELETE')
         <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce personnel permanent?')">Supprimer</button>
     </form>
-    <a href="{{ route('generate.payroll', ['id_personnel_permanent' => $personnelPermanent->id_personnel_permanent]) }}"   class="btn btn-info">Bulletin de paie</a>
+    <a href="{{ route('generate.payrollPersonnelpermanent', ['id_personnel_permanent' => $personnelPermanent->id_personnel_permanent]) }}"   class="btn btn-info">Bulletin de paie</a>
 </td>
                                         </tr>
                                         @endforeach

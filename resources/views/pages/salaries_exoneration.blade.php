@@ -61,6 +61,7 @@ div class="container-fluid py-4">
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce salarié exonéré?')">Supprimer</button>
                                                 </form>
+                                                <a href="{{ route('generate.payrollSalarieBeneficiantExoneration', ['id_salarie_exoneration' => $salarie->id_salarie_beneficiant_exoneration]) }}"   class="btn btn-info">Bulletin de paie</a>
                                             </td>
                     </tr>
                 @endforeach

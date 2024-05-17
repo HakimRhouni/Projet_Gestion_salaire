@@ -57,6 +57,7 @@
         @method('DELETE')
         <button type="submit" class="btn btn-primary" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?')">Supprimer</button>
     </form>
+    <a href="{{ route('generate.payrollbeneficiaire-OS', ['id_beneficiaire_OS' =>  $beneficiaire->id_beneficiaire_options_souscription]) }}"   class="btn btn-info">Bulletin de paie</a>
 </td>
 
                                                     </tr>
